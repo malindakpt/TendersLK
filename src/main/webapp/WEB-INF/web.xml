@@ -6,13 +6,13 @@
 	<display-name>Spring MVC Application</display-name>
 
 	<servlet>
-		<servlet-name>UploadServlet</servlet-name>
-		<servlet-class>servlet.UploadServlet</servlet-class>
+		<servlet-name>UploadServlet0</servlet-name>
+		<servlet-class>servlet.UploadServlet0</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>UploadServlet</servlet-name>
-		<url-pattern>/UploadServlet</url-pattern>
+		<servlet-name>UploadServlet0</servlet-name>
+		<url-pattern>/UploadServlet0</url-pattern>
 	</servlet-mapping>
 
     <servlet>

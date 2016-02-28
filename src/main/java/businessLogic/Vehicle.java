@@ -6,6 +6,8 @@ import java.io.InputStream;
  * Created by MalindaK on 2/21/2016.
  */
 public class Vehicle {
+
+    private int ID;
     private String regNo;
     private String Brand;
     private String model;
@@ -15,6 +17,7 @@ public class Vehicle {
     private String bodyType;
     private String transmission;
     private String fuel;
+
     private String engineCC;
     private String description;
 
@@ -24,8 +27,29 @@ public class Vehicle {
     private InputStream photo3;
     private InputStream photo4;
 
+    private String htmlPhoto0;
+    private String htmlPhoto1;
+    private String htmlPhoto2;
+    private String htmlPhoto3;
+    private String htmlPhoto4;
+
     private int advertisementID;
 
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getAdvertisementID() {
+        return advertisementID;
+    }
+
+    public void setAdvertisementID(int advertisementID) {
+        this.advertisementID = advertisementID;
+    }
 
     public String getRegNo() {
         return regNo;
@@ -153,5 +177,45 @@ public class Vehicle {
 
     public void setPhoto4(InputStream photo4) {
         this.photo4 = photo4;
+    }
+
+    public String getHtmlPhoto0() {
+        return htmlPhoto0;
+    }
+
+    public void setHtmlPhoto0(String htmlPhoto0) {
+        this.htmlPhoto0 = htmlPhoto0;
+    }
+
+    public String getHtmlPhoto1() {
+        return htmlPhoto1;
+    }
+
+    public void setHtmlPhoto1(String htmlPhoto1) {
+        this.htmlPhoto1 = htmlPhoto1;
+    }
+
+    public String getHtmlPhoto2() {
+        return htmlPhoto2;
+    }
+
+    public void setHtmlPhoto2(String htmlPhoto2) {
+        this.htmlPhoto2 = htmlPhoto2;
+    }
+
+    public String getHtmlPhoto3() {
+        return htmlPhoto3;
+    }
+
+    public void setHtmlPhoto3(String htmlPhoto3) {
+        this.htmlPhoto3 = htmlPhoto3;
+    }
+
+    public String getHtmlPhoto4() {
+        return htmlPhoto4;
+    }
+
+    public void setHtmlPhoto4(String htmlPhoto4) {
+        this.htmlPhoto4 = htmlPhoto4;
     }
 }

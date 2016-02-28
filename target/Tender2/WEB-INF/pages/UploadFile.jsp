@@ -24,5 +24,12 @@ Select a file to upload: <br />
     <br />
     <input type="submit" value="Upload File" />
 </form>
+
+<form  method="post"
+      enctype="multipart/form-data">
+    <input type="file" name="file" size="50" />
+    <br/>
+    <input type="submit" value="Upload File No" />
+</form>
 </body>
 </html>

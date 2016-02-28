@@ -121,7 +121,7 @@
         <input type="submit" value="Upload File" />
       </form>
     </div>
-
+    <br />
     <div>
       <form action="UploadServlet1" method="post"
             enctype="multipart/form-data">
@@ -130,7 +130,7 @@
         <input type="submit" value="Upload File" />
       </form>
     </div>
-
+    <br />
     <div>
       <form action="UploadServlet2" method="post"
             enctype="multipart/form-data">
@@ -139,7 +139,7 @@
         <input type="submit" value="Upload File" />
       </form>
     </div>
-
+    <br />
     <div>
       <form action="UploadServlet3" method="post"
             enctype="multipart/form-data">
@@ -148,7 +148,7 @@
         <input type="submit" value="Upload File" />
       </form>
     </div>
-
+    <br />
 
     <div>
       <form action="UploadServlet4" method="post"
