@@ -37,10 +37,31 @@
       margin: 10px
     }
   </style>
+<script>
+
+  function formSubmit0() {
+    document.getElementById("myForm").submit();
+    console.log("Pic0 uploaded");
+  }
+
+
+
+
+</script>
+
 
 </head>
 <body style="background-color:lightgrey;">
 <%--<body style="background-color:#CEE3F6;">--%>
+
+
+<div id="message"></div>
+<form id="myform" action="test.php">
+  <input type="text" name="test"/>
+  <input type="submit" value="submit"/>
+</form>
+<div id="response"></div>
+
 
 
 <div >
@@ -90,16 +111,7 @@
       <li> <input placeholder="Transmission"/></li>
       <li> <input placeholder="Fuel Type"/></li>
       <li> <input placeholder="Engine Capacity"/></li>
-      <%--<li> <%=v.getBrand()%></li>--%>
-      <%--<li> <%=v.getModel()%></li>--%>
-      <%--<li> <%=v.getYear()%></li>--%>
-      <%--<li><%=v.getCondition()%></li>--%>
-      <%--<li><%=v.getMileage()%></li>--%>
-      <%--<li><%=v.getBodyType()%></li>--%>
-      <%--<li> <%=v.getTransmission()%></li>--%>
-      <%--<li> <%=v.getFuel()%></li>--%>
-      <%--<li><%=v.getEngineCC()%></li>--%>
-      <%--<li> <%=v.getDescription()%></li>--%>
+
     </ul>
 
     <div align="center">
@@ -113,51 +125,51 @@
     <h1>The City</h1>
     <p>Chania is the capital of the Chania region on the island of Crete. The city can be divided in two parts, the old town and the modern city.</p>
 
-    <div>
-      <form action="UploadServlet0" method="post"
-            enctype="multipart/form-data">
-        <input type="file" name="file" size="50" />
-        <br />
-        <input type="submit" value="Upload File" />
-      </form>
-    </div>
-    <br />
-    <div>
-      <form action="UploadServlet1" method="post"
-            enctype="multipart/form-data">
-        <input type="file" name="file" size="50" />
-        <br />
-        <input type="submit" value="Upload File" />
-      </form>
-    </div>
-    <br />
-    <div>
-      <form action="UploadServlet2" method="post"
-            enctype="multipart/form-data">
-        <input type="file" name="file" size="50" />
-        <br />
-        <input type="submit" value="Upload File" />
-      </form>
-    </div>
-    <br />
-    <div>
-      <form action="UploadServlet3" method="post"
-            enctype="multipart/form-data">
-        <input type="file" name="file" size="50" />
-        <br />
-        <input type="submit" value="Upload File" />
-      </form>
-    </div>
-    <br />
+    <br/>
 
     <div>
-      <form action="UploadServlet4" method="post"
+      <form id="picForm0" method="post"
             enctype="multipart/form-data">
         <input type="file" name="file" size="50" />
-        <br />
-        <input type="submit" value="Upload File" />
       </form>
     </div>
+    <button  onclick="formSubmit0()">Upload File</button>
+    <br />
+    <br />
+    <div>
+      <form id="picForm1" method="post"
+            enctype="multipart/form-data">
+        <input type="file" name="file" size="50" />
+      </form>
+    </div>
+    <button  onclick="formSubmit1()">Upload File</button>
+    <br />
+    <br />
+    <div>
+      <form id="picForm2" method="post"
+            enctype="multipart/form-data">
+        <input type="file" name="file" size="50" />
+      </form>
+    </div>
+    <button  onclick="formSubmit2()">Upload File</button>
+    <br />
+    <br />
+    <div>
+      <form id="picForm3" method="post"
+            enctype="multipart/form-data">
+        <input type="file" name="file" size="50" />
+      </form>
+    </div>
+    <button  onclick="formSubmit3()">Upload File</button>
+    <br />
+    <br />
+    <div>
+      <form id="picForm4" method="post"
+            enctype="multipart/form-data">
+        <input type="file" name="file" size="50" />
+      </form>
+    </div>
+    <button  onclick="formSubmit4()">Upload File</button>
 
 
   </div>
