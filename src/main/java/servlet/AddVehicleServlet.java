@@ -23,7 +23,7 @@ public class AddVehicleServlet extends HttpServlet {
             throws ServletException, java.io.IOException {
 
         Vehicle v=null;
-        DBLink.persistVehicle(v);
+        //DBLink.persistVehicle(v);
 
     }
     public void doGet(HttpServletRequest request,

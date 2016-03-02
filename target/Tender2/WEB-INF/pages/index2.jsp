@@ -78,7 +78,7 @@
 
     <ul>
       <%
-        Vehicle v= DBLink.getAdvertisement();
+        Vehicle v= DBLink.getVehicle(0);
       %>
       <li> <%=v.getRegNo()%></li>
       <li> <%=v.getBrand()%></li>
@@ -90,7 +90,7 @@
       <li> <%=v.getTransmission()%></li>
       <li> <%=v.getFuel()%></li>
       <li><%=v.getEngineCC()%></li>
-      <%--<li> <%=v.getDescription()%></li>--%>
+      <li> <%=v.getDescription()%></li>
     </ul>
 
     <div align="center">
@@ -113,69 +113,38 @@
     </div>
     <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">
       <div data-p="112.50" style="display: none;">
-        <img data-u="image" src="img/05.jpg" />
+        <img data-u="image" src="data:image/png;base64,<%=v.getHtmlPhoto0()%>" />
         <div data-u="thumb">
-          <img src="img/landscape.jpg" />
-          <div class="title_back"></div>
-          <div class="title">
-            Landscape
+          <img src="data:image/png;base64,<%=v.getHtmlPhoto0()%>" />
 
-          </div>
         </div>
       </div>
       <div data-p="112.50" style="display: none;">
-        <img data-u="image" src="img/001.jpg" />
+        <img data-u="image" src="data:image/png;base64,<%=v.getHtmlPhoto1()%>" />
         <div data-u="thumb">
-          <img src="img/motor.jpg" />
-          <div class="title_back"></div>
-          <div class="title">
-            Motor
+          <img src="data:image/png;base64,<%=v.getHtmlPhoto1()%>" />
 
-          </div>
         </div>
       </div>
       <div data-p="112.50" style="display: none;">
-        <img data-u="image" src="img/004.jpg" />
+        <img data-u="image" src="data:image/png;base64,<%=v.getHtmlPhoto2()%>" />
         <div data-u="thumb">
-          <img src="img/photography.jpg" />
-          <div class="title_back"></div>
-          <div class="title">
-            Photography
+          <img src="data:image/png;base64,<%=v.getHtmlPhoto2()%>" />
 
-          </div>
         </div>
       </div>
       <div data-p="112.50" style="display: none;">
-        <img data-u="image" src="img/05.jpg" />
+        <img data-u="image" src="data:image/png;base64,<%=v.getHtmlPhoto3()%>" />
         <div data-u="thumb">
-          <img src="img/landscape.jpg" />
-          <div class="title_back"></div>
-          <div class="title">
-            Landscape
+          <img src="data:image/png;base64,<%=v.getHtmlPhoto3()%>" />
 
-          </div>
         </div>
       </div>
       <div data-p="112.50" style="display: none;">
-        <img data-u="image" src="img/001.jpg" />
+        <img data-u="image" src="data:image/png;base64,<%=v.getHtmlPhoto4()%>" />
         <div data-u="thumb">
-          <img src="img/motor.jpg" />
-          <div class="title_back"></div>
-          <div class="title">
-            Motor
+          <img src="data:image/png;base64,<%=v.getHtmlPhoto4()%>" />
 
-          </div>
-        </div>
-      </div>
-      <div data-p="112.50" style="display: none;">
-        <img data-u="image" src="img/004.jpg" />
-        <div data-u="thumb">
-          <img src="img/photography.jpg" />
-          <div class="title_back"></div>
-          <div class="title">
-            Photography
-
-          </div>
         </div>
       </div>
     </div>
@@ -220,6 +189,7 @@
       <h2>How?</h2>
       <p>You can reach Chania airport from all over Europe.</p>
     </div>
+      </ul>
   </div>
 
 </div>

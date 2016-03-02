@@ -13,9 +13,9 @@ public class Advertisement {
     private String  customer;
     private int maxAds;
 
-    public void addVehicle(Vehicle v){
-        DBLink.persistVehicle(v);
-    }
+//    public void addVehicle(Vehicle v){
+//        DBLink.persistVehicle(v);
+//    }
 
 
 }

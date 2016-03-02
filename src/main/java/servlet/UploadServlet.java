@@ -110,6 +110,8 @@ Vehicle v=new Vehicle();
                        v.setFuel(getStringVal(fi));
                    }else if(fieldName.equals("engineCC")){
                        v.setEngineCC(Integer.parseInt(getStringVal(fi)));
+                   }else if(fieldName.equals("desc")){
+                       v.setDescription(getStringVal(fi));
                    }else if(fieldName.equals("file0")){
                        v.setPhoto0(fi.getInputStream());
                    }else if(fieldName.equals("file1")){
@@ -122,7 +124,6 @@ Vehicle v=new Vehicle();
                        v.setPhoto4(fi.getInputStream());
                    }
 
-                    //deserialize(fi.getInputStream());
                     out.println("Uploaded Filename: " + fieldName + "<br>");
                 }
             }

@@ -8,12 +8,26 @@ import java.sql.*;
  */
 public class DBLink {
 
+    private static DBLink dbLink=null;
     private  static Connection connect = null;
     private  static Statement statement = null;
     private  static PreparedStatement preparedStatement = null;
     private  static ResultSet resultSet = null;
 
-    public static Vehicle getAdvertisement(){
+
+    static {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/tenders?"
+                            + "user=root&password=");
+            statement=connect.createStatement();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public static Vehicle getAdvertisement() throws SQLException {
         Vehicle v=new Vehicle();
         v.setRegNo("415955");
         v.setBrand("TOYOTA");
@@ -27,22 +41,18 @@ public class DBLink {
         v.setEngineCC(2500);
         v.setDescription("sdfsdf");
 
+        try {
+            Vehicle v2=getVehicle(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         return v;
 
     }
 
-    public static void persistVehicle(Vehicle v){
-
-    }
-
     public static void addVehicle(Vehicle v){
         try {
-
-            Class.forName("com.mysql.jdbc.Driver");
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/tenders?"
-                            + "user=root&password=");
 
             preparedStatement = connect
                     .prepareStatement("insert into  vehicles values ( ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
@@ -53,12 +63,12 @@ public class DBLink {
             preparedStatement.setString(4, v.getModel());
             preparedStatement.setInt(5, v.getYear());
             preparedStatement.setString(6, v.getCondition());
-            preparedStatement.setInt(7,v.getMileage());
+            preparedStatement.setInt(7, v.getMileage());
             preparedStatement.setString(8, v.getBodyType());
             preparedStatement.setString(9, v.getTransmission());
             preparedStatement.setString(10, v.getFuel());
             preparedStatement.setInt(11, v.getEngineCC());
-            preparedStatement.setString(12, "v.getDescription()");
+            preparedStatement.setString(12, v.getDescription());
 
             preparedStatement.setBlob(13, v.getPhoto0());
             preparedStatement.setBlob(14,v.getPhoto1());
@@ -74,13 +84,12 @@ public class DBLink {
         }
     }
 
-    public Vehicle getVehicle() throws SQLException {
+    public static Vehicle getVehicle(int addID) throws SQLException {
+        Vehicle v = new Vehicle();
 
-        resultSet = statement
-                .executeQuery("select * from adds");
+        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID="+addID);
+
         while (resultSet.next()) {
-
-            Vehicle v = new Vehicle();
 
             v.setID(resultSet.getInt("ID"));
             v.setRegNo(resultSet.getString("RegNo"));

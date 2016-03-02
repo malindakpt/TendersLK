@@ -28,6 +28,9 @@
       width:70px;
       margin-top: 10px
     }
+    .input1{
+      width:250px;
+    }
 
     .btn2{
       background-color: #6E6E6E;
@@ -52,19 +55,8 @@
     </div>
 
 
-
-
-
     <div align="center">
 
-      <%--<form>--%>
-        <%--<input style="height:33px; width:300px;" placeholder="Reference No"/>--%>
-        <%--<span>--%>
-          <%--&lt;%&ndash;<input type="image" src="img/search-icon.png" alt="Submit">&ndash;%&gt;--%>
-    <%--<input class="btn1" type="button" value="Search" class="btn btn-primary"/>--%>
-
-          <%--</span>--%>
-      <%--</form>--%>
 
 
     </div>
@@ -81,16 +73,17 @@
         <%
           Vehicle v= DBLink.getAdvertisement();
         %>
-        <li> <input placeholder="Reg No.." name="regNo"/></li>
-        <li> <input placeholder="Brand" name="brand"/></li>
-        <li> <input placeholder="Model" name="model"/></li>
-        <li> <input placeholder="Manufac. Yar" name="manufac"/></li>
-        <li> <input placeholder="Condition" name="condition"/></li>
-        <li> <input placeholder="Millage" name="millage"/></li>
-        <li> <input placeholder="Body Type" name="bodyType"/></li>
-        <li> <input placeholder="Transmission" name="transmission"/></li>
-        <li> <input placeholder="Fuel Type" name="fuel"/></li>
-        <li> <input placeholder="Engine Capacity" name="engineCC"/></li>
+        <li> <input class="input1" placeholder="Reg No.." name="regNo"/></li>
+        <li> <input class="input1"  placeholder="Brand" name="brand"/></li>
+        <li> <input class="input1"  placeholder="Model" name="model"/></li>
+        <li> <input class="input1"  placeholder="Manufac. Yar" name="manufac"/></li>
+        <li> <input class="input1"  placeholder="Condition" name="condition"/></li>
+        <li> <input class="input1"  placeholder="Millage" name="millage"/></li>
+        <li> <input class="input1"  placeholder="Body Type" name="bodyType"/></li>
+        <li> <input class="input1"  placeholder="Transmission" name="transmission"/></li>
+        <li> <input class="input1"  placeholder="Fuel Type" name="fuel"/></li>
+        <li> <input class="input1"  placeholder="Engine Capacity" name="engineCC"/></li>
+        <li><textarea placeholder="Description" name="desc" cols="33" rows="3"  ></textarea></li>
 
       </ul>
 
@@ -127,9 +120,6 @@
 
 
           <input type="submit" value="Upload Files" />
-        <%--</form>--%>
-
-
 
      <div>
         <!-- Thumbnail Navigator -->
