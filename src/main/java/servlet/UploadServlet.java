@@ -3,22 +3,16 @@ package servlet; /**
  */
 // Import required java libraries
 import java.io.*;
-import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import businessLogic.DBLink;
-import businessLogic.MySQLAccess;
 import businessLogic.Vehicle;
-import com.sun.xml.internal.messaging.saaj.util.Base64;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.output.*;
@@ -143,7 +137,7 @@ Vehicle v=new Vehicle();
         System.out.println("ee="+s);
         return s;
     }
-//
+
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws ServletException, java.io.IOException {
@@ -152,24 +146,5 @@ Vehicle v=new Vehicle();
                 getClass( ).getName( )+": POST method required.");
     }
 
-
-    private static void deserialize(InputStream fileIn){
-        try
-        {
-       //     FileInputStream fileIn = new FileInputStream(file);
-       //     ObjectInputStream in = new ObjectInputStream(fileIn);
-
-            MySQLAccess dao = new MySQLAccess();
-            dao.readDataBase(fileIn);
-            System.out.println(fileIn.toString());
-            fileIn.close();
-           // fileIn.close();
-
-        }catch(Exception c)
-        {
-            c.printStackTrace();
-            return;
-        }
-    }
 
 }
