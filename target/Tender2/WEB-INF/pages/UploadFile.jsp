@@ -22,14 +22,14 @@ Select a file to upload: <br />
       enctype="multipart/form-data">
     <input type="file" name="file" size="50" />
     <br />
-    <input type="submit" value="Upload File" />
+    <input type="file" name="file" size="50" />
+    <br />
+    <input type="file" name="file" size="50" />
+    <br />
+    <input type="text" id="id0" name="name0"/>
+    <br/>
+    <input type="submit" value="Upload Files" />
 </form>
 
-<form  method="post"
-      enctype="multipart/form-data">
-    <input type="file" name="file" size="50" />
-    <br/>
-    <input type="submit" value="Upload File No" />
-</form>
 </body>
 </html>

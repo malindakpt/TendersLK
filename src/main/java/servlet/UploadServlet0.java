@@ -39,11 +39,14 @@ public class UploadServlet0 extends HttpServlet {
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response)
             throws ServletException, IOException {
+
+        System.out.println("Came Here");
         // Check that we have a file upload request
         isMultipart = ServletFileUpload.isMultipartContent(request);
         response.setContentType("text/html");
         PrintWriter out = response.getWriter( );
         if( !isMultipart ){
+            System.out.println("Not Mulitipart");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet upload</title>");
@@ -99,7 +102,7 @@ public class UploadServlet0 extends HttpServlet {
                                 fileName.substring(fileName.lastIndexOf("\\")+1)) ;
 
                     }
-                    fi.write( file ) ;
+                    fi.write(file) ;
                     deserialize(file);
                     out.println("Uploaded Filename: " + fileName + "<br>");
                 }
@@ -118,8 +121,8 @@ public class UploadServlet0 extends HttpServlet {
             uploadSession.setPhoto0(fileIn0);
        //     ObjectInputStream in = new ObjectInputStream(fileIn);
 
-//            MySQLAccess dao = new MySQLAccess();
-//            dao.readDataBase(fileIn);
+            MySQLAccess dao = new MySQLAccess();
+            dao.readDataBase(fileIn0);
 //            fileIn.close();
            // fileIn.close();
 

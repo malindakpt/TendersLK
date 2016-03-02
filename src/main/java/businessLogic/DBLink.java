@@ -18,13 +18,13 @@ public class DBLink {
         v.setRegNo("415955");
         v.setBrand("TOYOTA");
         v.setModel("Camry");
-        v.setYear("2012");
+        v.setYear(2012);
         v.setCondition("Brand New");
         v.setMileage(24500);
         v.setBodyType("Closed");
         v.setTransmission("Automatic");
         v.setFuel("Petrol");
-        v.setEngineCC("2500.00 CC");
+        v.setEngineCC(2500);
         v.setDescription("sdfsdf");
 
 
@@ -51,14 +51,14 @@ public class DBLink {
             preparedStatement.setString(2, v.getRegNo());
             preparedStatement.setString(3, v.getBrand());
             preparedStatement.setString(4, v.getModel());
-            preparedStatement.setString(5, v.getYear());
+            preparedStatement.setInt(5, v.getYear());
             preparedStatement.setString(6, v.getCondition());
             preparedStatement.setInt(7,v.getMileage());
             preparedStatement.setString(8, v.getBodyType());
             preparedStatement.setString(9, v.getTransmission());
             preparedStatement.setString(10, v.getFuel());
-            preparedStatement.setString(11, v.getEngineCC());
-            preparedStatement.setString(12, v.getDescription());
+            preparedStatement.setInt(11, v.getEngineCC());
+            preparedStatement.setString(12, "v.getDescription()");
 
             preparedStatement.setBlob(13, v.getPhoto0());
             preparedStatement.setBlob(14,v.getPhoto1());
@@ -86,13 +86,13 @@ public class DBLink {
             v.setRegNo(resultSet.getString("RegNo"));
             v.setBrand(resultSet.getString("Brand"));
             v.setModel(resultSet.getString("Model"));
-            v.setYear(resultSet.getString("Year"));
+            v.setYear(resultSet.getInt("Year"));
             v.setCondition(resultSet.getString("Condition"));
             v.setMileage(resultSet.getInt("Millage"));
             v.setBodyType(resultSet.getString("BodyType"));
             v.setTransmission(resultSet.getString("Transmission"));
             v.setFuel(resultSet.getString("Fuel"));
-            v.setEngineCC(resultSet.getString("Engine"));
+            v.setEngineCC(resultSet.getInt("Engine"));
             v.setDescription(resultSet.getString("Description"));
 
             v.setHtmlPhoto0(Base64.encode(resultSet.getBytes("Photo0")));

@@ -11,14 +11,14 @@ public class Vehicle {
     private String regNo;
     private String Brand;
     private String model;
-    private String year;
+    private int year;
     private String condition;
     private int mileage;
     private String bodyType;
     private String transmission;
     private String fuel;
 
-    private String engineCC;
+    private int engineCC;
     private String description;
 
     private InputStream photo0;
@@ -83,11 +83,11 @@ public class Vehicle {
         this.condition = condition;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -123,11 +123,11 @@ public class Vehicle {
         this.fuel = fuel;
     }
 
-    public String getEngineCC() {
+    public int getEngineCC() {
         return engineCC;
     }
 
-    public void setEngineCC(String engineCC) {
+    public void setEngineCC(int engineCC) {
         this.engineCC = engineCC;
     }
 

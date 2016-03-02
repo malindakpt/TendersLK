@@ -3,6 +3,8 @@ package servlet; /**
  */
 // Import required java libraries
 import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import javax.servlet.ServletConfig;
@@ -11,7 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import businessLogic.DBLink;
 import businessLogic.MySQLAccess;
+import businessLogic.Vehicle;
+import com.sun.xml.internal.messaging.saaj.util.Base64;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -22,8 +27,8 @@ public class UploadServlet extends HttpServlet {
 
     private boolean isMultipart;
     private String filePath;
-    private int maxFileSize = 150 * 1024;
-    private int maxMemSize = 14 * 1024;
+    private int maxFileSize = 15000 * 1024;
+    private int maxMemSize = 150000 * 1024;
     private File file ;
 
     public void init( ){
@@ -35,6 +40,7 @@ public class UploadServlet extends HttpServlet {
                        HttpServletResponse response)
             throws ServletException, java.io.IOException {
         // Check that we have a file upload request
+Vehicle v=new Vehicle();
         isMultipart = ServletFileUpload.isMultipartContent(request);
         response.setContentType("text/html");
         java.io.PrintWriter out = response.getWriter( );
@@ -76,7 +82,6 @@ public class UploadServlet extends HttpServlet {
             while ( i.hasNext () )
             {
                 FileItem fi = (FileItem)i.next();
-                if ( !fi.isFormField () )
                 {
                     // Get the uploaded file parameters
                     String fieldName = fi.getFieldName();
@@ -85,26 +90,59 @@ public class UploadServlet extends HttpServlet {
                     boolean isInMemory = fi.isInMemory();
                     long sizeInBytes = fi.getSize();
 
-                    // Write the file
-                    if( fileName.lastIndexOf("\\") >= 0 ){
-                        file = new File( filePath +
-                                fileName.substring(fileName.lastIndexOf("\\"))) ;
-                    }else{
-                        file = new File( filePath +
-                                fileName.substring(fileName.lastIndexOf("\\")+1)) ;
- 
-                    }
-                    fi.write( file ) ;
-                    deserialize(file);
-                    out.println("Uploaded Filename: " + fileName + "<br>");
+                   if(fieldName.equals("regNo")){
+                       v.setRegNo(getStringVal(fi));
+                   }else if(fieldName.equals("brand")){
+                        v.setBrand(getStringVal(fi));
+                   }else if(fieldName.equals("model")){
+                       v.setModel(getStringVal(fi));
+                   }else if(fieldName.equals("manufac")){
+                       v.setYear(Integer.parseInt(getStringVal(fi)));
+                   }else if(fieldName.equals("condition")){
+                       v.setCondition(getStringVal(fi));
+                   }else if(fieldName.equals("millage")){
+                       v.setMileage(Integer.parseInt(getStringVal(fi)));
+                   }else if(fieldName.equals("bodyType")){
+                       v.setBodyType(getStringVal(fi));
+                   }else if(fieldName.equals("transmission")){
+                       v.setTransmission(getStringVal(fi));
+                   }else if(fieldName.equals("fuel")){
+                       v.setFuel(getStringVal(fi));
+                   }else if(fieldName.equals("engineCC")){
+                       v.setEngineCC(Integer.parseInt(getStringVal(fi)));
+                   }else if(fieldName.equals("file0")){
+                       v.setPhoto0(fi.getInputStream());
+                   }else if(fieldName.equals("file1")){
+                       v.setPhoto1(fi.getInputStream());
+                   }else if(fieldName.equals("file2")){
+                       v.setPhoto2(fi.getInputStream());
+                   }else if(fieldName.equals("file3")){
+                       v.setPhoto3(fi.getInputStream());
+                   }else if(fieldName.equals("file4")){
+                       v.setPhoto4(fi.getInputStream());
+                   }
+
+                    //deserialize(fi.getInputStream());
+                    out.println("Uploaded Filename: " + fieldName + "<br>");
                 }
             }
             out.println("</body>");
             out.println("</html>");
+            DBLink.addVehicle(v);
         }catch(Exception ex) {
             System.out.println(ex);
         }
     }
+
+
+    public String getStringVal( FileItem fi) throws IOException {
+        DeferredFileOutputStream obj = (DeferredFileOutputStream) fi.getOutputStream();
+        byte[] bos = obj.getData();
+        String s =  new String(bos, "UTF-8");
+        System.out.println("ee="+s);
+        return s;
+    }
+//
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws ServletException, java.io.IOException {
@@ -113,30 +151,16 @@ public class UploadServlet extends HttpServlet {
                 getClass( ).getName( )+": POST method required.");
     }
 
-    private void serialize(File file){
-//        try
-//        {
-//            FileOutputStream fileOut =
-//                    new FileOutputStream(file);
-//            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-//            out.writeObject(e);
-//            out.close();
-//            fileOut.close();
-//            System.out.printf("Serialized data is saved in /tmp/employee.ser");
-//        }catch(IOException i)
-//        {
-//            i.printStackTrace();
-//        }
-    }
 
-    private static void deserialize(File file){
+    private static void deserialize(InputStream fileIn){
         try
         {
-            FileInputStream fileIn = new FileInputStream(file);
+       //     FileInputStream fileIn = new FileInputStream(file);
        //     ObjectInputStream in = new ObjectInputStream(fileIn);
 
             MySQLAccess dao = new MySQLAccess();
             dao.readDataBase(fileIn);
+            System.out.println(fileIn.toString());
             fileIn.close();
            // fileIn.close();
 

@@ -48,7 +48,7 @@ public class MySQLAccess {
                     .prepareStatement("insert into  adds values ( ?, ?)");
             // "myuser, webpage, datum, summery, COMMENTS from feedback.comments");
             // Parameters start with 1
-            preparedStatement.setString(1, "Test2");
+            preparedStatement.setString(1, "Test5");
             preparedStatement.setBlob(2, is);
 //            preparedStatement.setString(3, "TestWebpage");
 //            preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
