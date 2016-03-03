@@ -2,6 +2,7 @@ package businessLogic;
 
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.sql.*;
+import java.util.Calendar;
 
 /**
  * Created by MalindaK on 2/25/2016.
@@ -21,39 +22,44 @@ public class DBLink {
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/tenders?"
                             + "user=root&password=");
-            statement=connect.createStatement();
+
+
 
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-    public static Vehicle getAdvertisement() throws SQLException {
-        Vehicle v=new Vehicle();
-        v.setRegNo("415955");
-        v.setBrand("TOYOTA");
-        v.setModel("Camry");
-        v.setYear(2012);
-        v.setCondition("Brand New");
-        v.setMileage(24500);
-        v.setBodyType("Closed");
-        v.setTransmission("Automatic");
-        v.setFuel("Petrol");
-        v.setEngineCC(2500);
-        v.setDescription("sdfsdf");
-
-        try {
-            Vehicle v2=getVehicle(0);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return v;
-
-    }
+//    public static Vehicle getAdvertisement() throws SQLException {
+//        Vehicle v=new Vehicle();
+//        v.setRegNo("415955");
+//        v.setBrand("TOYOTA");
+//        v.setModel("Camry");
+//        v.setYear(2012);
+//        v.setCondition("Brand New");
+//        v.setMileage(24500);
+//        v.setBodyType("Closed");
+//        v.setTransmission("Automatic");
+//        v.setFuel("Petrol");
+//        v.setEngineCC(2500);
+//        v.setDescription("sdfsdf");
+//
+//        try {
+//            Vehicle v2=getVehicle(0);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return v;
+//
+//    }
 
     public static void addVehicle(Vehicle v){
-        try {
 
+        try {
+            statement=connect.createStatement();
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/tenders?"
+                            + "user=root&password=");
             preparedStatement = connect
                     .prepareStatement("insert into  vehicles values ( ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
@@ -77,17 +83,20 @@ public class DBLink {
             preparedStatement.setBlob(17,v.getPhoto4());
             preparedStatement.setInt(18, v.getAdvertisementID());
             preparedStatement.executeUpdate();
-
-
+            connect.close();
         }catch (Exception e){
             e.printStackTrace();
         }
+
     }
 
     public static Vehicle getVehicle(int addID) throws SQLException {
         Vehicle v = new Vehicle();
-
-        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID="+addID);
+        connect = DriverManager
+                .getConnection("jdbc:mysql://localhost/tenders?"
+                        + "user=root&password=");
+        statement=connect.createStatement();
+        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID=" + addID);
 
         while (resultSet.next()) {
 
@@ -112,11 +121,26 @@ public class DBLink {
 
             v.setAdvertisementID(resultSet.getInt("AdvertisementID"));
 
-            return v;
         }
 
-        return null;
+//        connect.close();
+        return v;
     }
 
+
+    public static String getImage(int vehicleID,String img) throws SQLException {
+        String attribute="Photo"+img;
+        String imageS=null;
+        connect = DriverManager
+                .getConnection("jdbc:mysql://localhost/tenders?"
+                        + "user=root&password=");
+        statement=connect.createStatement();
+        resultSet = statement.executeQuery("select "+attribute+" from vehicles where ID="+vehicleID);
+        while (resultSet.next()) {
+            imageS = Base64.encode(resultSet.getBytes(attribute));
+        }
+//        connect.close();
+        return imageS;
+    }
 
 }

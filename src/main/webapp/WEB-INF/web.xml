@@ -22,13 +22,13 @@
 	</servlet>
 
 	<servlet>
-		<servlet-name>hello2</servlet-name>
-		<servlet-class>servlet.HelloWorldServlet</servlet-class>
+		<servlet-name>ImageDownload</servlet-name>
+		<servlet-class>servlet.ImageDownloadServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>hello2</servlet-name>
-		<url-pattern>/hello2</url-pattern>
+		<servlet-name>ImageDownload</servlet-name>
+		<url-pattern>/imageDownload</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
