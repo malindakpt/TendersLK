@@ -11,27 +11,27 @@ public class HelloController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
-		return "index2";
+		return "ViewVehicle";
 	}
 }
 
 @Controller
-@RequestMapping("/upload")
+@RequestMapping("/1")
 class HelloController2 {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
-		return "index";
+		return "AddVehicle";
 	}
 }
 
 @Controller
-@RequestMapping("/firstPage")
+@RequestMapping("/2")
 class HelloController3 {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
-		return "firstPage";
+		return "CreateAd";
 	}
 }
 

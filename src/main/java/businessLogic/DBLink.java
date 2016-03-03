@@ -22,9 +22,6 @@ public class DBLink {
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/tenders?"
                             + "user=root&password=");
-
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -84,6 +81,31 @@ public class DBLink {
             preparedStatement.setInt(18, v.getAdvertisementID());
             preparedStatement.executeUpdate();
             connect.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void addAdvertisement(Advertisement adv){
+
+        try {
+            statement=connect.createStatement();
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/tenders?"
+                            + "user=root&password=");
+            preparedStatement = connect
+                    .prepareStatement("insert into advertisements values ( ?,?,?,?,?,?)");
+
+            preparedStatement.setInt(1, adv.getID());
+            preparedStatement.setString(2,adv.getTopic());
+            preparedStatement.setDate(3, adv.getCreateDate());
+            preparedStatement.setDate(4, adv.getExpDate());
+            preparedStatement.setString(5, adv.getCustomer());
+            preparedStatement.setInt(6, adv.getMaxAds());
+
+            preparedStatement.executeUpdate();
+           // connect.close();
         }catch (Exception e){
             e.printStackTrace();
         }

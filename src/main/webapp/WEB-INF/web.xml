@@ -31,6 +31,16 @@
 		<url-pattern>/imageDownload</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>CreateAdvertisement</servlet-name>
+		<servlet-class>servlet.CreateAdvertisementServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreateAdvertisement</servlet-name>
+		<url-pattern>/CreateAdvertisement</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
