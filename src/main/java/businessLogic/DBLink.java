@@ -166,7 +166,7 @@ public class DBLink {
 //        connect.close();
         return imageS;
     }
-    public static List<Vehicle> getAddVehicles(int addID) throws SQLException {
+    public static List<Vehicle> getAdVehicles(int addID) throws SQLException {
 
         List<Vehicle> list=new ArrayList<Vehicle>();
         connect = DriverManager
