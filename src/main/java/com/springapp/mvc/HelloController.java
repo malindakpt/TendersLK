@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
@@ -54,4 +57,24 @@ class HelloController4 {
 //		return "firstPage";
 //	}
 //}
+@Controller
+@RequestMapping("/4")
+class HelloController5 {
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
+	ModelAndView printWelcomebyParameter(@RequestParam("vID") String id) {
+		{
+			//model.addAttribute("message", "Hello world!");
+			ModelAndView modelAndview = null;
+			try {
+				//generateException();
 
+				modelAndview = new ModelAndView("ViewVehicle");
+				modelAndview.addObject("movie",id);
+			} catch (IndexOutOfBoundsException e) {
+				//modelAndView = handleException();
+			}
+			return modelAndview;
+		}
+	}
+}
