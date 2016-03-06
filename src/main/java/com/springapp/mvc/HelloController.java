@@ -35,6 +35,16 @@ class HelloController3 {
 	}
 }
 
+@Controller
+@RequestMapping("/3")
+class HelloController4 {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("message", "Hello world!");
+		return "SearchResult";
+	}
+}
+
 //@Controller
 //@RequestMapping("/imageDownload")
 //class HelloController4 {

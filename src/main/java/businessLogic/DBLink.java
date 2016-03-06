@@ -2,7 +2,9 @@ package businessLogic;
 
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by MalindaK on 2/25/2016.
@@ -164,5 +166,41 @@ public class DBLink {
 //        connect.close();
         return imageS;
     }
+    public static List<Vehicle> getAddVehicles(int addID) throws SQLException {
 
+        List<Vehicle> list=new ArrayList<Vehicle>();
+        connect = DriverManager
+                .getConnection("jdbc:mysql://localhost/tenders?"
+                        + "user=root&password=");
+        statement=connect.createStatement();
+        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID=" + addID);
+
+        while (resultSet.next()) {
+            Vehicle v = new Vehicle();
+            v.setID(resultSet.getInt("ID"));
+            v.setRegNo(resultSet.getString("RegNo"));
+            v.setBrand(resultSet.getString("Brand"));
+            v.setModel(resultSet.getString("Model"));
+            v.setYear(resultSet.getInt("Year"));
+            v.setCondition(resultSet.getString("Condition"));
+            v.setMileage(resultSet.getInt("Millage"));
+            v.setBodyType(resultSet.getString("BodyType"));
+            v.setTransmission(resultSet.getString("Transmission"));
+            v.setFuel(resultSet.getString("Fuel"));
+            v.setEngineCC(resultSet.getInt("Engine"));
+            v.setDescription(resultSet.getString("Description"));
+
+            v.setHtmlPhoto0(Base64.encode(resultSet.getBytes("Photo0")));
+            v.setHtmlPhoto1(Base64.encode(resultSet.getBytes("Photo1")));
+            v.setHtmlPhoto2(Base64.encode(resultSet.getBytes("Photo2")));
+            v.setHtmlPhoto3(Base64.encode(resultSet.getBytes("Photo3")));
+            v.setHtmlPhoto4(Base64.encode(resultSet.getBytes("Photo4")));
+
+            v.setAdvertisementID(resultSet.getInt("AdvertisementID"));
+
+            list.add(v);
+        }
+//        connect.close();
+        return list;
+    }
 }
