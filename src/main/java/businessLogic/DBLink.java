@@ -114,13 +114,13 @@ public class DBLink {
 
     }
 
-    public static Vehicle getVehicle(int addID) throws SQLException {
+    public static Vehicle getVehicle(int vID) throws SQLException {
         Vehicle v = new Vehicle();
         connect = DriverManager
                 .getConnection("jdbc:mysql://localhost/tenders?"
                         + "user=root&password=");
         statement=connect.createStatement();
-        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID=" + addID);
+        resultSet = statement.executeQuery("select * from vehicles where ID=" + vID);
 
         while (resultSet.next()) {
 

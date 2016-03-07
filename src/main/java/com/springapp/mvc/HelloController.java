@@ -70,7 +70,7 @@ class HelloController5 {
 				//generateException();
 
 				modelAndview = new ModelAndView("ViewVehicle");
-				modelAndview.addObject("movie",id);
+				//modelAndview.addObject("movie",id);
 			} catch (IndexOutOfBoundsException e) {
 				//modelAndView = handleException();
 			}
