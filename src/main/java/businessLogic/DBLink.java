@@ -167,6 +167,10 @@ public class DBLink {
     public static List<Vehicle> getAdVehicles(String addID) throws SQLException {
 
         List<Vehicle> list=new ArrayList<Vehicle>();
+
+        if("".equals(addID) || addID==null){
+            return list;
+        }
         connect = DriverManager
                 .getConnection("jdbc:mysql://localhost/tenders?"
                         + "user=root&password=");

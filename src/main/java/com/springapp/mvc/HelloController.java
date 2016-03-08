@@ -39,6 +39,17 @@ class HelloController3 {
 }
 
 
+@Controller
+@RequestMapping("/ViewVehicle")
+class HelloController4 {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("message", "Hello world!");
+		return "ViewVehicle";
+	}
+}
+
+
 //@Controller
 //@RequestMapping("/imageDownload")
 //class HelloController4 {
@@ -48,24 +59,24 @@ class HelloController3 {
 //		return "firstPage";
 //	}
 //}
-//@Controller
-//@RequestMapping("/4")
-//class HelloController5 {
-//	@RequestMapping(method = RequestMethod.GET)
-//	@ResponseBody
-//	ModelAndView printWelcomebyParameter(@RequestParam("vID") String id) {
-//		{
-//			//model.addAttribute("message", "Hello world!");
-//			ModelAndView modelAndview = null;
-//			try {
-//				//generateException();
-//
-//				modelAndview = new ModelAndView("ViewVehicle");
-//				//modelAndview.addObject("movie",id);
-//			} catch (IndexOutOfBoundsException e) {
-//				//modelAndView = handleException();
-//			}
-//			return modelAndview;
-//		}
-//	}
-//}
+@Controller
+@RequestMapping("/4")
+class HelloController5 {
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
+	ModelAndView printWelcomebyParameter(@RequestParam("vID") String id) {
+		{
+			//model.addAttribute("message", "Hello world!");
+			ModelAndView modelAndview = null;
+			try {
+				//generateException();
+
+				modelAndview = new ModelAndView("ViewVehicle");
+				//modelAndview.addObject("movie",id);
+			} catch (IndexOutOfBoundsException e) {
+				//modelAndView = handleException();
+			}
+			return modelAndview;
+		}
+	}
+}
