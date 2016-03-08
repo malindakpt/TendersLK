@@ -58,6 +58,11 @@ public class UploadServlet extends HttpServlet {
             List fileItems = upload.parseRequest(request);
             Iterator i = fileItems.iterator();
 
+            int adID=0;
+            String email=null;
+            String pwd = null;
+
+
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet upload</title>");
@@ -73,6 +78,8 @@ public class UploadServlet extends HttpServlet {
 //                    String contentType = fi.getContentType();
 //                    boolean isInMemory = fi.isInMemory();
 //                    long sizeInBytes = fi.getSize();
+
+
 
                    if(fieldName.equals("regNo")){
                        v.setRegNo(getStringVal(fi));
@@ -106,6 +113,12 @@ public class UploadServlet extends HttpServlet {
                        v.setPhoto3(fi.getInputStream());
                    }else if(fieldName.equals("file4")){
                        v.setPhoto4(fi.getInputStream());
+                   }else if(fieldName.equals("adID")){
+                       adID=Integer.parseInt(getStringVal(fi));
+                   }else if(fieldName.equals("email")){
+                       email=getStringVal(fi);
+                   }else if(fieldName.equals("password")){
+                       pwd=getStringVal(fi);
                    }
 
                     out.println("Uploaded Filename: " + fieldName + "<br>");
@@ -113,7 +126,7 @@ public class UploadServlet extends HttpServlet {
             }
             out.println("</body>");
             out.println("</html>");
-            DBLink.addVehicle(v);
+            DBLink.addVehicle(v,adID,email,pwd);
         }catch(Exception ex) {
             System.out.println(ex);
         }

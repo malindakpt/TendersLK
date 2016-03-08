@@ -28,32 +28,30 @@ public class DBLink {
             e.printStackTrace();
         }
     }
-//    public static Vehicle getAdvertisement() throws SQLException {
-//        Vehicle v=new Vehicle();
-//        v.setRegNo("415955");
-//        v.setBrand("TOYOTA");
-//        v.setModel("Camry");
-//        v.setYear(2012);
-//        v.setCondition("Brand New");
-//        v.setMileage(24500);
-//        v.setBodyType("Closed");
-//        v.setTransmission("Automatic");
-//        v.setFuel("Petrol");
-//        v.setEngineCC(2500);
-//        v.setDescription("sdfsdf");
-//
-//        try {
-//            Vehicle v2=getVehicle(0);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return v;
-//
-//    }
 
-    public static void addVehicle(Vehicle v){
+    public static boolean validateUser(int adID,String email,String pwd){
 
+        try {
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/tenders?"
+                            + "user=root&password=");
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select * from advertisements where ID=" + adID+" and CustomerID='"+email+"' and Pwd='"+pwd+"'");
+
+            if (resultSet.next()) {
+                return true;
+            }
+        }catch (Exception e){
+
+        }
+        return false;
+    }
+
+    public static void addVehicle(Vehicle v,int adID,String email,String pwd){
+
+        if(!validateUser(adID,email,pwd)){
+            return;
+        }
         try {
             statement=connect.createStatement();
             connect = DriverManager
@@ -79,14 +77,15 @@ public class DBLink {
             preparedStatement.setBlob(14,v.getPhoto1());
             preparedStatement.setBlob(15,v.getPhoto2());
             preparedStatement.setBlob(16,v.getPhoto3());
-            preparedStatement.setBlob(17,v.getPhoto4());
+            preparedStatement.setBlob(17, v.getPhoto4());
             preparedStatement.setInt(18, v.getAdvertisementID());
             preparedStatement.executeUpdate();
-            connect.close();
+            //connect.close();
+
+
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     public static void addAdvertisement(Advertisement adv){
@@ -125,6 +124,9 @@ public class DBLink {
         while (resultSet.next()) {
 
             v.setID(resultSet.getInt("ID"));
+
+            v.setHtmlPhoto0(Base64.encode(resultSet.getBytes("Photo0")));
+            v.setHtmlPhoto1(Base64.encode(resultSet.getBytes("Photo1")));
             v.setRegNo(resultSet.getString("RegNo"));
             v.setBrand(resultSet.getString("Brand"));
             v.setModel(resultSet.getString("Model"));
@@ -136,9 +138,6 @@ public class DBLink {
             v.setFuel(resultSet.getString("Fuel"));
             v.setEngineCC(resultSet.getInt("Engine"));
             v.setDescription(resultSet.getString("Description"));
-
-            v.setHtmlPhoto0(Base64.encode(resultSet.getBytes("Photo0")));
-            v.setHtmlPhoto1(Base64.encode(resultSet.getBytes("Photo1")));
             v.setHtmlPhoto2(Base64.encode(resultSet.getBytes("Photo2")));
             v.setHtmlPhoto3(Base64.encode(resultSet.getBytes("Photo3")));
             v.setHtmlPhoto4(Base64.encode(resultSet.getBytes("Photo4")));
@@ -147,7 +146,6 @@ public class DBLink {
 
         }
 
-//        connect.close();
         return v;
     }
 
@@ -163,10 +161,10 @@ public class DBLink {
         while (resultSet.next()) {
             imageS = Base64.encode(resultSet.getBytes(attribute));
         }
-//        connect.close();
         return imageS;
     }
-    public static List<Vehicle> getAdVehicles(int addID) throws SQLException {
+
+    public static List<Vehicle> getAdVehicles(String addID) throws SQLException {
 
         List<Vehicle> list=new ArrayList<Vehicle>();
         connect = DriverManager

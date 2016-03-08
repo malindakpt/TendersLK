@@ -39,12 +39,24 @@ class HelloController3 {
 }
 
 @Controller
-@RequestMapping("/3")
-class HelloController4 {
+ @RequestMapping("/3")
+ class HelloController4 {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
 		return "SearchResult";
+	}
+}
+
+
+
+@Controller
+@RequestMapping("/6")
+class HelloController6 {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("message", "Hello world!");
+		return "SearchResultList";
 	}
 }
 
