@@ -14,12 +14,12 @@ public class HelloController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
-		return "ViewVehicle";
+		return "SearchResult";
 	}
 }
 
 @Controller
-@RequestMapping("/1")
+@RequestMapping("/AddVehicle")
 class HelloController2 {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
@@ -29,7 +29,7 @@ class HelloController2 {
 }
 
 @Controller
-@RequestMapping("/2")
+@RequestMapping("/CreateAdView")
 class HelloController3 {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
@@ -38,27 +38,6 @@ class HelloController3 {
 	}
 }
 
-@Controller
- @RequestMapping("/3")
- class HelloController4 {
-	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
-		model.addAttribute("message", "Hello world!");
-		return "SearchResult";
-	}
-}
-
-
-
-@Controller
-@RequestMapping("/6")
-class HelloController6 {
-	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
-		model.addAttribute("message", "Hello world!");
-		return "SearchResultList";
-	}
-}
 
 //@Controller
 //@RequestMapping("/imageDownload")
@@ -69,24 +48,24 @@ class HelloController6 {
 //		return "firstPage";
 //	}
 //}
-@Controller
-@RequestMapping("/4")
-class HelloController5 {
-	@RequestMapping(method = RequestMethod.GET)
-	@ResponseBody
-	ModelAndView printWelcomebyParameter(@RequestParam("vID") String id) {
-		{
-			//model.addAttribute("message", "Hello world!");
-			ModelAndView modelAndview = null;
-			try {
-				//generateException();
-
-				modelAndview = new ModelAndView("ViewVehicle");
-				//modelAndview.addObject("movie",id);
-			} catch (IndexOutOfBoundsException e) {
-				//modelAndView = handleException();
-			}
-			return modelAndview;
-		}
-	}
-}
+//@Controller
+//@RequestMapping("/4")
+//class HelloController5 {
+//	@RequestMapping(method = RequestMethod.GET)
+//	@ResponseBody
+//	ModelAndView printWelcomebyParameter(@RequestParam("vID") String id) {
+//		{
+//			//model.addAttribute("message", "Hello world!");
+//			ModelAndView modelAndview = null;
+//			try {
+//				//generateException();
+//
+//				modelAndview = new ModelAndView("ViewVehicle");
+//				//modelAndview.addObject("movie",id);
+//			} catch (IndexOutOfBoundsException e) {
+//				//modelAndView = handleException();
+//			}
+//			return modelAndview;
+//		}
+//	}
+//}
