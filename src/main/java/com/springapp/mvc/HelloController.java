@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class HelloController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
-		model.addAttribute("message", "Hello world!");
 		return "SearchResult";
 	}
 }
@@ -29,8 +28,8 @@ class HelloController2 {
 }
 
 @Controller
-@RequestMapping("/CreateAdView")
-class HelloController3 {
+ @RequestMapping("/CreateAdView")
+ class HelloController3 {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
@@ -38,16 +37,35 @@ class HelloController3 {
 	}
 }
 
-
 @Controller
-@RequestMapping("/ViewVehicle")
-class HelloController4 {
+@RequestMapping("/CreateUserView")
+class CreateUserController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
-		return "ViewVehicle";
+		return "CreateUser";
 	}
 }
+@Controller
+@RequestMapping("/Notification")
+class NotificationController {
+	@RequestMapping(method = RequestMethod.GET)
+	public String printWelcome(ModelMap model) {
+		model.addAttribute("message", "Hello world!");
+		return "Notification";
+	}
+}
+
+//
+//@Controller
+//@RequestMapping("/ViewVehicle")
+//class ViewVehicle {
+//	@RequestMapping(method = RequestMethod.GET)
+//	public String printWelcome(ModelMap model) {
+//		model.addAttribute("message", "Hello world!");
+//		return "ViewVehicle";
+//	}
+//}
 
 
 //@Controller
@@ -66,7 +84,7 @@ class HelloController5 {
 	@ResponseBody
 	ModelAndView printWelcomebyParameter(@RequestParam("vID") String id) {
 		{
-			//model.addAttribute("message", "Hello world!");
+			//model.addAttribute("message", "Hello world!");jgjhgjh
 			ModelAndView modelAndview = null;
 			try {
 				//generateException();

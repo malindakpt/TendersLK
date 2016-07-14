@@ -12,7 +12,16 @@ public class Advertisement {
     private Date createDate;
     private Date expDate;
     private String  customer;
+    private String pwd;
     private int maxAds;
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
 
     public Date getExpDate() {
         return expDate;

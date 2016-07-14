@@ -29,28 +29,28 @@ public class DBLink {
         }
     }
 
-    public static boolean validateUser(int adID,String email,String pwd){
+    public static boolean validateUser(String email,String pwd){
 
         try {
             connect = DriverManager
                     .getConnection("jdbc:mysql://localhost/tenders?"
                             + "user=root&password=");
             statement = connect.createStatement();
-            resultSet = statement.executeQuery("select * from advertisements where ID=" + adID+" and CustomerID='"+email+"' and Pwd='"+pwd+"'");
+            resultSet = statement.executeQuery("select * from customers where email='" + email+"' and password='"+pwd+"'");
 
             if (resultSet.next()) {
                 return true;
             }
         }catch (Exception e){
-
+            return false;
         }
         return false;
     }
 
     public static void addVehicle(Vehicle v,int adID,String email,String pwd){
 
-        if(!validateUser(adID,email,pwd)){
-            return;
+        if(!validateUser(email,pwd)){
+           return;
         }
         try {
             statement=connect.createStatement();
@@ -88,7 +88,7 @@ public class DBLink {
         }
     }
 
-    public static void addAdvertisement(Advertisement adv){
+    public static boolean addCustomer(Customer customer){
 
         try {
             statement=connect.createStatement();
@@ -96,14 +96,45 @@ public class DBLink {
                     .getConnection("jdbc:mysql://localhost/tenders?"
                             + "user=root&password=");
             preparedStatement = connect
-                    .prepareStatement("insert into advertisements values ( ?,?,?,?,?,?)");
+                    .prepareStatement("insert into customers values ( ?,?,?,?,?)");
+
+            preparedStatement.setString(1, customer.getEmail());
+            preparedStatement.setString(2, customer.getPassword());
+            preparedStatement.setString(3, customer.getPhone());
+            preparedStatement.setDate(4, customer.getCreateDate());
+            preparedStatement.setBoolean(5, true);
+
+            preparedStatement.executeUpdate();
+            return true;
+            // connect.close();
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+
+    public static void addAdvertisement(Advertisement adv){
+
+        if(!validateUser(adv.getCustomer(),adv.getPwd())){
+            return;
+        }
+
+        try {
+            statement=connect.createStatement();
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/tenders?"
+                            + "user=root&password=");
+            preparedStatement = connect
+                    .prepareStatement("insert into ads values ( ?,?,?,?,?,?)");
 
             preparedStatement.setInt(1, adv.getID());
-            preparedStatement.setString(2,adv.getTopic());
+            preparedStatement.setString(2, adv.getTopic());
             preparedStatement.setDate(3, adv.getCreateDate());
             preparedStatement.setDate(4, adv.getExpDate());
-            preparedStatement.setString(5, adv.getCustomer());
-            preparedStatement.setInt(6, adv.getMaxAds());
+            preparedStatement.setInt(5, adv.getMaxAds());
+            preparedStatement.setString(6, adv.getCustomer());
 
             preparedStatement.executeUpdate();
            // connect.close();

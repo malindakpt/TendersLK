@@ -114,14 +114,15 @@ public class UploadServlet extends HttpServlet {
                    }else if(fieldName.equals("file4")){
                        v.setPhoto4(fi.getInputStream());
                    }else if(fieldName.equals("adID")){
-                       adID=Integer.parseInt(getStringVal(fi));
+                       v.setAdvertisementID(Integer.parseInt(getStringVal(fi)));
                    }else if(fieldName.equals("email")){
                        email=getStringVal(fi);
                    }else if(fieldName.equals("password")){
                        pwd=getStringVal(fi);
                    }
 
-                    out.println("Uploaded Filename: " + fieldName + "<br>");
+//                    out.println("Uploaded Filename: " + fieldName + "<br>");
+//                    response.sendRedirect("http://localhost:8080/");
                 }
             }
             out.println("</body>");

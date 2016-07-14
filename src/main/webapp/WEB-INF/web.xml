@@ -35,7 +35,22 @@
 		<servlet-name>CreateAdvertisement</servlet-name>
 		<servlet-class>servlet.CreateAdvertisementServlet</servlet-class>
 	</servlet>
-
+	<servlet>
+		<servlet-name>CreateUserServlet</servlet-name>
+		<servlet-class>servlet.CreateUserServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DeleteVehicleServlet</servlet-name>
+		<servlet-class>servlet.DeleteVehicleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteVehicleServlet</servlet-name>
+		<url-pattern>/DeleteVehicle</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CreateUserServlet</servlet-name>
+		<url-pattern>/CreateUser</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>CreateAdvertisement</servlet-name>
 		<url-pattern>/CreateAdvertisement</url-pattern>
