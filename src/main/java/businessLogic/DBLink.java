@@ -47,10 +47,43 @@ public class DBLink {
         return false;
     }
 
-    public static void addVehicle(Vehicle v,int adID,String email,String pwd){
+    public static boolean validateAd(String email,String ad){
+
+        try {
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/tenders?"
+                            + "user=root&password=");
+            statement = connect.createStatement();
+            resultSet = statement.executeQuery("select * from ads where userID='" + email+"' and ID='"+ad+"'");
+
+            if (resultSet.next()) {
+                return true;
+            }
+        }catch (Exception e){
+            return false;
+        }
+        return false;
+    }
+
+    public static boolean deleteVehicle(String ID){
+
+        try {
+            connect = DriverManager
+                    .getConnection("jdbc:mysql://localhost/tenders?"
+                            + "user=root&password=");
+            statement = connect.createStatement();
+            statement.executeUpdate("DELETE FROM vehicles WHERE ID="+ID);
+
+        }catch (Exception e){
+            return false;
+        }
+        return false;
+    }
+
+    public static boolean addVehicle(Vehicle v, int adID, String email, String pwd){
 
         if(!validateUser(email,pwd)){
-           return;
+           return false;
         }
         try {
             statement=connect.createStatement();
@@ -82,9 +115,10 @@ public class DBLink {
             preparedStatement.executeUpdate();
             //connect.close();
 
-
+            return true;
         }catch (Exception e){
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -108,7 +142,7 @@ public class DBLink {
             return true;
             // connect.close();
         }catch (Exception e){
-            e.printStackTrace();
+          //  e.printStackTrace();
             return false;
         }
 

@@ -43,6 +43,14 @@
 		<servlet-name>DeleteVehicleServlet</servlet-name>
 		<servlet-class>servlet.DeleteVehicleServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ValidateUserAdvertisementServlet</servlet-name>
+		<servlet-class>servlet.ValidateUserAdvertisementServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateUserAdvertisementServlet</servlet-name>
+		<url-pattern>/ValidateUserAdvertisement</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>DeleteVehicleServlet</servlet-name>
 		<url-pattern>/DeleteVehicle</url-pattern>

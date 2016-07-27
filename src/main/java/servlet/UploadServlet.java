@@ -2,15 +2,20 @@ package servlet; /**
  * Created by MalindaK on 2/21/2016.
  */
 // Import required java libraries
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import businessLogic.DBLink;
+import businessLogic.FileResizer;
 import businessLogic.Vehicle;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -21,9 +26,11 @@ public class UploadServlet extends HttpServlet {
 
     private boolean isMultipart;
     private String filePath;
-    private int maxFileSize = 15000 * 1024;
-    private int maxMemSize = 150000 * 1024;
+    private int maxFileSize = 300000000;
+    private int maxMemSize =  300000000;
     private File file ;
+    private static final int IMG_WIDTH = 100;
+    private static final int IMG_HEIGHT = 100;
 
     public void init( ){
         // Get the file location where it would be stored.
@@ -53,7 +60,6 @@ public class UploadServlet extends HttpServlet {
         factory.setRepository(new File("c:\\temp"));
         ServletFileUpload upload = new ServletFileUpload(factory);
         upload.setSizeMax( maxFileSize );
-
         try{
             List fileItems = upload.parseRequest(request);
             Iterator i = fileItems.iterator();
@@ -74,13 +80,8 @@ public class UploadServlet extends HttpServlet {
                 {
                     // Get the uploaded file parameters
                     String fieldName = fi.getFieldName();
-//                    String fileName = fi.getName();
-//                    String contentType = fi.getContentType();
-//                    boolean isInMemory = fi.isInMemory();
-//                    long sizeInBytes = fi.getSize();
-
-
-
+                    String originalName = fi.getName();
+                    System.out.println();
                    if(fieldName.equals("regNo")){
                        v.setRegNo(getStringVal(fi));
                    }else if(fieldName.equals("brand")){
@@ -104,15 +105,15 @@ public class UploadServlet extends HttpServlet {
                    }else if(fieldName.equals("desc")){
                        v.setDescription(getStringVal(fi));
                    }else if(fieldName.equals("file0")){
-                       v.setPhoto0(fi.getInputStream());
+                       v.setPhoto0(FileResizer.resize(fi.getInputStream(), fi.getName()));
                    }else if(fieldName.equals("file1")){
-                       v.setPhoto1(fi.getInputStream());
+                       v.setPhoto1(FileResizer.resize(fi.getInputStream(), fi.getName()));
                    }else if(fieldName.equals("file2")){
-                       v.setPhoto2(fi.getInputStream());
+                       v.setPhoto2(FileResizer.resize(fi.getInputStream(), fi.getName()));
                    }else if(fieldName.equals("file3")){
-                       v.setPhoto3(fi.getInputStream());
+                       v.setPhoto3(FileResizer.resize(fi.getInputStream(), fi.getName()));
                    }else if(fieldName.equals("file4")){
-                       v.setPhoto4(fi.getInputStream());
+                       v.setPhoto4(FileResizer.resize(fi.getInputStream(), fi.getName()));
                    }else if(fieldName.equals("adID")){
                        v.setAdvertisementID(Integer.parseInt(getStringVal(fi)));
                    }else if(fieldName.equals("email")){
@@ -121,24 +122,28 @@ public class UploadServlet extends HttpServlet {
                        pwd=getStringVal(fi);
                    }
 
-//                    out.println("Uploaded Filename: " + fieldName + "<br>");
-//                    response.sendRedirect("http://localhost:8080/");
                 }
             }
             out.println("</body>");
             out.println("</html>");
-            DBLink.addVehicle(v,adID,email,pwd);
+
+            if(DBLink.addVehicle(v,adID,email,pwd)){
+                response.sendRedirect("http://localhost:8080?msg=Vehicle Added Successfully &#926;");
+            }else{
+                response.sendRedirect("http://localhost:8080?msg=Sorry, Error Occured &#926;");
+            }
         }catch(Exception ex) {
             System.out.println(ex);
         }
     }
 
 
+
     public String getStringVal( FileItem fi) throws IOException {
         DeferredFileOutputStream obj = (DeferredFileOutputStream) fi.getOutputStream();
         byte[] bos = obj.getData();
         String s =  new String(bos, "UTF-8");
-        System.out.println("ee="+s);
+        System.out.println("ee=" + s);
         return s;
     }
 
@@ -150,5 +155,53 @@ public class UploadServlet extends HttpServlet {
                 getClass( ).getName( )+": POST method required.");
     }
 
+    public static void resizeImage(){
+        try{
+
+            BufferedImage originalImage = ImageIO.read(new File("c:\\image\\mkyong.jpg"));
+            int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+
+            BufferedImage resizeImageJpg = resizeImage(originalImage, type);
+            ImageIO.write(resizeImageJpg, "jpg", new File("c:\\image\\mkyong_jpg.jpg"));
+
+            BufferedImage resizeImagePng = resizeImage(originalImage, type);
+            ImageIO.write(resizeImagePng, "png", new File("c:\\image\\mkyong_png.jpg"));
+
+            BufferedImage resizeImageHintJpg = resizeImageWithHint(originalImage, type);
+            ImageIO.write(resizeImageHintJpg, "jpg", new File("c:\\image\\mkyong_hint_jpg.jpg"));
+
+            BufferedImage resizeImageHintPng = resizeImageWithHint(originalImage, type);
+            ImageIO.write(resizeImageHintPng, "png", new File("c:\\image\\mkyong_hint_png.jpg"));
+
+        }catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    private static BufferedImage resizeImage(BufferedImage originalImage, int type){
+        BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
+        g.dispose();
+
+        return resizedImage;
+    }
+
+    private static BufferedImage resizeImageWithHint(BufferedImage originalImage, int type){
+
+        BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
+        g.dispose();
+        g.setComposite(AlphaComposite.Src);
+
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+        return resizedImage;
+    }
 
 }

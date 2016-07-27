@@ -16,6 +16,14 @@ public class HelloController {
 		return "SearchResult";
 	}
 }
+@Controller
+@RequestMapping("/")
+class HelloGETController {
+	@RequestMapping(method = RequestMethod.POST)
+	public String printWelcome(ModelMap model) {
+		return "SearchResultView";
+	}
+}
 
 @Controller
 @RequestMapping("/AddVehicle")
@@ -56,29 +64,8 @@ class NotificationController {
 	}
 }
 
-//
-//@Controller
-//@RequestMapping("/ViewVehicle")
-//class ViewVehicle {
-//	@RequestMapping(method = RequestMethod.GET)
-//	public String printWelcome(ModelMap model) {
-//		model.addAttribute("message", "Hello world!");
-//		return "ViewVehicle";
-//	}
-//}
-
-
-//@Controller
-//@RequestMapping("/imageDownload")
-//class HelloController4 {
-//	@RequestMapping(method = RequestMethod.GET)
-//	public String printWelcome(ModelMap model) {
-//		model.addAttribute("message", "Hello world!");
-//		return "firstPage";
-//	}
-//}
 @Controller
-@RequestMapping("/4")
+@RequestMapping("/loadItem")
 class HelloController5 {
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
