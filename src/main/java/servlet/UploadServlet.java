@@ -130,7 +130,7 @@ public class UploadServlet extends HttpServlet {
             if(DBLink.addVehicle(v,adID,email,pwd)){
                 response.sendRedirect("http://localhost:8080?msg=Vehicle Added Successfully &#926;");
             }else{
-                response.sendRedirect("http://localhost:8080?msg=Sorry, Error Occured &#926;");
+                response.sendRedirect("http://localhost:8080?msg=Oops...,Unknown Error Occured &#926;");
             }
         }catch(Exception ex) {
             System.out.println(ex);
