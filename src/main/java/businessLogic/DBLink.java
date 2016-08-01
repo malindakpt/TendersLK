@@ -77,7 +77,7 @@ public class DBLink {
         }catch (Exception e){
             return false;
         }
-        return false;
+        return true;
     }
 
     public static boolean addVehicle(Vehicle v, int adID, String email, String pwd){
