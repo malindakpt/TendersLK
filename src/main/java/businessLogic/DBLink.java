@@ -11,20 +11,30 @@ import java.util.List;
  */
 public class DBLink {
 
+    public  static StringBuilder errorMsg = new StringBuilder();
     private static DBLink dbLink=null;
     private  static Connection connect = null;
     private  static Statement statement = null;
     private  static PreparedStatement preparedStatement = null;
     private  static ResultSet resultSet = null;
 
+    public static Connection getConnection(){
+        errorMsg = new StringBuilder();
+        try {
+            return DriverManager.getConnection("jdbc:mysql://127.7.45.130:3306/voction?" + "user=adminV5y9umD&password=J8etWW3ma6fB");
+        } catch (SQLException e)
+        {
+            errorMsg.append(e.getMessage());
+            return null;
+        }
+    }
 
     static {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/tenders?"
-                            + "user=root&password=");
+            connect = getConnection();
         }catch (Exception e){
+            errorMsg.append(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -32,9 +42,7 @@ public class DBLink {
     public static boolean validateUser(String email,String pwd){
 
         try {
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/tenders?"
-                            + "user=root&password=");
+            connect = getConnection();
             statement = connect.createStatement();
             resultSet = statement.executeQuery("select * from customers where email='" + email+"' and password='"+pwd+"'");
 
@@ -42,6 +50,7 @@ public class DBLink {
                 return true;
             }
         }catch (Exception e){
+            errorMsg.append(e.getMessage());
             return false;
         }
         return false;
@@ -50,9 +59,7 @@ public class DBLink {
     public static boolean validateAd(String email,String ad){
 
         try {
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/tenders?"
-                            + "user=root&password=");
+            connect = getConnection();
             statement = connect.createStatement();
             resultSet = statement.executeQuery("select * from ads where userID='" + email+"' and ID='"+ad+"'");
 
@@ -60,6 +67,7 @@ public class DBLink {
                 return true;
             }
         }catch (Exception e){
+            errorMsg.append(e.getMessage());
             return false;
         }
         return false;
@@ -68,13 +76,12 @@ public class DBLink {
     public static boolean deleteVehicle(String ID){
 
         try {
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/tenders?"
-                            + "user=root&password=");
+            connect = getConnection();
             statement = connect.createStatement();
             statement.executeUpdate("DELETE FROM vehicles WHERE ID="+ID);
 
         }catch (Exception e){
+            errorMsg.append(e.getMessage());
             return false;
         }
         return true;
@@ -87,9 +94,7 @@ public class DBLink {
         }
         try {
             statement=connect.createStatement();
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/tenders?"
-                            + "user=root&password=");
+            connect = getConnection();
             preparedStatement = connect
                     .prepareStatement("insert into  vehicles values ( ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
@@ -117,6 +122,7 @@ public class DBLink {
 
             return true;
         }catch (Exception e){
+            errorMsg.append(e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -126,9 +132,7 @@ public class DBLink {
 
         try {
             statement=connect.createStatement();
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/tenders?"
-                            + "user=root&password=");
+            connect = getConnection();
             preparedStatement = connect
                     .prepareStatement("insert into customers values ( ?,?,?,?,?)");
 
@@ -142,6 +146,7 @@ public class DBLink {
             return true;
             // connect.close();
         }catch (Exception e){
+            errorMsg.append(e.getMessage());
           //  e.printStackTrace();
             return false;
         }
@@ -157,9 +162,7 @@ public class DBLink {
 
         try {
             statement=connect.createStatement();
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/tenders?"
-                            + "user=root&password=");
+            connect = getConnection();
             preparedStatement = connect
                     .prepareStatement("insert into ads values ( ?,?,?,?,?,?)");
 
@@ -173,6 +176,7 @@ public class DBLink {
             preparedStatement.executeUpdate();
            // connect.close();
         }catch (Exception e){
+            errorMsg.append(e.getMessage());
             e.printStackTrace();
         }
 
@@ -180,9 +184,7 @@ public class DBLink {
 
     public static Vehicle getVehicle(int vID) throws SQLException {
         Vehicle v = new Vehicle();
-        connect = DriverManager
-                .getConnection("jdbc:mysql://localhost/tenders?"
-                        + "user=root&password=");
+        connect = getConnection();
         statement=connect.createStatement();
         resultSet = statement.executeQuery("select * from vehicles where ID=" + vID);
 
@@ -218,9 +220,7 @@ public class DBLink {
     public static String getImage(int vehicleID,String img) throws SQLException {
         String attribute="Photo"+img;
         String imageS=null;
-        connect = DriverManager
-                .getConnection("jdbc:mysql://localhost/tenders?"
-                        + "user=root&password=");
+        connect = getConnection();
         statement=connect.createStatement();
         resultSet = statement.executeQuery("select "+attribute+" from vehicles where ID="+vehicleID);
         while (resultSet.next()) {
@@ -236,9 +236,7 @@ public class DBLink {
         if("".equals(addID) || addID==null){
             return list;
         }
-        connect = DriverManager
-                .getConnection("jdbc:mysql://localhost/tenders?"
-                        + "user=root&password=");
+        connect = getConnection();
         statement=connect.createStatement();
         resultSet = statement.executeQuery("select * from vehicles where AdvertisementID=" + addID);
 
