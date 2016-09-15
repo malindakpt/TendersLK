@@ -46,27 +46,18 @@ public class UploadServlet extends HttpServlet {
             throws ServletException, java.io.IOException {
         Vehicle v=new Vehicle();
 
-
-
-        String sTime = request.getParameter("time").substring(0,request.getParameter("time").length()-3).replace(',',' ');//"9/15/2016 9:54:43";//request.getParameter("time");
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-      try
-
-        {
-           Date date = simpleDateFormat.parse(sTime);
-      //     v.setTime(sTime);
-           System.out.println("date : "+simpleDateFormat.format(date));
-
+        try{
+            String sTime = request.getParameter("time").substring(0,request.getParameter("time").length()-3).replace(',', ' ');
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            Date date = simpleDateFormat.parse(sTime);
             Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String s = formatter.format(date);
-            v.setTime(s);
+            v.setTime(formatter.format(date));
         }
-        catch (ParseException ex)
-        {
+        catch (ParseException ex){
             System.out.println("Exception "+ex);
         }
 
+        v.setRegNo(request.getParameter("regNo"));
         v.setBrand(request.getParameter("brand"));
         v.setModel(request.getParameter("model"));
         v.setYear(Integer.parseInt(request.getParameter("year")));
@@ -84,7 +75,7 @@ public class UploadServlet extends HttpServlet {
             v.setPhoto3(IOUtils.toInputStream(request.getParameter("img3"), "UTF-8"));
             v.setPhoto4(IOUtils.toInputStream(request.getParameter("img4"), "UTF-8"));
         }catch (Exception e){
-
+            System.out.println("Exception "+e);
         }
 //
         String email=request.getParameter("email");
@@ -185,7 +176,7 @@ public class UploadServlet extends HttpServlet {
 //            out.println("</html>");
 
             if(DBLink.addVehicle(v,adID,email,pwd)){
-                out.println("?msg=Vehicle Added Successfully &#926; ");
+              //  out.println("?msg=Vehicle Added Successfully &#926; ");
             } else {
                 out.println("?msg=Oops...,Unknown Error Occured &#926;  ");
             }

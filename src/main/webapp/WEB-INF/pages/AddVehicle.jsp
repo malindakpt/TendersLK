@@ -190,19 +190,59 @@
     </form>
 
     <script>
+        var regNo ;
+        var brand ;
+        var model;
+        var year;
+        var millage ;
+        var transmission ;
+        var fuel ;
+        var cc ;
+        var desc ;
+        var adID ;
+        var email ;
+        var password;
+
+        function uploadPhoto2(time) {
+            $.post('Photo2UploadServlet', {
+                        regNo:regNo,
+                        adID:adID,
+                        email:email,
+                        time:time,
+                        img2:img2,
+                        img3:img3,
+                        pwd:password
+
+                    },
+                    function (result) {
+                        if(result==="") {
+                            swal("Vehicle Added ! ", "" + email + " ", "success");
+                        }else{
+                            swal("Oops...", result, "error");
+                        }
+
+                    }
+            ).fail(function () {
+                        alert("error");
+
+            })
+
+        };
+
         function submitVehicle() {
-            var regNo = document.getElementById("regNo").value;
-            var brand = document.getElementById("brand").value;
-            var model = document.getElementById("model").value;
-            var year = document.getElementById("year").value;
-            var millage = document.getElementById("millage").value;
-            var transmission = document.getElementById("transmission").value;
-            var fuel = document.getElementById("fuel").value;
-            var cc = document.getElementById("cc").value;
-            var desc = document.getElementById("desc").value;
-            var adID = document.getElementById("adID").value;
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
+            regNo = document.getElementById("regNo").value;
+            brand = document.getElementById("brand").value;
+            model = document.getElementById("model").value;
+            year = document.getElementById("year").value;
+            millage = document.getElementById("millage").value;
+            transmission = document.getElementById("transmission").value;
+            fuel = document.getElementById("fuel").value;
+            cc = document.getElementById("cc").value;
+            desc = document.getElementById("desc").value;
+            adID = document.getElementById("adID").value;
+            email = document.getElementById("email").value;
+            password = document.getElementById("password").value;
+
 
             function validateUserAdvertisement() {
 
@@ -233,21 +273,15 @@
 
                                            img0:img0,
                                             img1:img1,
-                                            img2:img2,
-                                            img3:img3,
-                                            img4:img4
-
-//                                    img0:document.getElementById("img0a").value,
-//                                    img1:document.getElementById("img1a").value,
-//                                    img2:document.getElementById("img2a").value,
-//                                    img3:document.getElementById("img3a").value,
-//                                    img4:document.getElementById("img4a").value,
-
+//                                            img2:img2,
+//                                            img3:img3,
+//                                            img4:img4
 
                                         },
-                                    function (result) {
+                                        function (result) {
                                         if(result==="") {
-                                            swal("Account Created", "" + email + " ", "success");
+                                            uploadPhoto2(time);
+                                           // swal("Vehicle Added ! ", "" + email + " ", "success");
                                         }else{
                                             swal("Oops...", result, "error");
                                         }

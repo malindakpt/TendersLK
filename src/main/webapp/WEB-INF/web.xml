@@ -59,6 +59,14 @@
 		<servlet-name>StartAddVehicleServlet</servlet-name>
 		<servlet-class>servlet.StartAddVehicleServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>Photo2UploadServlet</servlet-name>
+		<servlet-class>servlet.Photo2UploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Photo2UploadServlet</servlet-name>
+		<url-pattern>/Photo2UploadServlet</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>StartAddVehicleServlet</servlet-name>
 		<url-pattern>/StartAddVehicleServlet</url-pattern>
