@@ -5,6 +5,9 @@ package servlet; /**
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 
@@ -42,7 +45,28 @@ public class UploadServlet extends HttpServlet {
                        HttpServletResponse response)
             throws ServletException, java.io.IOException {
         Vehicle v=new Vehicle();
-        v.setRegNo(request.getParameter("regNo"));
+
+
+
+        String sTime = request.getParameter("time").substring(0,request.getParameter("time").length()-3).replace(',',' ');//"9/15/2016 9:54:43";//request.getParameter("time");
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+      try
+
+        {
+           Date date = simpleDateFormat.parse(sTime);
+      //     v.setTime(sTime);
+           System.out.println("date : "+simpleDateFormat.format(date));
+
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String s = formatter.format(date);
+            v.setTime(s);
+        }
+        catch (ParseException ex)
+        {
+            System.out.println("Exception "+ex);
+        }
+
         v.setBrand(request.getParameter("brand"));
         v.setModel(request.getParameter("model"));
         v.setYear(Integer.parseInt(request.getParameter("year")));

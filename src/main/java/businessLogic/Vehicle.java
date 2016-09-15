@@ -1,6 +1,8 @@
 package businessLogic;
 
 import java.io.InputStream;
+import java.sql.Date;
+
 
 /**
  * Created by MalindaK on 2/21/2016.
@@ -21,6 +23,8 @@ public class Vehicle {
     private int engineCC;
     private String description;
 
+    private String time;
+
     private InputStream photo0;
     private InputStream photo1;
     private InputStream photo2;
@@ -34,6 +38,14 @@ public class Vehicle {
     private String htmlPhoto4;
 
     private int advertisementID;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public int getID() {
         return ID;

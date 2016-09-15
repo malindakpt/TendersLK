@@ -97,7 +97,7 @@ public class DBLink {
             statement=connect.createStatement();
             connect = getConnection();
             preparedStatement = connect
-                    .prepareStatement("insert into  vehicles values ( ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    .prepareStatement("insert into  vehicles values ( ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setInt(1, v.getID());
             preparedStatement.setString(2, v.getRegNo());
@@ -118,6 +118,9 @@ public class DBLink {
             preparedStatement.setBlob(16,v.getPhoto3());
             preparedStatement.setBlob(17, v.getPhoto4());
             preparedStatement.setInt(18, v.getAdvertisementID());
+
+            preparedStatement.setTimestamp(19, java.sql.Timestamp.valueOf(v.getTime()));
+
             preparedStatement.executeUpdate();
             //connect.close();
 

@@ -84,6 +84,8 @@
                 var img4;
 
 
+
+
                 oFReader = new FileReader(), rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
 
                 oFReader.onload = function (oFREvent) {
@@ -202,18 +204,6 @@
             var email = document.getElementById("email").value;
             var password = document.getElementById("password").value;
 
-//            var img0 = document.getElementById("imgHolder0").value;
-//            var img1 = document.getElementById("imgHolder1").value;
-//            var img2 = document.getElementById("imgHolder2").value;
-//            var img3 = document.getElementById("imgHolder3").value;
-//            var img4 = document.getElementById("imgHolder4").value;
-//
-//            var Aimg0 = document.getElementById("img0").value;
-//            var Aimg1 = document.getElementById("img1").value;
-//            var Aimg2 = document.getElementById("img2").value;
-//            var Aimg3 = document.getElementById("img3").value;
-//            var Aimg4 = document.getElementById("img4").value;
-
             function validateUserAdvertisement() {
 
                 $.post('ValidateUserAdvertisement', {email: email, password: password, adID: adID},
@@ -221,6 +211,9 @@
                             if (result !== "") {
                                 swal("Oops...", result, "error");
                             } else {
+
+
+                                var time = new Date().toLocaleString();
                                // document.getElementById("vehicleData").submit();
                                 $.post('UploadServlet', {
                                             regNo:regNo,
@@ -235,6 +228,7 @@
                                             adID:adID,
                                             email:email,
                                             pwd:password,
+                                            time:time,
 
 
                                            img0:img0,
