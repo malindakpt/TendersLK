@@ -20,6 +20,7 @@ import businessLogic.Vehicle;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.*;
 
 public class UploadServlet extends HttpServlet {
@@ -41,100 +42,132 @@ public class UploadServlet extends HttpServlet {
                        HttpServletResponse response)
             throws ServletException, java.io.IOException {
         Vehicle v=new Vehicle();
-        isMultipart = ServletFileUpload.isMultipartContent(request);
-        response.setContentType("text/html");
-        java.io.PrintWriter out = response.getWriter( );
-        if( !isMultipart ){
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet upload</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<p>No file uploaded</p>");
-            out.println("</body>");
-            out.println("</html>");
-            return;
+        v.setRegNo(request.getParameter("regNo"));
+        v.setBrand(request.getParameter("brand"));
+        v.setModel(request.getParameter("model"));
+        v.setYear(Integer.parseInt(request.getParameter("year")));
+        v.setMileage(Integer.parseInt(request.getParameter("millage")));
+        v.setTransmission(request.getParameter("transmission"));
+        v.setFuel(request.getParameter("fuel"));
+        v.setEngineCC(Integer.parseInt(request.getParameter("cc")));
+        v.setDescription(request.getParameter("desc"));
+        v.setAdvertisementID(Integer.parseInt(request.getParameter("adID")));
+
+        try {
+            v.setPhoto0(IOUtils.toInputStream(request.getParameter("img0"), "UTF-8"));
+            v.setPhoto1(IOUtils.toInputStream(request.getParameter("img1"), "UTF-8"));
+            v.setPhoto2(IOUtils.toInputStream(request.getParameter("img2"), "UTF-8"));
+            v.setPhoto3(IOUtils.toInputStream(request.getParameter("img3"), "UTF-8"));
+            v.setPhoto4(IOUtils.toInputStream(request.getParameter("img4"), "UTF-8"));
+        }catch (Exception e){
+
         }
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setSizeThreshold(maxMemSize);
-        factory.setRepository(new File("c:\\temp"));
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        upload.setSizeMax( maxFileSize );
-        try{
-            List fileItems = upload.parseRequest(request);
-            Iterator i = fileItems.iterator();
+//
+        String email=request.getParameter("email");
+        String pwd = request.getParameter("pwd");
+        int adID=Integer.parseInt(request.getParameter("adID"));
+        java.io.PrintWriter out = response.getWriter( );
 
-            int adID=0;
-            String email=null;
-            String pwd = null;
-
-
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet upload</title>");
-            out.println("</head>");
-            out.println("<body>");
-            while ( i.hasNext () )
-            {
-                FileItem fi = (FileItem)i.next();
-                {
-                    // Get the uploaded file parameters
-                    String fieldName = fi.getFieldName();
-                    String originalName = fi.getName();
-                    System.out.println();
-                   if(fieldName.equals("regNo")){
-                       v.setRegNo(getStringVal(fi));
-                   }else if(fieldName.equals("brand")){
-                        v.setBrand(getStringVal(fi));
-                   }else if(fieldName.equals("model")){
-                       v.setModel(getStringVal(fi));
-                   }else if(fieldName.equals("manufac")){
-                       v.setYear(Integer.parseInt(getStringVal(fi)));
-                   }else if(fieldName.equals("condition")){
-                       v.setCondition(getStringVal(fi));
-                   }else if(fieldName.equals("millage")){
-                       v.setMileage(Integer.parseInt(getStringVal(fi)));
-                   }else if(fieldName.equals("bodyType")){
-                       v.setBodyType(getStringVal(fi));
-                   }else if(fieldName.equals("transmission")){
-                       v.setTransmission(getStringVal(fi));
-                   }else if(fieldName.equals("fuel")){
-                       v.setFuel(getStringVal(fi));
-                   }else if(fieldName.equals("engineCC")){
-                       v.setEngineCC(Integer.parseInt(getStringVal(fi)));
-                   }else if(fieldName.equals("desc")){
-                       v.setDescription(getStringVal(fi));
-                   }else if(fieldName.equals("file0")){
-                       v.setPhoto0(FileResizer.resize(fi.getInputStream(), fi.getName()));
-                   }else if(fieldName.equals("file1")){
-                       v.setPhoto1(FileResizer.resize(fi.getInputStream(), fi.getName()));
-                   }else if(fieldName.equals("file2")){
-                       v.setPhoto2(FileResizer.resize(fi.getInputStream(), fi.getName()));
-                   }else if(fieldName.equals("file3")){
-                       v.setPhoto3(FileResizer.resize(fi.getInputStream(), fi.getName()));
-                   }else if(fieldName.equals("file4")){
-                       v.setPhoto4(FileResizer.resize(fi.getInputStream(), fi.getName()));
-                   }else if(fieldName.equals("adID")){
-                       v.setAdvertisementID(Integer.parseInt(getStringVal(fi)));
-                   }else if(fieldName.equals("email")){
-                       email=getStringVal(fi);
-                   }else if(fieldName.equals("password")){
-                       pwd=getStringVal(fi);
-                   }
-
-                }
-            }
-            out.println("</body>");
-            out.println("</html>");
+//
+//        isMultipart = ServletFileUpload.isMultipartContent(request);
+//        response.setContentType("text/html");
+//        java.io.PrintWriter out = response.getWriter( );
+//        if( !isMultipart ){
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet upload</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<p>No file uploaded</p>");
+//            out.println("</body>");
+//            out.println("</html>");
+//            return;
+//        }
+//        DiskFileItemFactory factory = new DiskFileItemFactory();
+//        factory.setSizeThreshold(maxMemSize);
+//        factory.setRepository(new File("c:\\temp"));
+//        ServletFileUpload upload = new ServletFileUpload(factory);
+//        upload.setSizeMax( maxFileSize );
+//        try{
+//            List fileItems = upload.parseRequest(request);
+//            Iterator i = fileItems.iterator();
+//
+//            int adID=0;
+//            String email=null;
+//            String pwd = null;
+//
+//
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet upload</title>");
+//            out.println("</head>");
+//            out.println("<body>");
+//            while ( i.hasNext () )
+//            {
+//                FileItem fi = (FileItem)i.next();
+//                {
+//                    // Get the uploaded file parameters
+//                    String fieldName = fi.getFieldName();
+//                    String originalName = fi.getName();
+//                    System.out.println();
+//                   if(fieldName.equals("regNo")){
+//                       v.setRegNo(getStringVal(fi));
+//                   }else if(fieldName.equals("brand")){
+//                        v.setBrand(getStringVal(fi));
+//                   }else if(fieldName.equals("model")){
+//                       v.setModel(getStringVal(fi));
+//                   }else if(fieldName.equals("manufac")){
+//                       v.setYear(Integer.parseInt(getStringVal(fi)));
+//                   }else if(fieldName.equals("condition")){
+//                       v.setCondition(getStringVal(fi));
+//                   }else if(fieldName.equals("millage")){
+//                       v.setMileage(Integer.parseInt(getStringVal(fi)));
+//                   }else if(fieldName.equals("bodyType")){
+//                       v.setBodyType(getStringVal(fi));
+//                   }else if(fieldName.equals("transmission")){
+//                       v.setTransmission(getStringVal(fi));
+//                   }else if(fieldName.equals("fuel")){
+//                       v.setFuel(getStringVal(fi));
+//                   }else if(fieldName.equals("engineCC")){
+//                       v.setEngineCC(Integer.parseInt(getStringVal(fi)));
+//                   }else if(fieldName.equals("desc")){
+//                       v.setDescription(getStringVal(fi));
+//                   }else if(fieldName.equals("imgH0")){
+//                       //v.setPhoto0(FileResizer.resize(fi.getInputStream(), fi.getName()));
+//                       v.setPhoto0(fi.getInputStream());
+//                   }else if(fieldName.equals("imgH1")){
+//                      // v.setPhoto1(FileResizer.resize(fi.getInputStream(), fi.getName()));
+//                       v.setPhoto1(fi.getInputStream());
+//                   }else if(fieldName.equals("imgH2")){
+//                       //v.setPhoto2(FileResizer.resize(fi.getInputStream(), fi.getName()));
+//                       v.setPhoto2(fi.getInputStream());
+//                   }else if(fieldName.equals("imgH3")){
+//                       //v.setPhoto3(FileResizer.resize(fi.getInputStream(), fi.getName()));
+//                       v.setPhoto3(fi.getInputStream());
+//                   }else if(fieldName.equals("imgH4")){
+//                       //v.setPhoto4(FileResizer.resize(fi.getInputStream(), fi.getName()));
+//                       v.setPhoto4(fi.getInputStream());
+//                   }else if(fieldName.equals("adID")){
+//                       v.setAdvertisementID(Integer.parseInt(getStringVal(fi)));
+//                   }else if(fieldName.equals("email")){
+//                       email=getStringVal(fi);
+//                   }else if(fieldName.equals("password")){
+//                       pwd=getStringVal(fi);
+//                   }
+//
+//                }
+//            }
+//            out.println("</body>");
+//            out.println("</html>");
 
             if(DBLink.addVehicle(v,adID,email,pwd)){
-                response.sendRedirect("?msg=Vehicle Added Successfully &#926; "+DBLink.errorMsg);
-            }else{
-                response.sendRedirect("?msg=Oops...,Unknown Error Occured &#926;  "+DBLink.errorMsg);
+                out.println("?msg=Vehicle Added Successfully &#926; ");
+            } else {
+                out.println("?msg=Oops...,Unknown Error Occured &#926;  ");
             }
-        }catch(Exception ex) {
-            System.out.println(ex);
-        }
+//        }catch(Exception ex) {
+//            System.out.println(ex);
+//        }
     }
 
 

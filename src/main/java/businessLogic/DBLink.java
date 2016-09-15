@@ -121,6 +121,8 @@ public class DBLink {
             preparedStatement.executeUpdate();
             //connect.close();
 
+
+
             return true;
         }catch (Exception e){
             errorMsg.append(e.getMessage());
@@ -225,7 +227,8 @@ public class DBLink {
         statement=connect.createStatement();
         resultSet = statement.executeQuery("select "+attribute+" from vehicles where ID="+vehicleID);
         while (resultSet.next()) {
-            imageS = Base64.encode(resultSet.getBytes(attribute));
+           // imageS = Base64.encode(resultSet.getBytes(attribute));
+            imageS = resultSet.getString(attribute);
         }
         return imageS;
     }

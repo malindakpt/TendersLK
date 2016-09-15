@@ -47,6 +47,30 @@
 		<servlet-name>ValidateUserAdvertisementServlet</servlet-name>
 		<servlet-class>servlet.ValidateUserAdvertisementServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>UploadVehicleServlet</servlet-name>
+		<servlet-class>servlet.UploadVehicleServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>StartAdCreationServlet</servlet-name>
+		<servlet-class>servlet.StartAdCreationServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>StartAddVehicleServlet</servlet-name>
+		<servlet-class>servlet.StartAddVehicleServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StartAddVehicleServlet</servlet-name>
+		<url-pattern>/StartAddVehicleServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>StartAdCreationServlet</servlet-name>
+		<url-pattern>/StartAdCreationServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UploadVehicleServlet</servlet-name>
+		<url-pattern>/UploadVehicleServlet</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ValidateUserAdvertisementServlet</servlet-name>
 		<url-pattern>/ValidateUserAdvertisement</url-pattern>
