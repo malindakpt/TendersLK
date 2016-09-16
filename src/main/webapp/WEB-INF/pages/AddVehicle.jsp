@@ -16,7 +16,7 @@
 
 
 <div class="row">
-    <form id="vehicleData" >
+    <form id="vehicleData">
         <div class="col-3 col-m-3 menu">
             <ul>
 
@@ -30,46 +30,19 @@
                 <li><input id="brand" class="input1" placeholder="Brand" name="brand"/></li>
                 <li><input id="model" class="input1" placeholder="Model" name="model"/></li>
                 <li><input id="year" class="input1" placeholder="Manufac. Yar" name="year"/></li>
-                <%--<li> <input id="regNo"  class="input1"  placeholder="Condition" name="condition"/></li>--%>
                 <li><input id="millage" class="input1" placeholder="Millage" name="millage"/></li>
-                <%--<li> <input id="regNo"  class="input1"  placeholder="Body Type" name="bodyType"/></li>--%>
                 <li><input id="transmission" class="input1" placeholder="Transmission" name="transmission"/></li>
                 <li><input id="fuel" class="input1" placeholder="Fuel Type" name="fuel"/></li>
                 <li><input id="cc" class="input1" placeholder="Engine Capacity" name="cc"/></li>
 
                 <li><textarea id="desc" placeholder="Description" name="desc" cols="33" rows="3"></textarea></li>
 
-                <%--<li><input id="adID" class="input1" placeholder="Ad ID" name="adID"/></li>--%>
-                <%--<li><input id="email" class="input1" placeholder="Email" name="email"/></li>--%>
-                <%--<li><input id="password" class="input1" type="password" placeholder="Password" name="password"/></li>--%>
-
-                <input id="imgHolder0" style="display: none;" name=imgH0 />
-                <input id="imgHolder1" style="display: none;" name=imgH1 />
-                <input id="imgHolder2" style="display: none;" name=imgH2 />
+                <input id="imgHolder0" style="display: none;" name=imgH0/>
+                <input id="imgHolder1" style="display: none;" name=imgH1/>
+                <input id="imgHolder2" style="display: none;" name=imgH2/>
                 <input id="imgHolder3" style="display: none;" name=imgH3/>
                 <input id="imgHolder4" style="display: none;" name=imgH4/>
 
-
-                <script>
-                    function startAdCreation(){
-                        var adID = document.getElementById("adID").value;
-                        var email = document.getElementById("email").value;
-                        var pwd = document.getElementById("password").value;
-
-                        $.post('StartAddVehicleServlet', {email: email, pwd: pwd, adID: adID},
-                                function (result) {
-                                    if(result==="") {
-                                        swal("Vehicle Adding Started");
-                                    }else{
-                                        swal("Oops...", result, "error");
-                                    }
-
-                                }).fail(function (e) {
-                                    alert("error "+e);
-                                }
-                        );
-                    }
-                </script>
 
             </ul>
 
@@ -83,55 +56,45 @@
                 var img3;
                 var img4;
 
-
-
-
                 oFReader = new FileReader(), rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
 
                 oFReader.onload = function (oFREvent) {
 
-                    var img=new Image();
-                    img.onload=function(){
-                       // document.getElementById("originalImg").src=img.src;
-                        var canvas=document.createElement("canvas");
-                        var ctx=canvas.getContext("2d");
-                        canvas.width=600 ;
-                        canvas.height=450;
-                        ctx.drawImage(img,0,0,img.width,img.height,0,0,canvas.width,canvas.height);
-                       // document.getElementById("imgHolder"+window.idx).value = canvas.toDataURL();
-                        document.getElementById("prev"+window.idx).src = canvas.toDataURL();
+                    var img = new Image();
+                    img.onload = function () {
+                        var canvas = document.createElement("canvas");
+                        var ctx = canvas.getContext("2d");
+                        canvas.width = 600;
+                        canvas.height = 450;
+                        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+                        document.getElementById("prev" + window.idx).src = canvas.toDataURL();
 
-                        if(window.idx===0){
-                            //document.img0=canvas.toDataURL();
-                           // document.getElementById("img0a").value = canvas.toDataURL();
+                        if (window.idx === 0) {
                             img0 = canvas.toDataURL();
-                        }else if(window.idx===1){
-                            //document.img1=canvas.toDataURL();
-                            //document.getElementById("img1a").value = canvas.toDataURL();
+                        } else if (window.idx === 1) {
                             img1 = canvas.toDataURL();
-                        }else if(window.idx===2){
-                            //document.img2=canvas.toDataURL();
-                            //document.getElementById("img2a").value = canvas.toDataURL();
+                        } else if (window.idx === 2) {
                             img2 = canvas.toDataURL();
-                        }else if(window.idx===3){
-                            //document.img3=canvas.toDataURL();
-                            //document.getElementById("img3a").value = canvas.toDataURL();
+                        } else if (window.idx === 3) {
                             img3 = canvas.toDataURL();
-                        }else if(window.idx===4){
-                            //document.img4=canvas.toDataURL();
-                            //document.getElementById("img4a").value = canvas.toDataURL();
+                        } else if (window.idx === 4) {
                             img4 = canvas.toDataURL();
                         }
                     }
-                    img.src=oFREvent.target.result;
+                    img.src = oFREvent.target.result;
                 };
 
                 function loadImageFile(idx) {
                     console.log(idx);
-                    window.idx=idx;
-                    if (document.getElementById("img"+idx).files.length === 0) { return; }
-                    var oFile = document.getElementById("img"+idx).files[0];
-                    if (!rFilter.test(oFile.type)) { alert("You must select a valid image file!"); return; }
+                    window.idx = idx;
+                    if (document.getElementById("img" + idx).files.length === 0) {
+                        return;
+                    }
+                    var oFile = document.getElementById("img" + idx).files[0];
+                    if (!rFilter.test(oFile.type)) {
+                        alert("You must select a valid image file!");
+                        return;
+                    }
                     oFReader.readAsDataURL(oFile);
                 }
             </script>
@@ -152,32 +115,15 @@
                 <input id="img3" type="file" name="file3" size="50" onchange="loadImageFile(3);"/>
                 <img id="prev3" style="width:100px;height:70px;"/>
                 <br/>
-                <br/>
-                <input id="img4" type="file" name="file4" size="50" onchange="loadImageFile(4);"/>
-                <img id="prev4" style="width:100px;height:70px;"/>
-                <br/>
+
+                <%--For the momemnt only 4 photos are allowed to  upload--%>
+
+                <%--<br/>--%>
+                <%--<input id="img4" type="file" name="file4" size="50" onchange="loadImageFile(4);"/>--%>
+                <%--<img id="prev4" style="width:100px;height:70px;"/>--%>
+                <%--<br/>--%>
 
 
-
-                <input id="img0a"  name="file0"/>
-
-                <br/>
-                <br/>
-                <input id="img1a"   name="file1"/>
-
-                <br/>
-                <br/>
-                <input id="img2a" name="file2"/>
-
-                <br/>
-                <br/>
-                <input id="img3a" name="file3"/>
-
-                <br/>
-                <br/>
-                <input id="img4a" name="file4"/>
-
-                <br/>
             </div>
 
             <div style="width:150px">
@@ -190,34 +136,34 @@
     </form>
 
     <script>
-        var regNo ;
-        var brand ;
+        var regNo;
+        var brand;
         var model;
         var year;
-        var millage ;
-        var transmission ;
-        var fuel ;
-        var cc ;
-        var desc ;
-        var adID ;
-        var email ;
+        var millage;
+        var transmission;
+        var fuel;
+        var cc;
+        var desc;
+        var adID;
+        var email;
         var password;
 
         function uploadPhoto2(time) {
             $.post('Photo2UploadServlet', {
-                        regNo:regNo,
-                        adID:adID,
-                        email:email,
-                        time:time,
-                        img2:img2,
-                        img3:img3,
-                        pwd:password
+                        regNo: regNo,
+                        adID: adID,
+                        email: email,
+                        time: time,
+                        img2: img2,
+                        img3: img3,
+                        pwd: password
 
                     },
                     function (result) {
-                        if(result==="") {
+                        if (result === "") {
                             swal("Vehicle Added ! ", "" + email + " ", "success");
-                        }else{
+                        } else {
                             swal("Oops...", result, "error");
                         }
 
@@ -225,9 +171,10 @@
             ).fail(function () {
                         alert("error");
 
-            })
+                    })
 
-        };
+        }
+        ;
 
         function submitVehicle() {
             regNo = document.getElementById("regNo").value;
@@ -254,41 +201,38 @@
 
 
                                 var time = new Date().toLocaleString();
-                               // document.getElementById("vehicleData").submit();
+                                // document.getElementById("vehicleData").submit();
                                 $.post('UploadServlet', {
-                                            regNo:regNo,
-                                            brand:brand,
-                                            model:model,
-                                            year:year,
-                                            millage:millage,
-                                            transmission:transmission,
-                                            fuel:fuel,
-                                            cc:cc,
-                                            desc:desc,
-                                            adID:adID,
-                                            email:email,
-                                            pwd:password,
-                                            time:time,
-
-
-                                           img0:img0,
-                                            img1:img1,
-//                                            img2:img2,
-//                                            img3:img3,
-//                                            img4:img4
+                                            regNo: regNo,
+                                            brand: brand,
+                                            model: model,
+                                            year: year,
+                                            millage: millage,
+                                            transmission: transmission,
+                                            fuel: fuel,
+                                            cc: cc,
+                                            desc: desc,
+                                            adID: adID,
+                                            email: email,
+                                            pwd: password,
+                                            time: time,
+                                            //Images
+                                            img0: img0,
+                                            img1: img1,
 
                                         },
                                         function (result) {
-                                        if(result==="") {
-                                            uploadPhoto2(time);
-                                           // swal("Vehicle Added ! ", "" + email + " ", "success");
-                                        }else{
-                                            swal("Oops...", result, "error");
-                                        }
+                                            if (result === "") {
+                                                //If success, upload remaining 2 photos
+                                                uploadPhoto2(time);
+                                            } else {
+                                                swal("Oops...", result, "error");
+                                            }
 
-                                    }).fail(function () {
-                                        alert("error");
-                                    })
+                                        }).fail(function () {
+                                            //Unexeocted Error
+                                            alert("error");
+                                        })
                             }
 
                         }).fail(function () {
@@ -324,9 +268,10 @@
                 swal("Oops...", "Invalid Email", "error");
             } else if (password == "") {
                 swal("Oops...", "Invalid Password", "error");
-//            } else if (Aimg0 == "" && Aimg1 == "" && Aimg2 == "" && Aimg3 == "" && Aimg4 == "") {
-//                swal("Oops...", "You Should upload at-least one image", "error");
-//            } else if (Aimg0 !== "" && !Aimg0.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
+            } else if (img0 == "" && img1 == "" && img2 == "" && img3 == "") {
+                swal("Oops...", "You Should upload at-least one image", "error");
+//            }
+//            else if (Aimg0 !== "" && !Aimg0.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
 //                swal("Oops...", "Invalid Image in image 1", "error");
 //            } else if (Aimg1 !== "" && !Aimg1.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
 //                swal("Oops...", "Invalid Image in image 2", "error");
@@ -340,8 +285,6 @@
                 validateUserAdvertisement();
             }
 
-
-            // document.getElementById("vehicleData").submit();
         }
 
 

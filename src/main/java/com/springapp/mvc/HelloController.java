@@ -18,7 +18,7 @@ public class HelloController {
 }
 @Controller
 @RequestMapping("/")
-class HelloGETController {
+class SearchResultViewController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String printWelcome(ModelMap model) {
 		return "SearchResultView";
@@ -27,7 +27,7 @@ class HelloGETController {
 
 @Controller
 @RequestMapping("/AddVehicle")
-class HelloController2 {
+class AddVehicleController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
@@ -37,7 +37,7 @@ class HelloController2 {
 
 @Controller
  @RequestMapping("/CreateAdView")
- class HelloController3 {
+ class CreateAdViewController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world!");
@@ -66,20 +66,16 @@ class NotificationController {
 
 @Controller
 @RequestMapping("/loadItem")
-class HelloController5 {
+class LoadItemController {
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	ModelAndView printWelcomebyParameter(@RequestParam("vID") String id) {
 		{
-			//model.addAttribute("message", "Hello world!");jgjhgjh
+
 			ModelAndView modelAndview = null;
 			try {
-				//generateException();
-
 				modelAndview = new ModelAndView("ViewVehicle");
-				//modelAndview.addObject("movie",id);
 			} catch (IndexOutOfBoundsException e) {
-				//modelAndView = handleException();
 			}
 			return modelAndview;
 		}

@@ -97,7 +97,7 @@ public class DBLink {
             statement=connect.createStatement();
             connect = getConnection();
             preparedStatement = connect
-                    .prepareStatement("insert into  vehicles values ( ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    .prepareStatement("insert into  vehicles values ( ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setInt(1, v.getID());
             preparedStatement.setString(2, v.getRegNo());
@@ -120,6 +120,7 @@ public class DBLink {
             preparedStatement.setInt(18, v.getAdvertisementID());
 
             preparedStatement.setTimestamp(19, java.sql.Timestamp.valueOf(v.getTime()));
+            preparedStatement.setTimestamp(20, new java.sql.Timestamp(System.currentTimeMillis()));
 
             preparedStatement.executeUpdate();
             //connect.close();
@@ -142,9 +143,6 @@ public class DBLink {
         try {
             statement=connect.createStatement();
             connect = getConnection();
-//            preparedStatement = connect
-//                    .prepareStatement("UPDATE vehicles SET Photo2=" + v.getPhoto2() + ",Photo3=" + v.getPhoto3() + " where" + " RegNo=" + v.getRegNo() + " and Time=" + v.getTime() + " and AdvertisementID=" + v.getAdvertisementID());
-
 
             String query= " UPDATE vehicles SET Photo2=?,Photo3=? WHERE Time='"+v.getTime()+"' and RegNo='"+v.getRegNo()+"' and AdvertisementID="+v.getAdvertisementID();
             preparedStatement = connect
@@ -152,30 +150,8 @@ public class DBLink {
 
             preparedStatement.setBlob(1, v.getPhoto2());
             preparedStatement.setBlob(2, v.getPhoto3());
-//            preparedStatement.setString(3, v.getBrand());
-//            preparedStatement.setString(4, v.getModel());
-//            preparedStatement.setInt(5, v.getYear());
-//            preparedStatement.setString(6, v.getCondition());
-//            preparedStatement.setInt(7, v.getMileage());
-//            preparedStatement.setString(8, v.getBodyType());
-//            preparedStatement.setString(9, v.getTransmission());
-//            preparedStatement.setString(10, v.getFuel());
-//            preparedStatement.setInt(11, v.getEngineCC());
-//            preparedStatement.setString(12, v.getDescription());
-//
-//            preparedStatement.setBlob(13, v.getPhoto0());
-//            preparedStatement.setBlob(14,v.getPhoto1());
-//            preparedStatement.setBlob(15,v.getPhoto2());
-//            preparedStatement.setBlob(16,v.getPhoto3());
-//            preparedStatement.setBlob(17, v.getPhoto4());
-//            preparedStatement.setInt(18, v.getAdvertisementID());
-//
-//            preparedStatement.setTimestamp(19, java.sql.Timestamp.valueOf(v.getTime()));
 
             preparedStatement.executeUpdate();
-            //connect.close();
-
-
 
             return true;
         }catch (Exception e){
@@ -201,10 +177,8 @@ public class DBLink {
 
             preparedStatement.executeUpdate();
             return true;
-            // connect.close();
         }catch (Exception e){
             errorMsg.append(e.getMessage());
-          //  e.printStackTrace();
             return false;
         }
 
@@ -231,7 +205,6 @@ public class DBLink {
             preparedStatement.setString(6, adv.getCustomer());
 
             preparedStatement.executeUpdate();
-           // connect.close();
         }catch (Exception e){
             errorMsg.append(e.getMessage());
             e.printStackTrace();
@@ -296,7 +269,7 @@ public class DBLink {
         }
         connect = getConnection();
         statement=connect.createStatement();
-        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID=" + addID);
+        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID=" + addID+" ORDER BY SysTime DESC");
 
         while (resultSet.next()) {
             Vehicle v = new Vehicle();
@@ -317,13 +290,12 @@ public class DBLink {
             v.setHtmlPhoto1(Base64.encode(resultSet.getBytes("Photo1")));
             v.setHtmlPhoto2(Base64.encode(resultSet.getBytes("Photo2")));
             v.setHtmlPhoto3(Base64.encode(resultSet.getBytes("Photo3")));
-            v.setHtmlPhoto4(Base64.encode(resultSet.getBytes("Photo4")));
+//            v.setHtmlPhoto4(Base64.encode(resultSet.getBytes("Photo4")));
 
             v.setAdvertisementID(resultSet.getInt("AdvertisementID"));
 
             list.add(v);
         }
-//        connect.close();
         return list;
     }
 }

@@ -80,19 +80,16 @@
 
 
       }});
-      $.ajax({url: "/imageDownload?img=4&vID=<%=v.getID()%>", success: function(result){
-        if(result.startsWith("null")){
-          document.getElementById("img40").src = "img/noImage.JPG";
-        }else{
-          document.getElementById("img40").src =result;
-        }
+      <%--$.ajax({url: "/imageDownload?img=4&vID=<%=v.getID()%>", success: function(result){--%>
+        <%--if(result.startsWith("null")){--%>
+          <%--document.getElementById("img40").src = "img/noImage.JPG";--%>
+        <%--}else{--%>
+          <%--document.getElementById("img40").src =result;--%>
+        <%--}--%>
 
 
-      }});
+      <%--}});--%>
 
-//      $(function() {
-//        $( "#datepicker" ).datepicker();
-//      });
     </script>
     <script>
       function deleteVehicle() {
@@ -128,7 +125,7 @@
     <img id="img10"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">
     <img id="img20"  class="mySlides"  style="width:100%; max-height: 600px;" onclick="plusDivs(1)">
     <img id="img30"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">
-    <img id="img40"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">
+    <%--<img id="img40"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">--%>
 
     <a class="w3-btn-floating" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)"><</a>
     <a class="w3-btn-floating" style="position:absolute;top:45%;right:0" onclick="plusDivs(1)">></a>
