@@ -20,7 +20,7 @@ public class ValidateUserAdvertisementServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         if(!DBLink.validateUser(email,pwd)){
-            out.println("Invalid Email or Password");
+            out.println("Invalid Email or Password\n"+DBLink.errorMsg);
         }else if(!DBLink.validateAd(email,ad)){
             out.println("No Advertisement with ID:"+ad+" exist for "+email);
         }else{

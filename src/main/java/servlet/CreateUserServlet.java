@@ -43,7 +43,7 @@ public class CreateUserServlet extends HttpServlet {
                 out.println(isEmpty(customer));
             }
             else if(!DBLink.addCustomer(customer)){
-                out.println(email+" already exist");
+                out.println(DBLink.errorMsg);
             }else{
                 //Customer added successfully
             }

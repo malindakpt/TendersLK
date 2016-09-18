@@ -31,11 +31,58 @@ public class Vehicle {
     private InputStream photo3;
     private InputStream photo4;
 
+    private InputStream smallPhoto0;
+    private InputStream smallPhoto1;
+    private InputStream smallPhoto2;
+    private InputStream smallPhoto3;
+    private InputStream smallPhoto4;
+
     private String htmlPhoto0;
     private String htmlPhoto1;
     private String htmlPhoto2;
     private String htmlPhoto3;
     private String htmlPhoto4;
+
+    public InputStream getSmallPhoto1() {
+        return smallPhoto1;
+    }
+
+    public void setSmallPhoto1(InputStream smallPhoto1) {
+        this.smallPhoto1 = smallPhoto1;
+    }
+
+    public InputStream getSmallPhoto2() {
+        return smallPhoto2;
+    }
+
+    public void setSmallPhoto2(InputStream smallPhoto2) {
+        this.smallPhoto2 = smallPhoto2;
+    }
+
+    public InputStream getSmallPhoto4() {
+        return smallPhoto4;
+    }
+
+    public void setSmallPhoto4(InputStream smallPhoto4) {
+        this.smallPhoto4 = smallPhoto4;
+    }
+
+    public InputStream getSmallPhoto3() {
+        return smallPhoto3;
+    }
+
+    public void setSmallPhoto3(InputStream smallPhoto3) {
+        this.smallPhoto3 = smallPhoto3;
+    }
+
+    public InputStream getSmallPhoto0() {
+
+        return smallPhoto0;
+    }
+
+    public void setSmallPhoto0(InputStream smallPhoto0) {
+        this.smallPhoto0 = smallPhoto0;
+    }
 
     private int advertisementID;
 

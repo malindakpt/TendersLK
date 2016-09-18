@@ -21,8 +21,11 @@ public class DBLink {
     public static Connection getConnection(){
         errorMsg = new StringBuilder();
         try {
-            return DriverManager.getConnection("jdbc:mysql://localhost/tenders?" + "user=root&password=");
-           // return DriverManager.getConnection("jdbc:mysql://127.7.45.130:3306/voction?" + "user=adminV5y9umD&password=J8etWW3ma6fB");
+ //           return DriverManager.getConnection("jdbc:mysql://localhost/tenders?" + "user=root&password=");
+//           return DriverManager.getConnection("jdbc:mysql://127.7.45.130:3306/voction?" + "user=adminV5y9umD&password=J8etWW3ma6fB");
+            return DriverManager.getConnection("jdbc:mysql://127.6.96.130:3306/voction5?" + "user=adminEMicr6f&password=4jsJ98UdgFMf");
+
+
         } catch (SQLException e)
         {
             errorMsg.append(e.getMessage());
@@ -97,7 +100,7 @@ public class DBLink {
             statement=connect.createStatement();
             connect = getConnection();
             preparedStatement = connect
-                    .prepareStatement("insert into  vehicles values ( ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    .prepareStatement("insert into  vehicles values ( ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setInt(1, v.getID());
             preparedStatement.setString(2, v.getRegNo());
@@ -113,14 +116,20 @@ public class DBLink {
             preparedStatement.setString(12, v.getDescription());
 
             preparedStatement.setBlob(13, v.getPhoto0());
-            preparedStatement.setBlob(14,v.getPhoto1());
-            preparedStatement.setBlob(15,v.getPhoto2());
-            preparedStatement.setBlob(16,v.getPhoto3());
+            preparedStatement.setBlob(14, v.getPhoto1());
+            preparedStatement.setBlob(15, v.getPhoto2());
+            preparedStatement.setBlob(16, v.getPhoto3());
             preparedStatement.setBlob(17, v.getPhoto4());
             preparedStatement.setInt(18, v.getAdvertisementID());
 
             preparedStatement.setTimestamp(19, java.sql.Timestamp.valueOf(v.getTime()));
             preparedStatement.setTimestamp(20, new java.sql.Timestamp(System.currentTimeMillis()));
+
+            preparedStatement.setBlob(21, v.getSmallPhoto0());
+            preparedStatement.setBlob(22, v.getSmallPhoto1());
+            preparedStatement.setBlob(23, v.getSmallPhoto2());
+            preparedStatement.setBlob(24, v.getSmallPhoto3());
+            preparedStatement.setBlob(25, v.getSmallPhoto4());
 
             preparedStatement.executeUpdate();
             //connect.close();
@@ -144,12 +153,17 @@ public class DBLink {
             statement=connect.createStatement();
             connect = getConnection();
 
-            String query= " UPDATE vehicles SET Photo2=?,Photo3=? WHERE Time='"+v.getTime()+"' and RegNo='"+v.getRegNo()+"' and AdvertisementID="+v.getAdvertisementID();
+            String query= " UPDATE vehicles SET Photo2=?,Photo3=?,SmallPhoto0=?,SmallPhoto1=? ,SmallPhoto2=?,SmallPhoto3=?  WHERE Time='"+v.getTime()+"' and RegNo='"+v.getRegNo()+"' and AdvertisementID="+v.getAdvertisementID();
             preparedStatement = connect
                     .prepareStatement(query);
 
             preparedStatement.setBlob(1, v.getPhoto2());
             preparedStatement.setBlob(2, v.getPhoto3());
+
+            preparedStatement.setBlob(3, v.getSmallPhoto0());
+            preparedStatement.setBlob(4, v.getSmallPhoto1());
+            preparedStatement.setBlob(5, v.getSmallPhoto2());
+            preparedStatement.setBlob(6, v.getSmallPhoto3());
 
             preparedStatement.executeUpdate();
 
@@ -164,8 +178,10 @@ public class DBLink {
     public static boolean addCustomer(Customer customer){
 
         try {
-            statement=connect.createStatement();
+
             connect = getConnection();
+            statement=connect.createStatement();
+
             preparedStatement = connect
                     .prepareStatement("insert into customers values ( ?,?,?,?,?)");
 
@@ -255,6 +271,19 @@ public class DBLink {
         resultSet = statement.executeQuery("select "+attribute+" from vehicles where ID="+vehicleID);
         while (resultSet.next()) {
            // imageS = Base64.encode(resultSet.getBytes(attribute));
+            imageS = resultSet.getString(attribute);
+        }
+        return imageS;
+    }
+
+    public static String getSmallImage(int vehicleID,String img) throws SQLException {
+        String attribute="SmallPhoto"+img;
+        String imageS=null;
+        connect = getConnection();
+        statement=connect.createStatement();
+        resultSet = statement.executeQuery("select "+attribute+" from vehicles where ID="+vehicleID);
+        while (resultSet.next()) {
+            // imageS = Base64.encode(resultSet.getBytes(attribute));
             imageS = resultSet.getString(attribute);
         }
         return imageS;

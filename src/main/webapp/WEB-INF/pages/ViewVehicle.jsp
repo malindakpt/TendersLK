@@ -10,7 +10,7 @@
   <script src="js/jquery.mobile-1.4.5.min.js"></script>
   <script src="js/sweetalert.min.js"></script>
   <link rel="stylesheet" href="css/sweetalert.css"/>
-  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+  <%--<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">--%>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -105,7 +105,7 @@
             $.post('DeleteVehicle', { email: email, password : password, vID :vID},
                     function(returnedData){
                         if(returnedData=="1"){
-                          window.location.href="http://localhost:8080?msg=Vehicle Deleted Successfully &#926;";
+                          window.location.href="/?msg=Vehicle Deleted Successfully &#926;";
                         }else{
                           swal("Oops... unable to delete vehicle", returnedData, "error");
                         }
@@ -121,10 +121,10 @@
   </div>
   <div class="col-6" style="position:relative">
 
-    <img id="img00" class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">
-    <img id="img10"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">
-    <img id="img20"  class="mySlides"  style="width:100%; max-height: 600px;" onclick="plusDivs(1)">
-    <img id="img30"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">
+    <img id="img00" class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1) "  src="img/loading2.gif">
+    <img id="img10"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)"  src="img/loading2.gif">
+    <img id="img20"  class="mySlides"  style="width:100%; max-height: 600px;" onclick="plusDivs(1)"  src="img/loading2.gif">
+    <img id="img30"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)"  src="img/loading2.gif">
     <%--<img id="img40"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">--%>
 
     <a class="w3-btn-floating" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)"><</a>

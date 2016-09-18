@@ -15,7 +15,7 @@
   <script>
     function searchList() {
       var n = document.getElementById("search-mini2").value ;
-      window.location="http://localhost:8080?adID="+n ;
+      window.location.href="/?adID="+n ;
     }
   </script>
 

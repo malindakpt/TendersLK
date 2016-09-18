@@ -37,19 +37,23 @@
         for (int i=0;i<vList.size();i++) {
         Vehicle v=vList.get(i);%>
 
-        <li onclick="loadVehicle()">
+        <li onclick="loadVehicle<%=v.getID()%>()">
             <a>
-                <img id="th<%=i%>" style="width:80px;height:80px">
+                <img id="th<%=i%>" style="width:80px;height:80px" src="img/loading.gif">
                 <h2><%=v.getBrand()%></h2>
                 <p><%=v.getYear()%> : Reg No. <%=v.getRegNo()%> :  <%=v.getFuel()%> Enginr CC : <%=v.getEngineCC()%></p>
             </a>
             <script>
-                $.ajax({url: "/imageDownload?img=0&vID=<%=v.getID()%>", success: function(result){
-                document.getElementById("th<%=i%>").src = result;
+                $.ajax({url: "/imageDownload?small=1&img=0&vID=<%=v.getID()%>", success: function(result){
+                    if(result.startsWith("null")) {
+                        document.getElementById("th<%=i%>").src = "img/noImageSmall.jpg";
+                    }else{
+                        document.getElementById("th<%=i%>").src = result;
+                    }
                 }});
-                function loadVehicle(vID){
+                function loadVehicle<%=v.getID()%>(vID){
                   console.log("LLLL");
-                  window.location="http://localhost:8080/loadItem?vID=<%=v.getID()%>" ;
+                  window.location="/loadItem?vID=<%=v.getID()%>" ;
                 }
               </script>
         </li>

@@ -34,11 +34,18 @@ public class ImageDownloadServlet extends HttpServlet {
 
         try {
             String img = request.getParameter("img");
+            String smallImage=request.getParameter("small");
             int vID = Integer.parseInt(request.getParameter("vID"));
 
 
             System.out.println("img="+img+"   vID="+vID);
-            String sImage = DBLink.getImage(vID, img);
+            String sImage;
+
+            if(smallImage!=null){
+                sImage = DBLink.getSmallImage(vID, img);
+            }else{
+                sImage = DBLink.getImage(vID, img);
+            }
 
 
             PrintWriter out = response.getWriter();

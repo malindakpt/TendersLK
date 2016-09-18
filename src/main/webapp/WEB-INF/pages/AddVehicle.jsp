@@ -20,11 +20,19 @@
         <div class="col-3 col-m-3 menu">
             <ul>
 
-                <li><input id="adID" class="input1" placeholder="Ad ID" name="adID"/></li>
+                <li><input value="2"  id="adID" class="input1" placeholder="Ad ID" name="adID"/></li>
                 <li><input id="email" class="input1" placeholder="Email" name="email"/></li>
                 <li><input id="password" class="input1" type="password" placeholder="Password" name="password"/></li>
+                <li><input value="KN 6332" id="regNo" class="input1" placeholder="Reg No.." name="regNo"/></li>
+                <li><input value="MAZDA" id="brand" class="input1" placeholder="Brand" name="brand"/></li>
+                <li><input value="456P" id="model" class="input1" placeholder="Model" name="model"/></li>
+                <li><input value="2003" id="year" class="input1" placeholder="Manufac. Yar" name="year"/></li>
+                <li><input value="345000" id="millage" class="input1" placeholder="Millage" name="millage"/></li>
+                <li><input value="Automatic" id="transmission" class="input1" placeholder="Transmission" name="transmission"/></li>
+                <li><input value="Petrol" id="fuel" class="input1" placeholder="Fuel Type" name="fuel"/></li>
+                <li><input value="2100" id="cc" class="input1" placeholder="Engine Capacity" name="cc"/></li>
 
-                <%--<li><input type="button" value="Start Create Ad." onclick="startAdCreation()"></li>--%>
+                <li><textarea value="SUperb Car i"  id="desc" placeholder="Description" name="desc" cols="33" rows="3"></textarea></li>
 
                 <li><input id="regNo" class="input1" placeholder="Reg No.." name="regNo"/></li>
                 <li><input id="brand" class="input1" placeholder="Brand" name="brand"/></li>
@@ -56,16 +64,23 @@
                 var img3;
                 var img4;
 
+                var simg0;
+                var simg1;
+                var simg2;
+                var simg3;
+                var simg4;
+
                 oFReader = new FileReader(), rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
 
                 oFReader.onload = function (oFREvent) {
 
+                    createSmallImage(oFREvent);
                     var img = new Image();
                     img.onload = function () {
                         var canvas = document.createElement("canvas");
                         var ctx = canvas.getContext("2d");
-                        canvas.width = 600;
-                        canvas.height = 450;
+                        canvas.width = 300;
+                        canvas.height = 225;
                         ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
                         document.getElementById("prev" + window.idx).src = canvas.toDataURL();
 
@@ -84,8 +99,34 @@
                     img.src = oFREvent.target.result;
                 };
 
+                function createSmallImage(oFREvent){
+                    var img = new Image();
+                    img.onload = function () {
+                        var canvas = document.createElement("canvas");
+                        var ctx = canvas.getContext("2d");
+                        canvas.width = 80;
+                        canvas.height = 60;
+                        ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+                        document.getElementById("prev" + window.idx).src = canvas.toDataURL();
+
+                        if (window.idx === 0) {
+                            simg0 = canvas.toDataURL();
+                        } else if (window.idx === 1) {
+                            aimg1 = canvas.toDataURL();
+                        } else if (window.idx === 2) {
+                            simg2 = canvas.toDataURL();
+                        } else if (window.idx === 3) {
+                            simg3 = canvas.toDataURL();
+                        } else if (window.idx === 4) {
+                            simg4 = canvas.toDataURL();
+                        }
+                    }
+                    img.src = oFREvent.target.result;
+                };
+
                 function loadImageFile(idx) {
-                    console.log(idx);
+                    document.getElementById("prev"+idx).src="img/loading.gif";
+
                     window.idx = idx;
                     if (document.getElementById("img" + idx).files.length === 0) {
                         return;
@@ -97,23 +138,24 @@
                     }
                     oFReader.readAsDataURL(oFile);
                 }
+
             </script>
 
             <div style="width:250px">
                 <input id="img0" type="file" name="file0" size="50" onchange="loadImageFile(0);"/>
-                <img id="prev0" style="width:100px;height:70px;"/>
+                <img id="prev0" style="width:100px;height:70px;" src="img/noImageSmall.jpg"/>
                 <br/>
                 <br/>
                 <input id="img1" type="file" name="file1" size="50" onchange="loadImageFile(1);"/>
-                <img id="prev1" style="width:100px;height:70px;"/>
+                <img id="prev1" style="width:100px;height:70px;" src="img/noImageSmall.jpg"/>
                 <br/>
                 <br/>
                 <input id="img2" type="file" name="file2" size="50" onchange="loadImageFile(2);"/>
-                <img id="prev2" style="width:100px;height:70px;"/>
+                <img id="prev2" style="width:100px;height:70px;" src="img/noImageSmall.jpg"/>
                 <br/>
                 <br/>
                 <input id="img3" type="file" name="file3" size="50" onchange="loadImageFile(3);"/>
-                <img id="prev3" style="width:100px;height:70px;"/>
+                <img id="prev3" style="width:100px;height:70px;" src="img/noImageSmall.jpg"/>
                 <br/>
 
                 <%--For the momemnt only 4 photos are allowed to  upload--%>
@@ -157,12 +199,17 @@
                         time: time,
                         img2: img2,
                         img3: img3,
-                        pwd: password
+                        pwd: password,
+
+                        simg0:simg0,
+                        simg1:simg1,
+                        simg2:simg2,
+                        simg3:simg3,
 
                     },
                     function (result) {
                         if (result === "") {
-                            swal("Vehicle Added ! ", "" + email + " ", "success");
+                           swal("Vehicle Added Successfully ! ", "" + "" + " ", "success");
                         } else {
                             swal("Oops...", result, "error");
                         }
@@ -191,9 +238,24 @@
             password = document.getElementById("password").value;
 
 
+            function startValidation(){
+                swal({
+                    title: "Are you sure you need to submit this vehicle",
+                    text: "Sending vehicle details to the server",
+                    type: "info",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function () {
+                    validateUserAdvertisement()
+                });
+            };
             function validateUserAdvertisement() {
 
+
+
                 $.post('ValidateUserAdvertisement', {email: email, password: password, adID: adID},
+
                         function (result) {
                             if (result !== "") {
                                 swal("Oops...", result, "error");
@@ -282,7 +344,7 @@
 //            } else if (Aimg4 !== "" && !Aimg4.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
 //                swal("Oops...", "Invalid Image in image 5", "error");
             } else {
-                validateUserAdvertisement();
+                startValidation();
             }
 
         }
