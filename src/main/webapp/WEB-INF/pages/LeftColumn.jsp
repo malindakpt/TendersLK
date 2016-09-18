@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body>
-<div class="col-3 menu ">
+<div class="col-3 menu menuPanel ">
     <div class="aside">
         This is LEft Column
 
