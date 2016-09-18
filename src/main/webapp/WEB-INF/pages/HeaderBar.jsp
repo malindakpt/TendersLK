@@ -21,10 +21,23 @@
     </head>
     <body>
         <div class="header">
-            <img>
-            <span><img style="width:90px;height: 60px" src="img/symbol.png"/></span>
-            <span style="font-size: 300%;">VOCTION</span>
+            <%--<ul>--%>
+
+                <span>
+                       <span class="inlineMenu"><img class="logo" src="img/symbol.png"/></span>
+                       <span class="inlineMenu" style="font-size: 300%;">VOCTION</span>
+                </span>
+
+                <span style="float: right; padding-top: 30px; padding-right: 40px">
+                        <span class="inlineMenu" style="color: white !important;"><p style="text-shadow: 0 0px 0 #333; cursor: pointer;" onclick="newUser()"><b>Contact Us</b></p></span>
+                </span>
+
+
+            <%--</ul>--%>
+
         </div>
+
+
 
         <div align="center">
             <form style="height:33px; max-width:500px;">

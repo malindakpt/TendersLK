@@ -13,7 +13,6 @@
 <body>
 <div class="col-3 menu menuPanel ">
     <div class="aside">
-        This is LEft Column
 
         <h2>What?</h2>
 

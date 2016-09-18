@@ -1,3 +1,20 @@
+
+
+/*Mobile Custom CSS Starts*/
+.menuPanel {
+    display: none;
+}
+
+.inlineMenu{
+    display: inline;
+    color:white;
+}
+.logo{width:40px;height: 30px;}
+
+
+
+/*Custom CSS ends*/
+
 * {
     box-sizing: border-box;
 }
@@ -11,12 +28,12 @@
     padding: 15px;
 }
 html {
-    font-family: "Lucida Sans", sans-serif;
+    font-family: "Courier New","Lucida Sans", sans-serif;
 }
 .header {
     background-color: #9933cc;
     color: #ffffff;
-    padding: 15px;
+    padding-top: 1px;
 }
 .menu ul {
     list-style-type: none;
@@ -51,9 +68,7 @@ html {
 .leftCHide{
     display: none;
 }
-.menuPanel {
-    display: none;
-}
+
 /* For mobile phones: */
 [class*="col-"] {
     width: 100%;
@@ -72,5 +87,9 @@ html {
     .col-10 {width: 83.33%;}
     .col-11 {width: 91.66%;}
     .col-12 {width: 100%;}
+
+    /*Desktop Custom CSS*/
     .menuPanel {display: block ;}
+    .logo{width:90px;height: 60px;}
+
 }

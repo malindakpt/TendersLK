@@ -15,9 +15,9 @@
 </head>
 <body>
 <script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
+//  $(function() {
+//    $( "#datepicker" ).datepicker();
+//  });
 </script>
 
 

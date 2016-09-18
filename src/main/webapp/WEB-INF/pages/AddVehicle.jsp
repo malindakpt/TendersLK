@@ -33,15 +33,6 @@
                 <li><input value="2100" id="cc" class="input1" placeholder="Engine Capacity" name="cc"/></li>
 
                 <li><textarea value="SUperb Car i"  id="desc" placeholder="Description" name="desc" cols="33" rows="3"></textarea></li>
-
-
-                <input id="imgHolder0" style="display: none;" name=imgH0/>
-                <input id="imgHolder1" style="display: none;" name=imgH1/>
-                <input id="imgHolder2" style="display: none;" name=imgH2/>
-                <input id="imgHolder3" style="display: none;" name=imgH3/>
-                <input id="imgHolder4" style="display: none;" name=imgH4/>
-
-
             </ul>
 
         </div>
@@ -219,8 +210,8 @@
 
             function startValidation(){
                 swal({
-                    title: "Are you sure you need to submit this vehicle",
-                    text: "Sending vehicle details to the server",
+                    title: "Posting your vehicle",
+                    text: "Are  you sure ?",
                     type: "info",
                     showCancelButton: true,
                     closeOnConfirm: false,
@@ -309,8 +300,8 @@
                 swal("Oops...", "Invalid Email", "error");
             } else if (password == "") {
                 swal("Oops...", "Invalid Password", "error");
-            } else if (img0 == "" && img1 == "" && img2 == "" && img3 == "") {
-                swal("Oops...", "You Should upload at-least one image", "error");
+            } else if (img0 == ""){//} && img1 == "" && img2 == "" && img3 == "") {
+                swal("Oops...", "You Should upload at-least first image ", "error");
 //            }
 //            else if (Aimg0 !== "" && !Aimg0.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
 //                swal("Oops...", "Invalid Image in image 1", "error");
