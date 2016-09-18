@@ -25,16 +25,14 @@
     <br>
   <div data-role="navbar">
     <ul>
-      <li><a onclick="search1()">Search</a></li>
+
       <li><a onclick="newAd()">New Ad</a></li>
       <li><a onclick="newVehicle()">Post Vehicle</a></li>
       <li><a onclick="newUser()">New User</a></li>
     </ul>
 
       <script>
-          function search1(){
-              window.location.href="/";
-          }
+
           function newAd(){
               window.location.href="/CreateAdView";
           }

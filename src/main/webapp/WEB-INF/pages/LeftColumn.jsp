@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body>
-<div class="col-3 menu menuPanel ">
+<div class="col-3 menu hideInMobile ">
     <div class="aside">
 
         <h2>What?</h2>

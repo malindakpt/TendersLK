@@ -23,17 +23,21 @@
         <div class="header">
             <%--<ul>--%>
 
-                <span>
+                <span class="logoContainer">
                        <span class="inlineMenu"><img class="logo" src="img/symbol.png"/></span>
-                       <span class="inlineMenu" style="font-size: 300%;">VOCTION</span>
+                       <span class="inlineMenu" style="font-size: 300%;">Voction.lk</span>
                 </span>
 
-                <span style="float: right; padding-top: 30px; padding-right: 40px">
-                        <span class="inlineMenu" style="color: white !important;"><p style="text-shadow: 0 0px 0 #333; cursor: pointer;" onclick="newUser()"><b>Contact Us</b></p></span>
+                <span  class="hideInMobile" style="float: right; padding-top: 30px; padding-right: 40px">
+                        <span class="inlineMenu" style="color: white !important;"><p class="noShadow" style=" cursor: pointer;" onclick="showContactUs()"><b>Contact Us</b></p></span>
                 </span>
 
 
-            <%--</ul>--%>
+            <script>
+                function showContactUs(){
+                    swal("VOCTION.lk", "malindakpt@gmail.com\n0771141194", "info");
+                }
+            </script>
 
         </div>
 

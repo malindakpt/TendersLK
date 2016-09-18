@@ -12,7 +12,14 @@
 </head>
 <body>
 <div class="footer">
+  <p class="hideInDesktop noShadow " style="font-size: 150%; color: white" onclick="showContactUs()">Contact Us</p>
 <p>New Footer Resize the browser window to see how the content respond to the resizing.</p>
+
+  <script>
+    function showContactUs(){
+      swal("Voction.lk", "malindakpt@gmail.com\n0771141194", "info");
+    }
+  </script>
   </div>
 </body>
 </html>

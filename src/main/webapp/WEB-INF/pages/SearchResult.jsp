@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
   <script src="js/jquery.mobile-1.4.5.min.js"></script>
 
+    <script src="js/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="css/sweetalert.css"/>
+
+
 </head>
 <body>
 
@@ -29,6 +33,7 @@
           <% } %>
 
         </h2>
+
         <h2>All Tender Notices in one Place</h2>
         <ul data-role="listview" data-inset="true">
         <%String n = request.getParameter( "adID" );%>
