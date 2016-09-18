@@ -11,17 +11,22 @@
     <title></title>
 </head>
 <body>
-<div class="col-3 menu">
-<div class="aside">
-This is LEft Column
+<div class="col-3 menu ">
+    <div class="aside">
+        This is LEft Column
 
-<h2>What?</h2>
-<p>Your Advertisements are going Here.</p>
-<h2>What?</h2>
-<p>Your Advertisements are going Here.</p>
-<h2>What?</h2>
-<p>Your Advertisements are going Here.</p>
-</div>
+        <h2>What?</h2>
+
+        <p>Your Advertisements are going Here.</p>
+
+        <h2>What?</h2>
+
+        <p>Your Advertisements are going Here.</p>
+
+        <h2>What?</h2>
+
+        <p>Your Advertisements are going Here.</p>
+    </div>
 </div>
 </body>
 </html>

@@ -34,16 +34,6 @@
 
                 <li><textarea value="SUperb Car i"  id="desc" placeholder="Description" name="desc" cols="33" rows="3"></textarea></li>
 
-                <li><input id="regNo" class="input1" placeholder="Reg No.." name="regNo"/></li>
-                <li><input id="brand" class="input1" placeholder="Brand" name="brand"/></li>
-                <li><input id="model" class="input1" placeholder="Model" name="model"/></li>
-                <li><input id="year" class="input1" placeholder="Manufac. Yar" name="year"/></li>
-                <li><input id="millage" class="input1" placeholder="Millage" name="millage"/></li>
-                <li><input id="transmission" class="input1" placeholder="Transmission" name="transmission"/></li>
-                <li><input id="fuel" class="input1" placeholder="Fuel Type" name="fuel"/></li>
-                <li><input id="cc" class="input1" placeholder="Engine Capacity" name="cc"/></li>
-
-                <li><textarea id="desc" placeholder="Description" name="desc" cols="33" rows="3"></textarea></li>
 
                 <input id="imgHolder0" style="display: none;" name=imgH0/>
                 <input id="imgHolder1" style="display: none;" name=imgH1/>
@@ -158,23 +148,12 @@
                 <img id="prev3" style="width:100px;height:70px;" src="img/noImageSmall.jpg"/>
                 <br/>
 
-                <%--For the momemnt only 4 photos are allowed to  upload--%>
-
-                <%--<br/>--%>
-                <%--<input id="img4" type="file" name="file4" size="50" onchange="loadImageFile(4);"/>--%>
-                <%--<img id="prev4" style="width:100px;height:70px;"/>--%>
-                <%--<br/>--%>
-
-
             </div>
 
             <div style="width:150px">
                 <input type="button" onclick="submitVehicle()" value="Add Vehicle">
             </div>
-
         </div>
-
-
     </form>
 
     <script>
