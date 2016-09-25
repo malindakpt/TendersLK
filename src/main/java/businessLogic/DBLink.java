@@ -179,19 +179,19 @@ public class DBLink {
 
         try {
 
-            connect = getConnection();
-            statement=connect.createStatement();
-
-            preparedStatement = connect
-                    .prepareStatement("insert into customers values ( ?,?,?,?,?)");
-
-            preparedStatement.setString(1, customer.getEmail());
-            preparedStatement.setString(2, customer.getPassword());
-            preparedStatement.setString(3, customer.getPhone());
-            preparedStatement.setDate(4, customer.getCreateDate());
-            preparedStatement.setBoolean(5, true);
-
-            preparedStatement.executeUpdate();
+//            connect = getConnection();
+//            statement=connect.createStatement();
+//
+//            preparedStatement = connect
+//                    .prepareStatement("insert into customers values ( ?,?,?,?,?)");
+//
+//            preparedStatement.setString(1, customer.getEmail());
+//            preparedStatement.setString(2, customer.getPassword());
+//            preparedStatement.setString(3, customer.getPhone());
+//            preparedStatement.setDate(4, customer.getCreateDate());
+//            preparedStatement.setBoolean(5, true);
+//
+//            preparedStatement.executeUpdate();
             return true;
         }catch (Exception e){
             errorMsg.append(e.getMessage());
@@ -256,7 +256,6 @@ public class DBLink {
             v.setHtmlPhoto4(Base64.encode(resultSet.getBytes("Photo4")));
 
             v.setAdvertisementID(resultSet.getInt("AdvertisementID"));
-
         }
 
         return v;
@@ -292,7 +291,6 @@ public class DBLink {
     public static List<Vehicle> getAdVehicles(String addID) throws SQLException {
 
         List<Vehicle> list=new ArrayList<Vehicle>();
-
         if("".equals(addID) || addID==null){
             return list;
         }
@@ -319,10 +317,8 @@ public class DBLink {
             v.setHtmlPhoto1(Base64.encode(resultSet.getBytes("Photo1")));
             v.setHtmlPhoto2(Base64.encode(resultSet.getBytes("Photo2")));
             v.setHtmlPhoto3(Base64.encode(resultSet.getBytes("Photo3")));
-//            v.setHtmlPhoto4(Base64.encode(resultSet.getBytes("Photo4")));
 
             v.setAdvertisementID(resultSet.getInt("AdvertisementID"));
-
             list.add(v);
         }
         return list;

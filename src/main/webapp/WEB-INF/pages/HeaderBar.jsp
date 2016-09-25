@@ -35,7 +35,7 @@
 
             <script>
                 function showContactUs(){
-                    swal("VOCTION.lk", "malindakpt@gmail.com\n0771141194", "info");
+                    swal("Voction.lk", "malindakpt@gmail.com\n0771141194", "info");
                 }
             </script>
 

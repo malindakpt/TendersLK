@@ -53,4 +53,11 @@ public class Customer {
     public void setCreateDate(java.sql.Date createDate) {
         this.createDate = createDate;
     }
+
+    public Boolean validateCustomer(String pw2){
+        if(!getPassword().equals(pw2)){
+            return false;
+        }
+        return true;
+    }
 }
