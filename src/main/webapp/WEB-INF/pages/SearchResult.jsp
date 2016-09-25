@@ -72,7 +72,9 @@
 
     <h1>How to use</h1>
     <p>Find any tender notice reference number and search here. You can find all the detailed information and images relevant for the notice</p>
+      <div class="hideInMobile" style="min-height:350px;"> </div>
   </div>
+
 
 <jsp:include page='RightColumn.jsp'/>
 </div>

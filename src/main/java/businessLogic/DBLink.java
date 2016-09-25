@@ -200,11 +200,24 @@ public class DBLink {
 
     }
 
+    public static String getAdverrtisementList(String user)throws SQLException {
+        String list="";
+        connect = getConnection();
+        statement=connect.createStatement();
+        resultSet = statement.executeQuery("select name from ads where userID=" + user);
 
-    public static void addAdvertisement(Advertisement adv){
+        while (resultSet.next()) {
+            // imageS = Base64.encode(resultSet.getBytes(attribute));
+            list=list+"##$"+resultSet.getString("RegNo");
+        }
+        return list;
+    }
 
+    public static boolean addAdvertisement(Advertisement adv){
+        errorMsg = new StringBuilder();
         if(!validateUser(adv.getCustomer(),adv.getPwd())){
-            return;
+            errorMsg.append("Invaid username or password");
+            return false;
         }
 
         try {
@@ -221,9 +234,12 @@ public class DBLink {
             preparedStatement.setString(6, adv.getCustomer());
 
             preparedStatement.executeUpdate();
+
+            return true;
         }catch (Exception e){
             errorMsg.append(e.getMessage());
             e.printStackTrace();
+            return false;
         }
 
     }

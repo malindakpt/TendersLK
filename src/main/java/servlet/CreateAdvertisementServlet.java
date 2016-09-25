@@ -3,9 +3,7 @@ package servlet; /**
  */
 // Import required java libraries
 
-import businessLogic.Advertisement;
-import businessLogic.DBLink;
-import businessLogic.Vehicle;
+import businessLogic.*;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -31,8 +29,10 @@ public class CreateAdvertisementServlet extends HttpServlet {
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response)
             throws ServletException, IOException {
-
+        PrintWriter out = response.getWriter();
         try {
+
+
             Advertisement ad=new Advertisement();
             String topic = request.getParameter("topic");
             String expDate = request.getParameter("expDate");
@@ -40,18 +40,10 @@ public class CreateAdvertisementServlet extends HttpServlet {
             String email = request.getParameter("email");
             String pwd = request.getParameter("pwd");
 
-            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String dateInString = expDate;
             Date date=null;
-            try {
-
-                date = formatter.parse(dateInString);
-                System.out.println(date);
-                System.out.println(formatter.format(date));
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            date = formatter.parse(dateInString);
 
             ad.setID(0);
             ad.setTopic(topic);
@@ -61,13 +53,15 @@ public class CreateAdvertisementServlet extends HttpServlet {
             ad.setPwd(pwd);
             ad.setMaxAds(inoVehi);
 
-            DBLink.addAdvertisement(ad);
-            //PrintWriter out = response.getWriter();
-            //out.println(sImage);
+            if(DBLink.addAdvertisement(ad)){
+                EmailSender.sendEmail(Constants.EMAIL_AD_CREATED,email);
+            }else{
+                out.print(DBLink.errorMsg);
+            }
 
-            response.sendRedirect("http://localhost:8080?msg=Advertisement Created Successfully &#926;");
         }catch (Exception e){
             e.printStackTrace();
+            out.print("Unexpected error :"+DBLink.errorMsg);
         }
     }
 

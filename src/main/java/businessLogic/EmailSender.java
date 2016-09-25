@@ -28,19 +28,17 @@ public class EmailSender{
     public static  void sendEmail(final int type, final String emailaddr){
         Thread thread = new Thread(){
             public void run(){
-                System.out.println("Thread Running");
                 send(type,emailaddr);
             }
         };
         thread.start();
     }
 
-    public static void send(int type,String emailaddr)
+    private static void send(int type,String emailaddr)
     {
         String subject = null,text = null;
-        String to = "malindakpt@gmail.com";
-        subject = " account create "+new Date().toString();
-        text="Hi, your acc will be activated by 1 hr";
+        String to = "malindakpt@gmail.com"; //Should be replaced by emailaddr
+
 
         switch (type){
             case 0:
@@ -48,8 +46,8 @@ public class EmailSender{
                 text="Hi, your acc will be activated by 1 hr";
                 break;
             case 1:
-                subject="";
-                text="";
+                subject="Advertisement Created";
+                text="Your VOCTION advertisement created successfully\n Please refer following details :";
                 break;
             case 2:
                 subject="";
@@ -75,11 +73,8 @@ public class EmailSender{
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", "587");
 
-        Session session = Session.getDefaultInstance(properties);
-
-        System.out.println("Session created");
-
         try{
+            Session session = Session.getDefaultInstance(properties);
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO,
@@ -92,7 +87,7 @@ public class EmailSender{
             transport.connect(host, from, pass);
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
-            System.out.println("Sent message successfully....");
+            System.out.println("Email sent to : "+emailaddr);
         }catch (Exception mex) {
             mex.printStackTrace();
             System.out.println(mex.getMessage());

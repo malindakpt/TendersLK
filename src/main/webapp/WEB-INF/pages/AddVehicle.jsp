@@ -20,9 +20,11 @@
         <div class="col-3 col-m-3 menu">
             <ul>
 
-                <li><input value="2"  id="adID" class="input1" placeholder="Ad ID" name="adID"/></li>
-                <li><input id="email" class="input1" placeholder="Email" name="email"/></li>
+
+                <li><input id="email" class="input1" placeholder="Email" name="email" /></li>
                 <li><input id="password" class="input1" type="password" placeholder="Password" name="password"/></li>
+                <li><input value="2"  id="adID" class="input1" placeholder="Ad ID" name="adID"/></li>
+
                 <li><input value="KN 6332" id="regNo" class="input1" placeholder="Reg No.." name="regNo"/></li>
                 <li><input value="MAZDA" id="brand" class="input1" placeholder="Brand" name="brand"/></li>
                 <li><input value="456P" id="model" class="input1" placeholder="Model" name="model"/></li>
@@ -39,6 +41,10 @@
 
         <div class="col-6 col-m-9">
             <script type="text/javascript">
+
+
+
+
                 var img0;
                 var img1;
                 var img2;

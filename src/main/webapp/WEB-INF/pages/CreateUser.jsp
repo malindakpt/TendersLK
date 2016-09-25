@@ -80,6 +80,8 @@
     }
   }
 </script>
+
+        <div class="hideInMobile" style="min-height:350px;"> </div>
     </div>
 
     <jsp:include page='RightColumn.jsp'/>
