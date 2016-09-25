@@ -2,7 +2,11 @@ package servlet;
 
 import businessLogic.*;
 
+import javax.mail.Message;
 import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,45 +48,7 @@ public class CreateUserServlet extends HttpServlet {
                 out.println(DBLink.errorMsg);
             }else{
                 //Customer added successfully
-
-
-
-
-
-                Thread t = new Thread() {
-                    public void run() {
-                        try {
-                            String subject = null,text = null;
-                            String to="malindakpt@gmail.com";
-                            subject="Voction account create";
-                            text="Hi, your acc will be activated by 1 hr";
-
-                            String from = "voction@yahoo.com";
-                            String pass ="Vkpt@16709";
-                            String host = "smtp.mail.yahoo.com";
-
-                            Properties properties = System.getProperties();
-                            properties.put("mail.smtp.user", from);
-                            properties.put("mail.smtp.password", pass);
-
-                            properties.put("mail.smtp.auth", "true");
-                            properties.put("mail.smtp.starttls.enable", "true");
-                            properties.put("mail.smtp.host", host);
-                            properties.put("mail.smtp.port", "587");
-                            Session session = Session.getInstance(properties);
-                            System.out.println("DOne");
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-
-                    }
-                };
-                t.start();
-
-                System.out.println("DOOOOO");
-
-
-
+               EmailSender.send(Constants.EMAIL_ACCOUNT_CREATED,"asda");
             }
         }catch (Exception e){
             e.printStackTrace();

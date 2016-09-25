@@ -37,6 +37,25 @@
         </div>
       <%--</form>--%>
 <script>
+  function uploadData(){
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var pwd1 = document.getElementById("pwd1").value;
+    var pwd2 = document.getElementById("pwd2").value;
+
+    $.post('CreateUser', {email: email, phone: phone, pwd1: pwd1, pwd2 :pwd2},
+            function (result) {
+              if(result==="") {
+                swal("Account Created", "" + email + " ", "success");
+              }else{
+                swal("Oops...", result, "error");
+              }
+
+            }).fail(function () {
+              alert("error");
+            }
+    );
+  }
   function createUser() {
     var email = document.getElementById("email").value;
     var phone = document.getElementById("phone").value;
@@ -44,20 +63,20 @@
     var pwd2 = document.getElementById("pwd2").value;
 
     if(pwd1 !== pwd2){
-      swal("Oops...", "Password mimatch", "error");
+      swal("Oops...", "Password misatch", "error");
     }else {
-      $.post('CreateUser', {email: email, phone: phone, pwd1: pwd1, pwd2 :pwd2},
-              function (result) {
-                if(result==="") {
-                  swal("Account Created", "" + email + " ", "success");
-                }else{
-                  swal("Oops...", result, "error");
-                }
 
-              }).fail(function () {
-                alert("error");
-              }
-      );
+      swal({
+            title: "Creating your profile",
+            text: "Are  you sure ?",
+            type: "info",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true
+      }, function () {
+            uploadData();
+      });
+
     }
   }
 </script>

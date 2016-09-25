@@ -76,7 +76,6 @@ public class Vehicle {
     }
 
     public InputStream getSmallPhoto0() {
-
         return smallPhoto0;
     }
 

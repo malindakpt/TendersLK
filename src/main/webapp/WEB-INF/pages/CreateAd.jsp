@@ -31,7 +31,7 @@
     <form action="CreateAdvertisement" method="post" style="max-width: 500px;">
       <div>
         <p> <input name="topic" class="inputText" placeholder="Advertisement Name"type="text"/></p>
-        <p> <input name="expDate" class="inputText" placeholder="Expire Date" type="text" id="datepicker"></p>
+        <p> <input type="date" name="expDate" min="2000-01-02"  id="datepicker"></p>
         <p> <input name="noVehi" class="inputText" placeholder="No Of Vehicles"type="text"/></p>
         <p> <input name="email" class="inputText" placeholder="Email Address"type="text"/></p>
         <p> <input name="pwd" class="inputText" placeholder="Password"type="password"/></p>
