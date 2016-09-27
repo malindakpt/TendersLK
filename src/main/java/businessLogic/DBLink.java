@@ -228,7 +228,7 @@ public class DBLink {
             statement=connect.createStatement();
             connect = getConnection();
             preparedStatement = connect
-                    .prepareStatement("insert into ads values ( ?,?,?,?,?,?)");
+                    .prepareStatement("insert into ads values ( ?,?,?,?,?,?,?)");
 
             preparedStatement.setInt(1, adv.getID());
             preparedStatement.setString(2, adv.getTopic());
@@ -236,6 +236,7 @@ public class DBLink {
             preparedStatement.setDate(4, adv.getExpDate());
             preparedStatement.setInt(5, adv.getMaxAds());
             preparedStatement.setString(6, adv.getCustomer());
+            preparedStatement.setString(7, adv.getLocation());
 
             preparedStatement.executeUpdate();
 
@@ -252,7 +253,7 @@ public class DBLink {
         Vehicle v = new Vehicle();
         connect = getConnection();
         statement=connect.createStatement();
-        resultSet = statement.executeQuery("select * from vehicles where ID=" + vID);
+        resultSet = statement.executeQuery("select * from vehicles INNER JOIN ads on vehicles.AdvertisementID = ads.ID where vehicles.ID=" + vID);
 
         while (resultSet.next()) {
 
@@ -276,6 +277,7 @@ public class DBLink {
             v.setHtmlPhoto4(Base64.encode(resultSet.getBytes("Photo4")));
 
             v.setAdvertisementID(resultSet.getInt("AdvertisementID"));
+            v.setLocation(resultSet.getString("location"));
         }
 
         return v;
@@ -316,7 +318,8 @@ public class DBLink {
         }
         connect = getConnection();
         statement=connect.createStatement();
-        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID=" + addID+" ORDER BY SysTime DESC");
+//        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID=" + addID+" ORDER BY SysTime DESC NATURAL JOIN  ");
+        resultSet = statement.executeQuery("select * from vehicles INNER JOIN ads on vehicles.AdvertisementID = ads.ID where vehicles.AdvertisementID= "+addID+ " order by vehicles.SysTime desc");
 
         while (resultSet.next()) {
             Vehicle v = new Vehicle();
@@ -339,6 +342,8 @@ public class DBLink {
             v.setHtmlPhoto3(Base64.encode(resultSet.getBytes("Photo3")));
 
             v.setAdvertisementID(resultSet.getInt("AdvertisementID"));
+
+            v.setLocation(resultSet.getString("location"));
             list.add(v);
         }
         return list;

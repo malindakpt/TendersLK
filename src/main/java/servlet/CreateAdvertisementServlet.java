@@ -39,6 +39,8 @@ public class CreateAdvertisementServlet extends HttpServlet {
             int inoVehi = Integer.parseInt(request.getParameter("noVehi"));
             String email = request.getParameter("email");
             String pwd = request.getParameter("pwd");
+            String location = request.getParameter("location");
+            location = location.substring(0,7)+" class=map "+location.substring(7,location.length());
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String dateInString = expDate;
@@ -52,6 +54,7 @@ public class CreateAdvertisementServlet extends HttpServlet {
             ad.setCustomer(email);
             ad.setPwd(pwd);
             ad.setMaxAds(inoVehi);
+            ad.setLocation(location);
 
             if(DBLink.addAdvertisement(ad)){
                 EmailSender.sendEmail(Constants.EMAIL_AD_CREATED,email);

@@ -28,6 +28,7 @@
         <p> <input id="topic" class="inputText" placeholder="Advertisement Name"type="text"/></p>
         <p> <input id="expDate" type="date" min="2000-01-02"  id="datepicker"></p>
         <p> <input id="noVehi" class="inputText" placeholder="No Of Vehicles"type="number"  min="1" max="5"/></p>
+        <p> <input id="location" class="inputText" placeholder="Location"/></p>
 
         <p> <input id="email" class="inputText" placeholder="Email Address"type="text"/></p>
         <p> <input id="pwd" class="inputText" placeholder="Password"type="password"/></p>
@@ -49,8 +50,9 @@
             var noVehi = document.getElementById("noVehi").value;
             var email = document.getElementById("email").value;
             var pwd = document.getElementById("pwd").value;
+            var location = document.getElementById("location").value;
 
-            $.post('CreateAdvertisement', {topic: topic, expDate: expDate, noVehi: noVehi, email :email,pwd:pwd },
+            $.post('CreateAdvertisement', {topic: topic, expDate: expDate, noVehi: noVehi, email :email,pwd:pwd,location:location },
                     function (result) {
                         if(result==="") {
                             swal("Advertisement Created", "" + topic + " ", "success");
@@ -69,6 +71,7 @@
             var noVehi = document.getElementById("noVehi").value;
             var email = document.getElementById("email").value;
             var pwd = document.getElementById("pwd").value;
+            var location = document.getElementById("location").value;
 
             if(topic=="" || expDate =="" || noVehi=="" || email =="" || pwd ==""){
                 swal("Oops...", "You have to fill all the fields", "error");

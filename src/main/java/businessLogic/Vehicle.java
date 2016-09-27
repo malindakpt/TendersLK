@@ -20,6 +20,9 @@ public class Vehicle {
     private String transmission;
     private String fuel;
 
+    private String location;
+
+
     private int engineCC;
     private String description;
 
@@ -275,5 +278,14 @@ public class Vehicle {
 
     public void setHtmlPhoto4(String htmlPhoto4) {
         this.htmlPhoto4 = htmlPhoto4;
+    }
+
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
