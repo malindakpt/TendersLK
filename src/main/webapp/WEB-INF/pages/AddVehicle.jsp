@@ -364,7 +364,7 @@
                 swal("Oops...", "Invalid Password", "error");
             } else if (img0 == "") {//} && img1 == "" && img2 == "" && img3 == "") {
                 swal("Oops...", "You Should upload at-least first image ", "error");
-            }else if(adSelected){
+            }else if(!adSelected){
                 swal("Oops...", "Please select a ad ID ", "error");
 //            }
 //            else if (Aimg0 !== "" && !Aimg0.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
