@@ -23,7 +23,51 @@
 
                 <li><input id="email" class="input1" placeholder="Email" name="email" /></li>
                 <li><input id="password" class="input1" type="password" placeholder="Password" name="password"/></li>
-                <li><input value="2"  id="adID" class="input1" placeholder="Ad ID" name="adID"/></li>
+
+    <li>
+        <div>
+        <input style=" margin:auto;display:block;" type="button"  data-icon="refresh" id="loadAds" class="input1" value="Load Ads" onclick="loadMyAds()"/>
+        </div>
+    </li>
+
+
+                <%--<li><input value="2"  id="adID" class="input1" placeholder="Ad ID" name="adID"/></li>--%>
+                <li>
+                    <select id="dropList"  data-native-menu="true" >
+                        <option value="volvo">Select an Item</option>
+                    </select>
+                </li>
+
+                <script>
+                    function loadMyAds(){
+                        console.log("Load my ads");
+                        var email = document.getElementById("email").value;
+                        $.post('GetAdvertisemeentsServlet', {email: email },
+                                function (result) {
+                                    if(result==="") {
+                                        swal("Oops...", "No ads for this email", "error");
+                                    }else{
+                                        var res = result.split("##$");
+                                        var select = document.getElementById("dropList");
+                                        select.innerHTML = "";
+                                        res.forEach(function(item, index){
+                                            try {
+                                                var opt = document.createElement("option");
+                                                opt.value = item.split("-")[0];
+                                                opt.textContent = item;
+                                                select.appendChild(opt);
+                                            }catch(e){
+                                                console.log(e);
+                                            }
+                                        });
+                                    }
+                                }).fail(function () {
+                                    alert("error");
+                                }
+                        );
+                    }
+
+                </script>
 
                 <li><input value="KN 6332" id="regNo" class="input1" placeholder="Reg No.." name="regNo"/></li>
                 <li><input value="MAZDA" id="brand" class="input1" placeholder="Brand" name="brand"/></li>
@@ -41,9 +85,6 @@
 
         <div class="col-6 col-m-9">
             <script type="text/javascript">
-
-
-
 
                 var img0;
                 var img1;
@@ -196,8 +237,7 @@
 
                     })
 
-        }
-        ;
+        };
 
         function submitVehicle() {
             regNo = document.getElementById("regNo").value;
@@ -209,7 +249,13 @@
             fuel = document.getElementById("fuel").value;
             cc = document.getElementById("cc").value;
             desc = document.getElementById("desc").value;
-            adID = document.getElementById("adID").value;
+
+
+            var e = document.getElementById("dropList");
+            var strUser = e.options[e.selectedIndex].value;
+
+            adID = strUser;// document.getElementById("adID").value;
+
             email = document.getElementById("email").value;
             password = document.getElementById("password").value;
 
@@ -282,6 +328,16 @@
 
 //
 
+            var adSelected=true;
+            try{
+                var e = document.getElementById("dropList");
+                var strUser = e.options[e.selectedIndex].value;
+
+            }catch(e){
+                adSelected=false;
+            }
+
+
             if (regNo == "") {
                 swal("Oops...", "Invalid Registration No", "error");
             } else if (brand == "") {
@@ -306,8 +362,10 @@
                 swal("Oops...", "Invalid Email", "error");
             } else if (password == "") {
                 swal("Oops...", "Invalid Password", "error");
-            } else if (img0 == ""){//} && img1 == "" && img2 == "" && img3 == "") {
+            } else if (img0 == "") {//} && img1 == "" && img2 == "" && img3 == "") {
                 swal("Oops...", "You Should upload at-least first image ", "error");
+            }else if(adSelected){
+                swal("Oops...", "Please select a ad ID ", "error");
 //            }
 //            else if (Aimg0 !== "" && !Aimg0.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
 //                swal("Oops...", "Invalid Image in image 1", "error");
@@ -320,7 +378,14 @@
 //            } else if (Aimg4 !== "" && !Aimg4.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
 //                swal("Oops...", "Invalid Image in image 5", "error");
             } else {
-                startValidation();
+                try{
+                    var e = document.getElementById("dropList");
+                    var strUser = e.options[e.selectedIndex].value;
+                    startValidation();
+                }catch(e){
+
+                }
+
             }
 
         }

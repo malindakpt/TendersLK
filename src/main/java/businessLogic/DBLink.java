@@ -204,11 +204,15 @@ public class DBLink {
         String list="";
         connect = getConnection();
         statement=connect.createStatement();
-        resultSet = statement.executeQuery("select name from ads where userID=" + user);
+        try {
+            resultSet = statement.executeQuery("select ID,name from ads where userID='" + user + "'");
 
-        while (resultSet.next()) {
-            // imageS = Base64.encode(resultSet.getBytes(attribute));
-            list=list+"##$"+resultSet.getString("RegNo");
+            while (resultSet.next()) {
+                // imageS = Base64.encode(resultSet.getBytes(attribute));
+                list = list + "##$" + resultSet.getString("ID")+ "-" + resultSet.getString("name");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
         return list;
     }

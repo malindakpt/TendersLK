@@ -165,7 +165,7 @@
 
 </div>
 
-  <jsp:include page='RightColumn.jsp'/>
+  <jsp:include page='RIghtColumnMap.jsp'/>
 </div>
 <jsp:include page='Footer.jsp'/>
 </body>

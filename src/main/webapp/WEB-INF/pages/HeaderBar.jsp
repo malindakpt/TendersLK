@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <title>VOCTION</title>
+        <title>Album</title>
         <link rel="icon"
               type="image/png"
               href="img/symbol.png">
@@ -25,7 +25,7 @@
 
                 <span class="logoContainer">
                        <span class="inlineMenu"><img class="logo" src="img/symbol.png"/></span>
-                       <span class="inlineMenu" style="font-size: 300%;">Voction.lk</span>
+                       <span class="inlineMenu" style="font-size: 300%;">Album</span>
                 </span>
 
                 <span  class="hideInMobile" style="float: right; padding-top: 30px; padding-right: 40px">

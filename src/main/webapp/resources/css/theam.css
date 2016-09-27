@@ -19,6 +19,10 @@
 .noShadow{
     text-shadow: 0 0px 0 #333;
 }
+.map{
+    width:100%;
+    height:200px;
+}
 
 
 
@@ -102,5 +106,6 @@ html {
     .hideInDesktop {display: none ;}
     .logo{width:90px;height: 60px;}
     .logoContainer{ padding-left: 100px;}
+    .map{ width:100%; height:430px; }
 
 }
