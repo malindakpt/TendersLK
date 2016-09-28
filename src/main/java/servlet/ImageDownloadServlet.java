@@ -36,9 +36,6 @@ public class ImageDownloadServlet extends HttpServlet {
             String img = request.getParameter("img");
             String smallImage=request.getParameter("small");
             int vID = Integer.parseInt(request.getParameter("vID"));
-
-
-            System.out.println("img="+img+"   vID="+vID);
             String sImage;
 
             if(smallImage!=null){
@@ -46,12 +43,8 @@ public class ImageDownloadServlet extends HttpServlet {
             }else{
                 sImage = DBLink.getImage(vID, img);
             }
-
-
             PrintWriter out = response.getWriter();
             out.println(sImage);
-
-
         }catch (Exception e){
             e.printStackTrace();
         }

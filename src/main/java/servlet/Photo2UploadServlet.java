@@ -33,19 +33,9 @@ public class Photo2UploadServlet extends HttpServlet {
         }
 
         v.setRegNo(request.getParameter("regNo"));
-//        v.setBrand(request.getParameter("brand"));
-//        v.setModel(request.getParameter("model"));
-//        v.setYear(Integer.parseInt(request.getParameter("year")));
-//        v.setMileage(Integer.parseInt(request.getParameter("millage")));
-//        v.setTransmission(request.getParameter("transmission"));
-//        v.setFuel(request.getParameter("fuel"));
-//        v.setEngineCC(Integer.parseInt(request.getParameter("cc")));
-//        v.setDescription(request.getParameter("desc"));
         v.setAdvertisementID(Integer.parseInt(request.getParameter("adID")));
 
         try {
-//            v.setPhoto0(IOUtils.toInputStream(request.getParameter("img0"), "UTF-8"));
-//            v.setPhoto1(IOUtils.toInputStream(request.getParameter("img1"), "UTF-8"));
             v.setPhoto2(IOUtils.toInputStream(request.getParameter("img2"), "UTF-8"));
             v.setPhoto3(IOUtils.toInputStream(request.getParameter("img3"), "UTF-8"));
 

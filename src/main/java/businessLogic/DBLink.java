@@ -178,20 +178,19 @@ public class DBLink {
     public static boolean addCustomer(Customer customer){
 
         try {
+            connect = getConnection();
+            statement=connect.createStatement();
 
-//            connect = getConnection();
-//            statement=connect.createStatement();
-//
-//            preparedStatement = connect
-//                    .prepareStatement("insert into customers values ( ?,?,?,?,?)");
-//
-//            preparedStatement.setString(1, customer.getEmail());
-//            preparedStatement.setString(2, customer.getPassword());
-//            preparedStatement.setString(3, customer.getPhone());
-//            preparedStatement.setDate(4, customer.getCreateDate());
-//            preparedStatement.setBoolean(5, true);
-//
-//            preparedStatement.executeUpdate();
+            preparedStatement = connect
+                    .prepareStatement("insert into customers values ( ?,?,?,?,?)");
+
+            preparedStatement.setString(1, customer.getEmail());
+            preparedStatement.setString(2, customer.getPassword());
+            preparedStatement.setString(3, customer.getPhone());
+            preparedStatement.setDate(4, customer.getCreateDate());
+            preparedStatement.setBoolean(5, true);
+
+            preparedStatement.executeUpdate();
             return true;
         }catch (Exception e){
             errorMsg.append(e.getMessage());

@@ -68,15 +68,6 @@ public class CreateAdvertisementServlet extends HttpServlet {
         }
     }
 
-
-    public String getStringVal( FileItem fi) throws IOException {
-        DeferredFileOutputStream obj = (DeferredFileOutputStream) fi.getOutputStream();
-        byte[] bos = obj.getData();
-        String s =  new String(bos, "UTF-8");
-        System.out.println("ee="+s);
-        return s;
-    }
-
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response)
             throws ServletException, IOException {

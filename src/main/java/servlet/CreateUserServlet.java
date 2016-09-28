@@ -56,7 +56,7 @@ public class CreateUserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("as");
+
     }
 
     private String isEmpty(Customer customer){

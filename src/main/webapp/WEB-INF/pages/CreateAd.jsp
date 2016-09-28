@@ -28,11 +28,22 @@
         <p> <input id="topic" class="inputText" placeholder="Advertisement Name"type="text"/></p>
         <p> <input id="expDate" type="date" min="2000-01-02"  id="datepicker"></p>
         <p> <input id="noVehi" class="inputText" placeholder="No Of Vehicles"type="number"  min="1" max="5"/></p>
-        <p> <input id="location" class="inputText" placeholder="Location"/></p>
+        <p> <input id="location" class="inputText" placeholder="Location" title="We ask for your age only for statistical purposes."/>
+          <div data-role="collapsible">
+              <h4>How to add location</h4>
+              <ul data-role="listview">
+                  <li>Open Google maps</li>
+                  <li>Search a location</li>
+                  <li>Click on share button</li>
+                  <li>Select Embed Map</li>
+                  <li>Copy and pase location URL here</li>
+              </ul>
+          </div>
+            <a style=" text-decoration: none;" href="https://www.google.lk/maps/" target="_blank">Open Map</a>
+        </p>
 
         <p> <input id="email" class="inputText" placeholder="Email Address"type="text"/></p>
         <p> <input id="pwd" class="inputText" placeholder="Password"type="password"/></p>
-
 
           <div style="width:200px">
               <input type="button" value="Create Advertisement" onclick="createAd()">
@@ -87,12 +98,9 @@
                 }, function () {
                     uploadData();
                 });
-
             }
         }
-
     </script>
-
 
   <jsp:include page='RightColumn.jsp'/>
 </div>
