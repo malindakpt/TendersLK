@@ -45,7 +45,7 @@ public class CreateUserServlet extends HttpServlet {
                 out.println(isEmpty(customer));
             }
             else if(!DBLink.addCustomer(customer)){
-                out.println(DBLink.errorMsg);
+                out.println("Error : "+DBLink.errorMsg);
             }else{
                 //Customer added successfully
                EmailSender.sendEmail(Constants.EMAIL_ACCOUNT_CREATED,"asda");

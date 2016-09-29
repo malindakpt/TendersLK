@@ -29,16 +29,16 @@
       <% String n = request.getParameter( "vID" );
         Vehicle v= DBLink.getVehicle(Integer.parseInt(n));
       %>
-      <li> <%=v.getRegNo()%></li>
-      <li> <%=v.getBrand()%></li>
-      <li> <%=v.getModel()%></li>
-      <li> <%=v.getYear()%></li>
+      <li>Brand : <%=v.getBrand()%></li>
+      <li>Reg No :  <%=v.getRegNo()%></li>
+      <li>Model :  <%=v.getModel()%></li>
+      <li>Manufac. Year :  <%=v.getYear()%></li>
       <%--<li><%=v.getCondition()%></li>--%>
-      <li><%=v.getMileage()%></li>
+      <li>Millage : <%=v.getMileage()%></li>
       <%--<li><%=v.getBodyType()%></li>--%>
-      <li> <%=v.getTransmission()%></li>
-      <li> <%=v.getFuel()%></li>
-      <li><%=v.getEngineCC()%></li>
+      <li>Transmission :  <%=v.getTransmission()%></li>
+      <li>Fuel Type :  <%=v.getFuel()%></li>
+      <li>Engine CC :<%=v.getEngineCC()%></li>
       <li> <%=v.getDescription()%></li>
       <li id="vID"> <%=v.getID()%></li>
     </ul>

@@ -1,0 +1,106 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.14
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sep 29, 2016 at 11:20 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `tenders`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ads`
+--
+
+CREATE TABLE IF NOT EXISTS `ads` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `createDate` date NOT NULL,
+  `expDate` date NOT NULL,
+  `noOfVehicles` int(11) NOT NULL,
+  `userID` varchar(100) NOT NULL,
+  `location` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE IF NOT EXISTS `customers` (
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `createDate` date NOT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `enabled` int(11) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vehicles`
+--
+
+CREATE TABLE IF NOT EXISTS `vehicles` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `RegNo` varchar(100) DEFAULT NULL,
+  `Brand` varchar(100) DEFAULT NULL,
+  `Model` varchar(100) DEFAULT NULL,
+  `Year` int(11) DEFAULT NULL,
+  `Condition` varchar(100) DEFAULT NULL,
+  `Millage` int(11) DEFAULT NULL,
+  `BodyType` varchar(100) DEFAULT NULL,
+  `Transmission` varchar(100) DEFAULT NULL,
+  `Fuel` varchar(100) DEFAULT NULL,
+  `Engine` int(11) DEFAULT NULL,
+  `Description` varchar(1000) DEFAULT NULL,
+  `Photo0` longblob,
+  `Photo1` longblob,
+  `Photo2` longblob,
+  `Photo3` longblob,
+  `Photo4` longblob,
+  `AdvertisementID` int(11) DEFAULT NULL,
+  `Time` timestamp NOT NULL,
+  `SysTime` timestamp NOT NULL,
+  `SmallPhoto0` blob,
+  `SmallPhoto1` blob,
+  `SmallPhoto2` blob,
+  `SmallPhoto3` blob,
+  `SmallPhoto4` blob,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -28,7 +28,8 @@
         <p> <input id="topic" class="inputText" placeholder="Advertisement Name"type="text"/></p>
         <p> <input id="expDate" type="date" min="2000-01-02"  id="datepicker"></p>
         <p> <input id="noVehi" class="inputText" placeholder="No Of Vehicles"type="number"  min="1" max="5"/></p>
-        <p> <input id="location" class="inputText" placeholder="Location" title="We ask for your age only for statistical purposes."/>
+          <%--<% String sss=" <iframe class=map src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d35209.15500681015!2d79.83780309188174!3d6.9133317926346765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25960d359dbbf%3A0xd64947e9ab7a4c4f!2sColombo+03%2C+Colombo!5e0!3m2!1sen!2slk!4v1474998953777\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>";  %>--%>
+        <p> <input id="location" class="inputText" placeholder="Location" title="We ask for your age only for statistical purposes." value=""/>
           <div data-role="collapsible">
               <h4>How to add location</h4>
               <ul data-role="listview">

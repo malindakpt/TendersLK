@@ -40,8 +40,12 @@ public class CreateAdvertisementServlet extends HttpServlet {
             String email = request.getParameter("email");
             String pwd = request.getParameter("pwd");
             String location = request.getParameter("location");
-            location = location.substring(0,7)+" class=map "+location.substring(7,location.length());
 
+            try {
+                location = location.substring(0, 7) + " class=map " + location.substring(7, location.length());
+            }catch(Exception e){
+
+            }
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String dateInString = expDate;
             Date date=null;

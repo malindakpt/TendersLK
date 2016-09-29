@@ -21,9 +21,9 @@ public class DBLink {
     public static Connection getConnection(){
         errorMsg = new StringBuilder();
         try {
-           return DriverManager.getConnection("jdbc:mysql://localhost/tenders?" + "user=root&password=");
+ //          return DriverManager.getConnection("jdbc:mysql://localhost/tenders?" + "user=root&password=");
 //           return DriverManager.getConnection("jdbc:mysql://127.7.45.130:3306/voction?" + "user=adminV5y9umD&password=J8etWW3ma6fB");
-            //return DriverManager.getConnection("jdbc:mysql://127.6.96.130:3306/voction5?" + "user=adminEMicr6f&password=4jsJ98UdgFMf");
+            return DriverManager.getConnection("jdbc:mysql://127.6.96.130:3306/voction5?" + "user=adminEMicr6f&password=4jsJ98UdgFMf");
 
 
         } catch (SQLException e)
@@ -78,7 +78,7 @@ public class DBLink {
     }
 
     public static boolean deleteVehicle(String ID){
-
+        errorMsg = new StringBuilder();
         try {
             connect = getConnection();
             statement = connect.createStatement();
@@ -92,7 +92,7 @@ public class DBLink {
     }
 
     public static boolean addVehicle(Vehicle v, int adID, String email, String pwd){
-
+        errorMsg = new StringBuilder();
         if(!validateUser(email,pwd)){
            return false;
         }
@@ -145,7 +145,7 @@ public class DBLink {
     }
 
     public static boolean updateVehicle(Vehicle v, int adID, String email, String pwd){
-
+        errorMsg = new StringBuilder();
         if(!validateUser(email,pwd)){
             return false;
         }
@@ -176,7 +176,7 @@ public class DBLink {
     }
 
     public static boolean addCustomer(Customer customer){
-
+        errorMsg = new StringBuilder();
         try {
             connect = getConnection();
             statement=connect.createStatement();
@@ -200,6 +200,7 @@ public class DBLink {
     }
 
     public static String getAdverrtisementList(String user)throws SQLException {
+        errorMsg = new StringBuilder();
         String list="";
         connect = getConnection();
         statement=connect.createStatement();
@@ -249,6 +250,7 @@ public class DBLink {
     }
 
     public static Vehicle getVehicle(int vID) throws SQLException {
+        errorMsg = new StringBuilder();
         Vehicle v = new Vehicle();
         connect = getConnection();
         statement=connect.createStatement();
@@ -284,6 +286,7 @@ public class DBLink {
 
 
     public static String getImage(int vehicleID,String img) throws SQLException {
+        errorMsg = new StringBuilder();
         String attribute="Photo"+img;
         String imageS=null;
         connect = getConnection();
@@ -297,53 +300,65 @@ public class DBLink {
     }
 
     public static String getSmallImage(int vehicleID,String img) throws SQLException {
+        errorMsg = new StringBuilder();
         String attribute="SmallPhoto"+img;
         String imageS=null;
         connect = getConnection();
         statement=connect.createStatement();
-        resultSet = statement.executeQuery("select "+attribute+" from vehicles where ID="+vehicleID);
-        while (resultSet.next()) {
-            // imageS = Base64.encode(resultSet.getBytes(attribute));
-            imageS = resultSet.getString(attribute);
+
+        try {
+            resultSet = statement.executeQuery("select " + attribute + " from vehicles where ID=" + vehicleID);
+            while (resultSet.next()) {
+                // imageS = Base64.encode(resultSet.getBytes(attribute));
+                imageS = resultSet.getString(attribute);
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            e.printStackTrace();
         }
         return imageS;
     }
 
     public static List<Vehicle> getAdVehicles(String addID) throws SQLException {
-
+        errorMsg = new StringBuilder();
         List<Vehicle> list=new ArrayList<Vehicle>();
         if("".equals(addID) || addID==null){
             return list;
         }
-        connect = getConnection();
-        statement=connect.createStatement();
+        try {
+            connect = getConnection();
+            statement = connect.createStatement();
 //        resultSet = statement.executeQuery("select * from vehicles where AdvertisementID=" + addID+" ORDER BY SysTime DESC NATURAL JOIN  ");
-        resultSet = statement.executeQuery("select * from vehicles INNER JOIN ads on vehicles.AdvertisementID = ads.ID where vehicles.AdvertisementID= "+addID+ " order by vehicles.SysTime desc");
+            resultSet = statement.executeQuery("select * from vehicles INNER JOIN ads on vehicles.AdvertisementID = ads.ID where vehicles.AdvertisementID= " + addID + " order by vehicles.SysTime desc");
 
-        while (resultSet.next()) {
-            Vehicle v = new Vehicle();
-            v.setID(resultSet.getInt("ID"));
-            v.setRegNo(resultSet.getString("RegNo"));
-            v.setBrand(resultSet.getString("Brand"));
-            v.setModel(resultSet.getString("Model"));
-            v.setYear(resultSet.getInt("Year"));
-            v.setCondition(resultSet.getString("Condition"));
-            v.setMileage(resultSet.getInt("Millage"));
-            v.setBodyType(resultSet.getString("BodyType"));
-            v.setTransmission(resultSet.getString("Transmission"));
-            v.setFuel(resultSet.getString("Fuel"));
-            v.setEngineCC(resultSet.getInt("Engine"));
-            v.setDescription(resultSet.getString("Description"));
+            while (resultSet.next()) {
+                Vehicle v = new Vehicle();
+                v.setID(resultSet.getInt("ID"));
+                v.setRegNo(resultSet.getString("RegNo"));
+                v.setBrand(resultSet.getString("Brand"));
+                v.setModel(resultSet.getString("Model"));
+                v.setYear(resultSet.getInt("Year"));
+                v.setCondition(resultSet.getString("Condition"));
+                v.setMileage(resultSet.getInt("Millage"));
+                v.setBodyType(resultSet.getString("BodyType"));
+                v.setTransmission(resultSet.getString("Transmission"));
+                v.setFuel(resultSet.getString("Fuel"));
+                v.setEngineCC(resultSet.getInt("Engine"));
+                v.setDescription(resultSet.getString("Description"));
 
-            v.setHtmlPhoto0(Base64.encode(resultSet.getBytes("Photo0")));
-            v.setHtmlPhoto1(Base64.encode(resultSet.getBytes("Photo1")));
-            v.setHtmlPhoto2(Base64.encode(resultSet.getBytes("Photo2")));
-            v.setHtmlPhoto3(Base64.encode(resultSet.getBytes("Photo3")));
+                v.setHtmlPhoto0(Base64.encode(resultSet.getBytes("Photo0")));
+                v.setHtmlPhoto1(Base64.encode(resultSet.getBytes("Photo1")));
+                v.setHtmlPhoto2(Base64.encode(resultSet.getBytes("Photo2")));
+                v.setHtmlPhoto3(Base64.encode(resultSet.getBytes("Photo3")));
 
-            v.setAdvertisementID(resultSet.getInt("AdvertisementID"));
+                v.setAdvertisementID(resultSet.getInt("AdvertisementID"));
 
-            v.setLocation(resultSet.getString("location"));
-            list.add(v);
+                v.setLocation(resultSet.getString("location"));
+                list.add(v);
+            }
+        }catch (Exception e){
+            errorMsg.append(e.getMessage());
+            e.printStackTrace();
         }
         return list;
     }
