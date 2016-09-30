@@ -24,9 +24,9 @@
             <%--<ul>--%>
 
                 <span class="logoContainer">
-                       <span class="inlineMenu"><img class="logo" src="img/symbol.png"/></span>
-                       <span class="inlineMenu" style="font-size: 300%;">Album</span>
-                </span>
+                       <span class="inlineMenu"><img class="logo" src="img/C.png"/></span>
+                       <span class="inlineMenu" style="font-size: 400%; font-weight:700">album</span>
+                       <span class="inlineMenu" style="font-size: 400%; ">   .lk</span>
 
                 <span  class="hideInMobile" style="float: right; padding-top: 30px; padding-right: 40px">
                         <span class="inlineMenu" style="color: white !important;"><p class="noShadow" style=" cursor: pointer;" onclick="showContactUs()"><b>Contact Us</b></p></span>

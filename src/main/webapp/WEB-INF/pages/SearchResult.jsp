@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="css/sweetalert.css"/>
 
 
+
+    <link href="img/CB.png" rel="icon" type="image/x-icon" />
+    <%--<link href="img/noImageSmall.jpg" rel="shortcut icon" type="image/x-icon" />--%>
+
+
 </head>
 <body>
 
@@ -64,7 +69,7 @@
         </li>
         <% }}else{ %>
 
-          <h1>Enter a valied Ref no and click Search</h1>
+          <h1>Enter a valid Ref no and click Search</h1>
           <%}%>
         </ul>
       </div>

@@ -22,19 +22,24 @@
 
 
                 <li><input id="email" class="input1" placeholder="Email" name="email" /></li>
-                <li><input id="password" class="input1" type="password" placeholder="Password" name="password"/></li>
 
-    <li>
-        <div>
-        <input style=" margin:auto;display:block;" type="button"  data-icon="refresh" id="loadAds" class="input1" value="Load Ads" onclick="loadMyAds()"/>
-        </div>
-    </li>
+                <li>
+                    <table style='width:100%'>
+                    <tr>
 
+                        <td>
+                            <input id="password" class="input1" type="password" placeholder="Password" name="password"/>
+                        </td>
+                        <td style="font-size:50%; width:7em;height:10px">
+                            <input  data-mini="true" type="button"  data-icon="refresh" id="loadAds" class="input1" value="Load Ads" onclick="loadMyAds()"/>
+                        </td>
+                    </tr>
+                        </table>
+                </li>
 
-                <%--<li><input value="2"  id="adID" class="input1" placeholder="Ad ID" name="adID"/></li>--%>
                 <li>
                     <select id="dropList"  data-native-menu="true" >
-                        <option value="volvo">Select an Item</option>
+                        <option value="volvo">Select your advertisement</option>
                     </select>
                 </li>
 
@@ -239,6 +244,19 @@
 
         };
 
+
+        function clearFields(){
+            document.getElementById("regNo").value="";
+            document.getElementById("brand").value="";
+            document.getElementById("model").value="";
+            document.getElementById("year").value="";
+            document.getElementById("millage").value="";
+            document.getElementById("transmission").value="";
+            document.getElementById("fuel").value="";
+            document.getElementById("cc").value="";
+            document.getElementById("desc").value="";
+        };
+
         function submitVehicle() {
             regNo = document.getElementById("regNo").value;
             brand = document.getElementById("brand").value;
@@ -261,6 +279,7 @@
 
 
             function startValidation(){
+                clearFields();
                 swal({
                     title: "Posting your vehicle",
                     text: "Are  you sure ?",
