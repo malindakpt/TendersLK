@@ -14,6 +14,8 @@
     <script src="js/sweetalert.min.js"></script>
     <link rel="stylesheet" href="css/sweetalert.css"/>
 
+    <link href="img/CB.png" rel="icon" type="image/x-icon" />
+
 </head>
 <body>
 <div >

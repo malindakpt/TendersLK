@@ -14,10 +14,9 @@
     <script src="js/sweetalert.min.js"></script>
     <link rel="stylesheet" href="css/sweetalert.css"/>
 
-
-
     <link href="img/CB.png" rel="icon" type="image/x-icon" />
-    <%--<link href="img/noImageSmall.jpg" rel="shortcut icon" type="image/x-icon" />--%>
+
+
 
 
 </head>
@@ -75,8 +74,7 @@
       </div>
     </form>
 
-    <h1>How to use</h1>
-    <p>Find any tender notice reference number and search here. You can find all the detailed information and images relevant for the notice</p>
+
       <div class="hideInMobile" style="min-height:350px;"> </div>
   </div>
 

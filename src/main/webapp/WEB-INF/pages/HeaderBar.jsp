@@ -18,6 +18,8 @@
                 window.location.href = "/?adID=" + n;
             }
         </script>
+
+
     </head>
     <body>
         <div class="header">
@@ -25,11 +27,11 @@
 
                 <span class="logoContainer">
                        <span class="inlineMenu"><img class="logo" src="img/C.png"/></span>
-                       <span class="inlineMenu" style="font-size: 400%; font-weight:700">album</span>
-                       <span class="inlineMenu" style="font-size: 400%; ">   .lk</span>
+                       <span class="inlineMenu" style="font-weight:600">album</span>
+                       <span class="inlineMenu2" style="font-weight:300">   .lk</span>
 
                 <span  class="hideInMobile" style="float: right; padding-top: 30px; padding-right: 40px">
-                        <span class="inlineMenu" style="color: white !important;"><p class="noShadow" style=" cursor: pointer;" onclick="showContactUs()"><b>Contact Us</b></p></span>
+                        <span class="inlineMenu3" style="color: white !important;"><p class="noShadow" style=" cursor: pointer;" onclick="showContactUs()"><b>Contact Us</b></p></span>
                 </span>
 
 

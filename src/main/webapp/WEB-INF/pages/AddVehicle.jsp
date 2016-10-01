@@ -9,6 +9,8 @@
 
     <script src="js/sweetalert.min.js"></script>
     <link rel="stylesheet" href="css/sweetalert.css"/>
+
+    <link href="img/CB.png" rel="icon" type="image/x-icon" />
 </head>
 <body>
 
@@ -19,72 +21,110 @@
     <form id="vehicleData">
         <div class="col-3 col-m-3 menu">
             <ul>
-
-
-                <li><input id="email" class="input1" placeholder="Email" name="email" /></li>
-
+                <li><input id="email" class="input1" placeholder="Email" name="email"/></li>
                 <li>
                     <table style='width:100%'>
-                    <tr>
-
-                        <td>
-                            <input id="password" class="input1" type="password" placeholder="Password" name="password"/>
-                        </td>
-                        <td style="font-size:50%; width:7em;height:10px">
-                            <input  data-mini="true" type="button"  data-icon="refresh" id="loadAds" class="input1" value="Load Ads" onclick="loadMyAds()"/>
-                        </td>
-                    </tr>
-                        </table>
+                        <tr>
+                            <td>
+                                <input id="password" class="input1" type="password" placeholder="Password"
+                                       name="password"/>
+                            </td>
+                            <td style="font-size:50%; width:7em;height:10px">
+                                <input data-mini="true" type="button" data-icon="refresh" id="loadAds" class="input1"
+                                       value="Load Ads" onclick="loadMyAds()"/>
+                            </td>
+                        </tr>
+                    </table>
                 </li>
+                <div>
+                    <li>
+                        <select id="dropList" data-native-menu="true" onchange="showLoadAdError()">
+                            <option value="volvo">Select an Ad</option>
+                        </select>
+                    </li>
+                    <li><input value="KN 6332" id="regNo" class="input1" placeholder="Reg No.." name="regNo"/></li>
+                    <li><input value="MAZDA" id="brand" class="input1" placeholder="Brand" name="brand"/></li>
+                    <li><input value="456P" id="model" class="input1" placeholder="Model" name="model"/></li>
+                    <li><input value="2003" id="year" class="input1" placeholder="Manufac. Yar" name="year"/></li>
+                    <li><input value="345000" id="millage" class="input1" placeholder="Millage" name="millage"/></li>
+                    <li><input value="Automatic" id="transmission" class="input1" placeholder="Transmission"
+                               name="transmission"/></li>
+                    <li><input value="Petrol" id="fuel" class="input1" placeholder="Fuel Type" name="fuel"/></li>
+                    <li><input value="2100" id="cc" class="input1" placeholder="Engine Capacity" name="cc"/></li>
 
-                <li>
-                    <select id="dropList"  data-native-menu="true" >
-                        <option value="volvo">Select your advertisement</option>
-                    </select>
-                </li>
+                    <li><textarea value="SUperb Car i" id="desc" placeholder="Description" name="desc" cols="33"
+                                  rows="3"></textarea></li>
 
-                <script>
-                    function loadMyAds(){
-                        console.log("Load my ads");
-                        var email = document.getElementById("email").value;
-                        $.post('GetAdvertisemeentsServlet', {email: email },
-                                function (result) {
-                                    if(result==="") {
-                                        swal("Oops...", "No ads for this email", "error");
-                                    }else{
-                                        var res = result.split("##$");
-                                        var select = document.getElementById("dropList");
-                                        select.innerHTML = "";
-                                        res.forEach(function(item, index){
-                                            try {
+                </div>
+            </ul>
+
+
+            <script>
+
+                function showLoadAdError() {
+//                    console.log("Error load");
+//                    if($("#dropList")[0].length>1){
+//                        disableInputs(false);
+//                    }else{
+//                        disableInputs(true);
+//                        swal("Oops...", "Load your Ads, before post Vehicles.", "error");
+//                    }
+                }
+
+                function disableInputs(enabled) {
+                    $("#regNo").prop('disabled', enabled);
+                    $("#brand").prop('disabled', enabled);
+                    $("#model").prop('disabled', enabled);
+                    $("#year").prop('disabled', enabled);
+                    $("#millage").prop('disabled', enabled);
+                    $("#transmission").prop('disabled', enabled);
+                    $("#fuel").prop('disabled', enabled);
+                    $("#cc").prop('disabled', enabled);
+                    $("#desc").prop('disabled', enabled);
+                    $("#img0").prop('disabled', enabled);
+                    $("#img1").prop('disabled', enabled);
+                    $("#img2").prop('disabled', enabled);
+                    $("#img3").prop('disabled', enabled);
+                }
+
+
+                function loadMyAds() {
+                    console.log("Load my ads");
+                    var email = document.getElementById("email").value;
+                    $.post('GetAdvertisemeentsServlet', {email: email},
+                            function (result) {
+                                if (result === "") {
+                                    swal("Oops...", "No ads for this email", "error");
+                                } else {
+                                    var res = result.split("##$");
+                                    var select = document.getElementById("dropList");
+                                    select.innerHTML = "";
+
+                                    var opt0 = document.createElement("option");
+                                    opt0.value = "1000-1000";
+                                    opt0.textContent = "Select a advertisement";
+                                    select.appendChild(opt0);
+
+
+                                    res.forEach(function (item, index) {
+                                        try {
+                                            if(index>0) {
                                                 var opt = document.createElement("option");
                                                 opt.value = item.split("-")[0];
                                                 opt.textContent = item;
                                                 select.appendChild(opt);
-                                            }catch(e){
-                                                console.log(e);
                                             }
-                                        });
-                                    }
-                                }).fail(function () {
-                                    alert("error");
+                                        } catch (e) {
+                                            console.log(e);
+                                        }
+                                    });
                                 }
-                        );
-                    }
-
-                </script>
-
-                <li><input value="KN 6332" id="regNo" class="input1" placeholder="Reg No.." name="regNo"/></li>
-                <li><input value="MAZDA" id="brand" class="input1" placeholder="Brand" name="brand"/></li>
-                <li><input value="456P" id="model" class="input1" placeholder="Model" name="model"/></li>
-                <li><input value="2003" id="year" class="input1" placeholder="Manufac. Yar" name="year"/></li>
-                <li><input value="345000" id="millage" class="input1" placeholder="Millage" name="millage"/></li>
-                <li><input value="Automatic" id="transmission" class="input1" placeholder="Transmission" name="transmission"/></li>
-                <li><input value="Petrol" id="fuel" class="input1" placeholder="Fuel Type" name="fuel"/></li>
-                <li><input value="2100" id="cc" class="input1" placeholder="Engine Capacity" name="cc"/></li>
-
-                <li><textarea value="SUperb Car i"  id="desc" placeholder="Description" name="desc" cols="33" rows="3"></textarea></li>
-            </ul>
+                            }).fail(function () {
+                                alert("error");
+                            }
+                    );
+                }
+            </script>
 
         </div>
 
@@ -112,8 +152,8 @@
                     img.onload = function () {
                         var canvas = document.createElement("canvas");
                         var ctx = canvas.getContext("2d");
-                        canvas.width = 300;
-                        canvas.height = 225;
+                        canvas.width = 600;
+                        canvas.height = 450;
                         ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
                         document.getElementById("prev" + window.idx).src = canvas.toDataURL();
 
@@ -132,7 +172,7 @@
                     img.src = oFREvent.target.result;
                 };
 
-                function createSmallImage(oFREvent){
+                function createSmallImage(oFREvent) {
                     var img = new Image();
                     img.onload = function () {
                         var canvas = document.createElement("canvas");
@@ -155,10 +195,11 @@
                         }
                     }
                     img.src = oFREvent.target.result;
-                };
+                }
+                ;
 
                 function loadImageFile(idx) {
-                    document.getElementById("prev"+idx).src="img/loading.gif";
+                    document.getElementById("prev" + idx).src = "img/loading.gif";
 
                     window.idx = idx;
                     if (document.getElementById("img" + idx).files.length === 0) {
@@ -223,15 +264,15 @@
                         img3: img3,
                         pwd: password,
 
-                        simg0:simg0,
-                        simg1:simg1,
-                        simg2:simg2,
-                        simg3:simg3,
+                        simg0: simg0,
+                        simg1: simg1,
+                        simg2: simg2,
+                        simg3: simg3,
 
                     },
                     function (result) {
                         if (result === "") {
-                           swal("Vehicle Added Successfully ! ", "" + "" + " ", "success");
+                            swal("Vehicle Added Successfully ! ", "" + "" + " ", "success");
                         } else {
                             swal("Oops...", result, "error");
                         }
@@ -242,20 +283,22 @@
 
                     })
 
-        };
+        }
+        ;
 
 
-        function clearFields(){
-            document.getElementById("regNo").value="";
-            document.getElementById("brand").value="";
-            document.getElementById("model").value="";
-            document.getElementById("year").value="";
-            document.getElementById("millage").value="";
-            document.getElementById("transmission").value="";
-            document.getElementById("fuel").value="";
-            document.getElementById("cc").value="";
-            document.getElementById("desc").value="";
-        };
+        function clearFields() {
+            document.getElementById("regNo").value = "";
+            document.getElementById("brand").value = "";
+            document.getElementById("model").value = "";
+            document.getElementById("year").value = "";
+            document.getElementById("millage").value = "";
+            document.getElementById("transmission").value = "";
+            document.getElementById("fuel").value = "";
+            document.getElementById("cc").value = "";
+            document.getElementById("desc").value = "";
+        }
+        ;
 
         function submitVehicle() {
             regNo = document.getElementById("regNo").value;
@@ -278,7 +321,7 @@
             password = document.getElementById("password").value;
 
 
-            function startValidation(){
+            function startValidation() {
                 clearFields();
                 swal({
                     title: "Posting your vehicle",
@@ -292,7 +335,6 @@
                 });
             };
             function validateUserAdvertisement() {
-
 
 
                 $.post('ValidateUserAdvertisement', {email: email, password: password, adID: adID},
@@ -347,17 +389,18 @@
 
 //
 
-            var adSelected=true;
-            try{
+            var adSelected = true;
+            try {
                 var e = document.getElementById("dropList");
                 var strUser = e.options[e.selectedIndex].value;
 
-            }catch(e){
-                adSelected=false;
+            } catch (e) {
+                adSelected = false;
             }
 
-
-            if (regNo == "") {
+            if($("#dropList")[0].selectedIndex<1){
+                swal("Oops...", "Select an Ad, before post Vehicles.", "error");
+            }else if (regNo == "") {
                 swal("Oops...", "Invalid Registration No", "error");
             } else if (brand == "") {
                 swal("Oops...", "Invalid Brand", "error");
@@ -381,9 +424,9 @@
                 swal("Oops...", "Invalid Email", "error");
             } else if (password == "") {
                 swal("Oops...", "Invalid Password", "error");
-            } else if (img0 == "") {//} && img1 == "" && img2 == "" && img3 == "") {
+            } else if (!img0 || img0 == "") {//} && img1 == "" && img2 == "" && img3 == "") {
                 swal("Oops...", "You Should upload at-least first image ", "error");
-            }else if(!adSelected){
+            } else if (!adSelected) {
                 swal("Oops...", "Please select a ad ID ", "error");
 //            }
 //            else if (Aimg0 !== "" && !Aimg0.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
@@ -397,11 +440,11 @@
 //            } else if (Aimg4 !== "" && !Aimg4.match(/\.(jpg|JPG|JPEG|jpeg|png|PNG|)$/)) {
 //                swal("Oops...", "Invalid Image in image 5", "error");
             } else {
-                try{
+                try {
                     var e = document.getElementById("dropList");
                     var strUser = e.options[e.selectedIndex].value;
                     startValidation();
-                }catch(e){
+                } catch (e) {
 
                 }
 
@@ -418,5 +461,9 @@
 <jsp:include page='Footer.jsp'/>
 
 </body>
+
+<script>
+  //  disableInputs(true);
+</script>
 </html>
 

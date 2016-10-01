@@ -21,9 +21,9 @@ public class DBLink {
     public static Connection getConnection(){
         errorMsg = new StringBuilder();
         try {
- //          return DriverManager.getConnection("jdbc:mysql://localhost/tenders?" + "user=root&password=");
+          return DriverManager.getConnection("jdbc:mysql://localhost/tenders?" + "user=root&password=");
 //           return DriverManager.getConnection("jdbc:mysql://127.7.45.130:3306/voction?" + "user=adminV5y9umD&password=J8etWW3ma6fB");
-            return DriverManager.getConnection("jdbc:mysql://127.6.96.130:3306/voction5?" + "user=adminEMicr6f&password=4jsJ98UdgFMf");
+//            return DriverManager.getConnection("jdbc:mysql://127.6.96.130:3306/voction5?" + "user=adminEMicr6f&password=4jsJ98UdgFMf");
 
 
         } catch (SQLException e)

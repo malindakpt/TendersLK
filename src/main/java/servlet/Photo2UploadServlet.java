@@ -35,17 +35,12 @@ public class Photo2UploadServlet extends HttpServlet {
         v.setRegNo(request.getParameter("regNo"));
         v.setAdvertisementID(Integer.parseInt(request.getParameter("adID")));
 
-        try {
-            v.setPhoto2(IOUtils.toInputStream(request.getParameter("img2"), "UTF-8"));
-            v.setPhoto3(IOUtils.toInputStream(request.getParameter("img3"), "UTF-8"));
-
-            v.setSmallPhoto0(IOUtils.toInputStream(request.getParameter("simg0"), "UTF-8"));
-            v.setSmallPhoto1(IOUtils.toInputStream(request.getParameter("simg1"), "UTF-8"));
-            v.setSmallPhoto2(IOUtils.toInputStream(request.getParameter("simg2"), "UTF-8"));
-            v.setSmallPhoto3(IOUtils.toInputStream(request.getParameter("simg3"), "UTF-8"));
-        }catch (Exception e){
-            System.out.println("Exception "+e);
-        }
+        try { v.setPhoto2(IOUtils.toInputStream(request.getParameter("img2"), "UTF-8")); }catch (Exception e){}
+        try { v.setPhoto3(IOUtils.toInputStream(request.getParameter("img3"), "UTF-8")); }catch (Exception e){}
+        try { v.setSmallPhoto0(IOUtils.toInputStream(request.getParameter("simg0"), "UTF-8")); }catch (Exception e){}
+        try { v.setSmallPhoto1(IOUtils.toInputStream(request.getParameter("simg1"), "UTF-8")); }catch (Exception e){}
+        try { v.setSmallPhoto2(IOUtils.toInputStream(request.getParameter("simg2"), "UTF-8")); }catch (Exception e){}
+        try { v.setSmallPhoto3(IOUtils.toInputStream(request.getParameter("simg3"), "UTF-8")); }catch (Exception e){}
 
         String email=request.getParameter("email");
         String pwd = request.getParameter("pwd");
