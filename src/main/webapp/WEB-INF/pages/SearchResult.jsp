@@ -41,10 +41,11 @@
         <h2>All Tender Notices in one Place</h2>
         <ul data-role="listview" data-inset="true">
         <%String n = request.getParameter( "adID" );%>
+        <% Vehicle v=null; %>
         <% List<Vehicle> vList= DBLink.getAdVehicles(n);
           if(vList.size()>0){
         for (int i=0;i<vList.size();i++) {
-        Vehicle v=vList.get(i);%>
+        v=vList.get(i);%>
 
         <li onclick="loadVehicle<%=v.getID()%>()">
             <a>
@@ -79,9 +80,48 @@
   </div>
 
 
-<jsp:include page='RightColumn.jsp'/>
+    <% if (v!=null && v.getLocation() != null) { %>
+
+    <div class="col-3 right">
+
+
+        <div>
+            <%=v.getLocation()%>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <div data-role="navbar">
+            <ul>
+
+                <li><a onclick="newAd()">New Ad</a></li>
+                <li><a onclick="newVehicle()">Post Vehicle</a></li>
+                <li><a onclick="newUser()">New User</a></li>
+            </ul>
+
+            <script>
+
+                function newAd() {
+                    window.location.href = "/CreateAdView";
+                }
+                function newVehicle() {
+                    window.location.href = "/AddVehicle";
+                }
+                function newUser() {
+                    window.location.href = "/CreateUserView";
+                }
+            </script>
+        </div>
+
+    </div>
+    <% } else {%>
+    <jsp:include page='RightColumn.jsp'/>
+    <% } %>
 </div>
 <jsp:include page='Footer.jsp'/>
 </body>
+
+
 </html>
 

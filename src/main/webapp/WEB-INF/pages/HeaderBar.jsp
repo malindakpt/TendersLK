@@ -27,7 +27,7 @@
 
                 <span class="logoContainer">
                        <span class="inlineMenu"><img class="logo" src="img/C.png"/></span>
-                       <span class="inlineMenu" style="font-weight:600">album</span>
+                       <span class="inlineMenu" style="font-weight:600">album9</span>
                        <span class="inlineMenu2" style="font-weight:300">   .lk</span>
 
                 <span  class="hideInMobile" style="float: right; padding-top: 30px; padding-right: 40px">
@@ -37,7 +37,7 @@
 
             <script>
                 function showContactUs(){
-                    swal("Voction.lk", "malindakpt@gmail.com\n0771141194", "info");
+                    swal("album.lk", "malindakpt@gmail.com\n0771141194", "info");
                 }
             </script>
 
@@ -51,7 +51,7 @@
                     <tr>
 
                         <td>
-                            <input type="search" name="search-mini" id="search-mini2" value="" data-mini="true"/>
+                            <input type="search" name="adID" id="search-mini2" value="" data-mini="true"/>
                         </td>
                         <td style="font-size:50%; width:7em;height:10px">
                             <input type="button" data-mini="true" value="Search" onclick="searchList()">
@@ -61,4 +61,11 @@
             </form>
         </div>
     </body>
+
+    <script>
+
+//        $('#search-mini2').bind("enterKey",function(e){
+//            console.log("Enter Pressed");
+//        });
+    </script>
 </html>
