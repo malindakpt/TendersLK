@@ -25,7 +25,6 @@
             }
         </style>
         <ul>
-
             <% String n = request.getParameter("vID");
                 Vehicle v = DBLink.getVehicle(Integer.parseInt(n));
             %>
@@ -54,59 +53,66 @@
         </ul>
 
         <script>
-            $.ajax({
-                url: "/imageDownload?img=0&vID=<%=v.getID()%>", success: function (result) {
-                    if (result.startsWith("null")) {
-                        document.getElementById("img00").src = "img/noImage.JPG";
-                    } else {
-                        document.getElementById("img00").src = result;
+            var loadDone0=false;
+            var loadDone1=false;
+            var loadDone2=false;
+            var loadDone3=false;
+
+            load1image0();
+            function load1image0() {
+                $.ajax({
+                    url: "/imageDownload?img=0&vID=<%=v.getID()%>", success: function (result) {
+                        if (result.startsWith("null")) {
+                            document.getElementById("img00").src = "img/noImage.JPG";
+                        } else {
+                            document.getElementById("img00").src = result;
+                        }
+                        loadDone0=true;
+                        load1image1();
                     }
+                });
+            }
+            function load1image1() {
+                    $.ajax({
+                        url: "/imageDownload?img=1&vID=<%=v.getID()%>", success: function (result) {
+                            if (result.startsWith("null")) {
+                                document.getElementById("img10").src = "img/noImage.JPG";
+                            } else {
+                                document.getElementById("img10").src = result;
+                            }
+                            loadDone1=true;
+                            load1image2();
+                        }
+                    });
 
                 }
-            });
+            function load1image2() {
+                        $.ajax({
+                            url: "/imageDownload?img=2&vID=<%=v.getID()%>", success: function (result) {
+                                if (result.startsWith("null")) {
+                                    document.getElementById("img20").src = "img/noImage.JPG";
+                                } else {
+                                    document.getElementById("img20").src = result;
+                                }
+                                loadDone2=true;
+                                load1image3();
+                            }
+                        });
 
-            $.ajax({
-                url: "/imageDownload?img=1&vID=<%=v.getID()%>", success: function (result) {
-                    if (result.startsWith("null")) {
-                        document.getElementById("img10").src = "img/noImage.JPG";
-                    } else {
-                        document.getElementById("img10").src = result;
-                    }
+            }
+            function load1image3() {
+                        $.ajax({
+                            url: "/imageDownload?img=3&vID=<%=v.getID()%>", success: function (result) {
+                                if (result.startsWith("null")) {
+                                    document.getElementById("img30").src = "img/noImage.JPG";
+                                } else {
+                                    document.getElementById("img30").src = result;
+                                }
+                                loadDone3=true;
+                            }
+                        });
 
-
-                }
-            });
-            $.ajax({
-                url: "/imageDownload?img=2&vID=<%=v.getID()%>", success: function (result) {
-                    if (result.startsWith("null")) {
-                        document.getElementById("img20").src = "img/noImage.JPG";
-                    } else {
-                        document.getElementById("img20").src = result;
-                    }
-
-
-                }
-            });
-            $.ajax({
-                url: "/imageDownload?img=3&vID=<%=v.getID()%>", success: function (result) {
-                    if (result.startsWith("null")) {
-                        document.getElementById("img30").src = "img/noImage.JPG";
-                    } else {
-                        document.getElementById("img30").src = result;
-                    }
-
-
-                }
-            });
-            <%--$.ajax({url: "/imageDownload?img=4&vID=<%=v.getID()%>", success: function(result){--%>
-            <%--if(result.startsWith("null")){--%>
-            <%--document.getElementById("img40").src = "img/noImage.JPG";--%>
-            <%--}else{--%>
-            <%--document.getElementById("img40").src =result;--%>
-            <%--}--%>
-
-
-            <%--}});--%>
+            }
 
         </script>
         <script>
