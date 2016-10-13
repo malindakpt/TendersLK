@@ -69,19 +69,29 @@
                             document.getElementById("img00").src = "img/noImage.JPG";
                         } else {
                             var image = document.getElementById("img00");
-                            gWidth = image.width;
+                            gWidth = image.width ;
                             gHeight = image.height;
+
+//                            if(image.width > screen.width ){
+//                                gHeight=200;
+//                            }
 
                             var tempImg = document.createElement('img');
 
                             tempImg.addEventListener('load', function() {
                                 image.src = result;
-                                image.style.left =  (image.width-tempImg.width)/2+"px";
-                                image.style.top =   (image.height-tempImg.height)/2+"px";
 
-                                image.style.width =  tempImg.width+"px";
-                                image.style.height = tempImg.height+"px";
-
+                                if(gWidth>tempImg.width ) {
+                                    image.style.left =  (gWidth-tempImg.width)/2+"px";
+                                    image.style.top =   (gHeight-tempImg.height)/2+"px";
+                                    image.style.width = tempImg.width + "px";
+                                    image.style.height = tempImg.height + "px";
+                                }else{
+                                    image.style.left =  0+"px";
+                                    image.style.top =   0+"px";
+                                    image.style.width = gWidth+ "px";
+                                    image.style.height =  tempImg.height*gWidth/tempImg.width + "px";
+                                }
                             });
                             tempImg.src = result;
                         }
@@ -96,19 +106,26 @@
                             if (result.startsWith("null")) {
                                 document.getElementById("img10").src = "img/noImage.JPG";
                             } else {
-                                var image1 = document.getElementById("img10");
-                                var tempImg1 = document.createElement('img');
+                                var image = document.getElementById("img10");
+                                var tempImg = document.createElement('img');
 
-                                tempImg1.addEventListener('load', function() {
-                                    image1.src = result;
-                                    image1.style.left =  (gWidth-tempImg1.width)/2+"px";
-                                    image1.style.top =   (gHeight-tempImg1.height)/2+"px";
+                                tempImg.addEventListener('load', function() {
+                                    image.src = result;
 
-                                    image1.style.width =  tempImg1.width+"px";
-                                    image1.style.height = tempImg1.height+"px";
+                                    if(gWidth>tempImg.width ) {
+                                        image.style.left =  (gWidth-tempImg.width)/2+"px";
+                                        image.style.top =   (gHeight-tempImg.height)/2+"px";
+                                        image.style.width = tempImg.width + "px";
+                                        image.style.height = tempImg.height + "px";
+                                    }else{
+                                        image.style.left =  0+"px";
+                                        image.style.top =   0+"px";
+                                        image.style.width = gWidth+ "px";
+                                        image.style.height =  tempImg.height*gWidth/tempImg.width + "px";
+                                    }
 
                                 });
-                                tempImg1.src = result;
+                                tempImg.src = result;
                             }
                             loadDone1=true;
                             load1image2();
@@ -127,11 +144,18 @@
 
                                     tempImg.addEventListener('load', function() {
                                         image.src = result;
-                                        image.style.left =  (gWidth-tempImg.width)/2+"px";
-                                        image.style.top =   (gHeight-tempImg.height)/2+"px";
 
-                                        image.style.width =  tempImg.width+"px";
-                                        image.style.height = tempImg.height+"px";
+                                        if(gWidth>tempImg.width ) {
+                                            image.style.left =  (gWidth-tempImg.width)/2+"px";
+                                            image.style.top =   (gHeight-tempImg.height)/2+"px";
+                                            image.style.width = tempImg.width + "px";
+                                            image.style.height = tempImg.height + "px";
+                                        }else{
+                                            image.style.left =  0+"px";
+                                            image.style.top =   0+"px";
+                                            image.style.width = gWidth+ "px";
+                                            image.style.height =  tempImg.height*gWidth/tempImg.width + "px";
+                                        }
 
                                     });
                                     tempImg.src = result;
@@ -153,11 +177,18 @@
 
                                     tempImg.addEventListener('load', function() {
                                         image.src = result;
-                                        image.style.left =  (gWidth-tempImg.width)/2+"px";
-                                        image.style.top =   (gHeight-tempImg.height)/2+"px";
 
-                                        image.style.width =  tempImg.width+"px";
-                                        image.style.height = tempImg.height+"px";
+                                        if(gWidth>tempImg.width ) {
+                                            image.style.left =  (gWidth-tempImg.width)/2+"px";
+                                            image.style.top =   (gHeight-tempImg.height)/2+"px";
+                                            image.style.width = tempImg.width + "px";
+                                            image.style.height = tempImg.height + "px";
+                                        }else{
+                                            image.style.left =  0+"px";
+                                            image.style.top =   0+"px";
+                                            image.style.width = gWidth+ "px";
+                                            image.style.height =  tempImg.height*gWidth/tempImg.width + "px";
+                                        }
 
                                     });
                                     tempImg.src = result;
@@ -197,20 +228,19 @@
         </script>
     </div>
     <div class="col-6" style="position:relative">
+<div onclick="plusDivs(1)">
+        <img id="img00" class="mySlides" style="position: relative ;width:100%; max-height: 450px;"
+             src="img/loading2.gif">
+        <img id="img10" class="mySlides" style="position: relative;width:100%; max-height: 450px;"
+             src="img/loading2.gif">
+        <img id="img20" class="mySlides" style="position: relative;width:100%; max-height: 450px;"
+             src="img/loading2.gif">
+        <img id="img30" class="mySlides" style="position: relative;width:100%; max-height: 450px;"
+             src="img/loading2.gif">c
 
-        <img id="img00" class="mySlides" style="position: relative ;width:100%; height: 450px;" onclick="plusDivs(1) "
-             src="img/loading2.gif">
-        <img id="img10" class="mySlides" style="position: relative;width:100%; max-height: 450px;" onclick="plusDivs(1)"
-             src="img/loading2.gif">
-        <img id="img20" class="mySlides" style="position: relative;width:100%; max-height: 450px;" onclick="plusDivs(1)"
-             src="img/loading2.gif">
-        <img id="img30" class="mySlides" style="position: relative;width:100%; max-height: 450px;" onclick="plusDivs(1)"
-             src="img/loading2.gif">
-        <%--<img id="img40"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">--%>
-
-        <a class="w3-btn-floating" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)"><</a>
-        <a class="w3-btn-floating" style="position:absolute;top:45%;right:0" onclick="plusDivs(1)">></a>
-
+        <%--<a class="w3-btn-floating" style="position:absolute;top:45%;left:0" onclick="plusDivs(-1)"><</a>--%>
+        <%--<a class="w3-btn-floating" style="position:absolute;top:45%;right:0" onclick="plusDivs(1)">></a>--%>
+</div>
         <script>
             var slideIndex = 1;
             showDivs(slideIndex);
