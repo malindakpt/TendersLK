@@ -152,8 +152,28 @@
                     img.onload = function () {
                         var canvas = document.createElement("canvas");
                         var ctx = canvas.getContext("2d");
-                        canvas.width = 600;
-                        canvas.height = 450;
+                        var oWidth=img.width;
+                        var oHeight=img.height;
+
+                        if(oWidth>oHeight){
+
+                             if(oWidth>600){
+                                 canvas.width = 600;
+                             }else{
+                                 canvas.width = oWidth;
+                             }
+                             canvas.height = canvas.width*oHeight/oWidth;
+
+                        }else{
+                            if(oHeight>450){
+                                canvas.height = 450;
+                            }else{
+                                canvas.height = oHeight;
+                            }
+                            canvas.width = canvas.height*oWidth/oHeight;
+                        }
+//                        canvas.width = 600;
+//                        canvas.height = 450;
                         ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
                         document.getElementById("prev" + window.idx).src = canvas.toDataURL();
 

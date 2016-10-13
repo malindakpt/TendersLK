@@ -58,6 +58,9 @@
             var loadDone2=false;
             var loadDone3=false;
 
+            var gWidth=600;
+            var gHeight=600;
+
             load1image0();
             function load1image0() {
                 $.ajax({
@@ -65,7 +68,22 @@
                         if (result.startsWith("null")) {
                             document.getElementById("img00").src = "img/noImage.JPG";
                         } else {
-                            document.getElementById("img00").src = result;
+                            var image = document.getElementById("img00");
+                            gWidth = image.width;
+                            gHeight = image.height;
+
+                            var tempImg = document.createElement('img');
+
+                            tempImg.addEventListener('load', function() {
+                                image.src = result;
+                                image.style.left =  (image.width-tempImg.width)/2+"px";
+                                image.style.top =   (image.height-tempImg.height)/2+"px";
+
+                                image.style.width =  tempImg.width+"px";
+                                image.style.height = tempImg.height+"px";
+
+                            });
+                            tempImg.src = result;
                         }
                         loadDone0=true;
                         load1image1();
@@ -78,7 +96,19 @@
                             if (result.startsWith("null")) {
                                 document.getElementById("img10").src = "img/noImage.JPG";
                             } else {
-                                document.getElementById("img10").src = result;
+                                var image1 = document.getElementById("img10");
+                                var tempImg1 = document.createElement('img');
+
+                                tempImg1.addEventListener('load', function() {
+                                    image1.src = result;
+                                    image1.style.left =  (gWidth-tempImg1.width)/2+"px";
+                                    image1.style.top =   (gHeight-tempImg1.height)/2+"px";
+
+                                    image1.style.width =  tempImg1.width+"px";
+                                    image1.style.height = tempImg1.height+"px";
+
+                                });
+                                tempImg1.src = result;
                             }
                             loadDone1=true;
                             load1image2();
@@ -92,7 +122,19 @@
                                 if (result.startsWith("null")) {
                                     document.getElementById("img20").src = "img/noImage.JPG";
                                 } else {
-                                    document.getElementById("img20").src = result;
+                                    var image = document.getElementById("img20");
+                                    var tempImg = document.createElement('img');
+
+                                    tempImg.addEventListener('load', function() {
+                                        image.src = result;
+                                        image.style.left =  (gWidth-tempImg.width)/2+"px";
+                                        image.style.top =   (gHeight-tempImg.height)/2+"px";
+
+                                        image.style.width =  tempImg.width+"px";
+                                        image.style.height = tempImg.height+"px";
+
+                                    });
+                                    tempImg.src = result;
                                 }
                                 loadDone2=true;
                                 load1image3();
@@ -106,7 +148,19 @@
                                 if (result.startsWith("null")) {
                                     document.getElementById("img30").src = "img/noImage.JPG";
                                 } else {
-                                    document.getElementById("img30").src = result;
+                                    var image = document.getElementById("img30");
+                                    var tempImg = document.createElement('img');
+
+                                    tempImg.addEventListener('load', function() {
+                                        image.src = result;
+                                        image.style.left =  (gWidth-tempImg.width)/2+"px";
+                                        image.style.top =   (gHeight-tempImg.height)/2+"px";
+
+                                        image.style.width =  tempImg.width+"px";
+                                        image.style.height = tempImg.height+"px";
+
+                                    });
+                                    tempImg.src = result;
                                 }
                                 loadDone3=true;
                             }
@@ -144,13 +198,13 @@
     </div>
     <div class="col-6" style="position:relative">
 
-        <img id="img00" class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1) "
+        <img id="img00" class="mySlides" style="position: relative ;width:100%; height: 450px;" onclick="plusDivs(1) "
              src="img/loading2.gif">
-        <img id="img10" class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)"
+        <img id="img10" class="mySlides" style="position: relative;width:100%; max-height: 450px;" onclick="plusDivs(1)"
              src="img/loading2.gif">
-        <img id="img20" class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)"
+        <img id="img20" class="mySlides" style="position: relative;width:100%; max-height: 450px;" onclick="plusDivs(1)"
              src="img/loading2.gif">
-        <img id="img30" class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)"
+        <img id="img30" class="mySlides" style="position: relative;width:100%; max-height: 450px;" onclick="plusDivs(1)"
              src="img/loading2.gif">
         <%--<img id="img40"  class="mySlides" style="width:100%; max-height: 600px;" onclick="plusDivs(1)">--%>
 
